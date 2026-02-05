@@ -16,7 +16,7 @@ import { LuMessageCircle } from "react-icons/lu";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-black text-white font-['Inter']">
+    <div className="min-h-screen bg-[#121212] text-white font-['Inter']">
       {/* <DotPattern
         glow={true}
         cr={2}
@@ -33,7 +33,7 @@ export default function Home() {
               Clarity for Every Step In Medicine
             </TextAnimate>
           </h1>
-          <WordRotate className="text-6xl md:text-6xl font-bold mb-6 leading-tight " words={["Mentorship", "Guidance", "Real Insights", "Community", "Real Experiences"]} />
+          <WordRotate className="text-6xl md:text-6xl font-bold mb-6 leading-tight " words={["Mentorship", "Guidance", "Real Insights", "Community", "Experiences"]} />
 
           <TextAnimate by="word" animation="slideUp" delay={0.5} startOnView={true} className="text-xl text-gray-400 mb-8">
             Simplifying your Medical University Life

@@ -35,8 +35,7 @@ export const StarsBackground: React.FC<StarBackgroundProps> = ({
 }) => {
   const [stars, setStars] = useState<StarProps[]>([]);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const canvas = canvasRef.current;
-  if (!canvas) return;
+
 
   const generateStars = useCallback(
     (width: number, height: number): StarProps[] => {
