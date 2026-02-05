@@ -26,15 +26,20 @@ export default function Home() {
       /> */}
 
       {/* Hero section  */}
-      <section className="pt-32 pb-20 px-6 min-h-screen flex items-center justify-center">
+      <section className="py-20 sm:py-24 md:py-32 px-10 sm:px-6 lg:px-10 min-h-screen flex items-center justify-center">
         <div className="max-w-5xl mx-auto text-center">
-          <h1 className="text-6xl md:text-6xl font-bold mt-15 leading-tight animate-fade-in-up">
+          {/* Main Heading - Responsive text sizes */}
+          <h1 className="text-6xl md:text-4xl lg:text-5xl font-bold leading-tight">
             <TextAnimate by="word" animation="slideUp" startOnView={true}>
               Clarity for Every Step In Medicine
             </TextAnimate>
           </h1>
-          <WordRotate className="text-6xl md:text-6xl font-bold mb-6 leading-tight " words={["Mentorship", "Guidance", "Real Insights", "Community", "Experiences"]} />
 
+          {/* Word Rotation - Responsive text sizes */}
+          <WordRotate
+            className="text-6xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight"
+            words={["Mentorship", "Guidance", "Real Insights", "Community", "Experiences"]}
+          />
           <TextAnimate by="word" animation="slideUp" delay={0.5} startOnView={true} className="text-xl text-gray-400 mb-8">
             Simplifying your Medical University Life
           </TextAnimate>
