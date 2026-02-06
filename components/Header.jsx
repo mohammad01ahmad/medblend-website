@@ -16,7 +16,7 @@ export default function Header() {
         <header className="fixed bg-[#121212] top-0 w-full z-50 px-6">
             <div className="max-w-6xl mx-auto py-4 sm:py-6 flex items-center justify-between">
                 {/* Logo */}
-                <Link href="/#" onClick={closeMenu}>
+                <Link href="/" onClick={closeMenu}>
                     <div className="text-xl sm:text-2xl font-bold text-white cursor-pointer">
                         Medblend
                     </div>
@@ -97,7 +97,7 @@ export default function Header() {
                             Features
                         </a>
 
-                        <a href="/#register"
+                        <a href="/waitlist"
                             onClick={closeMenu}
                             className="text-white py-3 px-4 rounded-lg hover:bg-white/10 transition-colors text-lg"
                         >
@@ -107,9 +107,9 @@ export default function Header() {
 
                     {/* Mobile Newsletter Button - at bottom */}
                     <div className="p-6 border-t border-gray-700">
-                        <Link href="/#newsletter" onClick={closeMenu}>
+                        <Link href="/waitlist" onClick={closeMenu}>
                             <ShimmerButton className="w-full">
-                                Join Our Newsletter
+                                Join Our Waitlist
                             </ShimmerButton>
                         </Link>
                     </div>

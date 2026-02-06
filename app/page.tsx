@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { WordRotate } from "@/components/ui/word-rotate";
@@ -12,9 +13,17 @@ import { StarsBackground } from "@/components/ui/stars-background";
 import { motion } from "framer-motion";
 import FeatureDiv from "@/components/FeatureDiv";
 import { CiLinkedin } from "react-icons/ci";
+import { useRouter } from "next/navigation";
+import Teammembercard from "@/components/Teammembercard";
 
 
 export default function Home() {
+
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push("/waitlist");
+  }
 
   return (
     <div className="min-h-screen bg-[#121212] text-white font-['Inter'] smooth-scroll">
@@ -28,10 +37,10 @@ export default function Home() {
 
       {/* Hero section  */}
       <section className="py-20 sm:py-24 md:py-32 px-10 sm:px-6 lg:px-10 min-h-screen flex items-center justify-center">
-        <div className="max-w-5xl mx-auto text-center">
+        <div className="max-w-5xl mx-auto text-center z-10">
           {/* Main Heading - Responsive text sizes */}
           <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold leading-tight">
-            <TextAnimate by="word" animation="slideUp" startOnView={true}>
+            <TextAnimate by="word" animation="slideUp" startOnView={true} once={true}>
               Clarity For Every Step In Medicine
             </TextAnimate>
           </h1>
@@ -41,18 +50,21 @@ export default function Home() {
             className="text-3xl md:text-4xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight"
             words={["Mentorship", "Guidance", "Insights", "Community", "Experiences"]}
           />
-          <TextAnimate by="word" animation="slideUp" delay={0.5} startOnView={true} className="text-xl text-gray-400 mb-8">
+          <TextAnimate by="word" animation="slideUp" delay={0.5} startOnView={true} once={true} className="text-xl text-gray-400 mb-8">
             Simplifying your Medical University Life
           </TextAnimate>
 
-          <Link href="/waitlist" className="flex items-center justify-center">
-            <ShimmerButton className="px-8 py-4">
+          <div className="flex justify-center">
+            <ShimmerButton onClick={handleClick} className="px-8 py-4 flex items-center justify-center">
               Join Our Waitlist
             </ShimmerButton>
-          </Link>
+          </div>
+
         </div>
-        <ShootingStars starColor="#ffffffff" trailColor="#c4c4c4ff" />
-        <StarsBackground />
+        <div className="absolute inset-0 z-0">
+          <ShootingStars starColor="#ffffffff" trailColor="#c4c4c4ff" />
+          <StarsBackground />
+        </div>
       </section>
 
       {/* About section */}
@@ -65,13 +77,13 @@ export default function Home() {
 
           {/* Headline */}
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 sm:mb-6 px-4 sm:px-12 lg:px-24">
-            <TextAnimate by="word" animation="fadeIn" startOnView={true}>
+            <TextAnimate by="word" animation="fadeIn" startOnView={true} once={true}>
               Choosing Medicine Shouldn't Be a Guess.
             </TextAnimate>
           </h2>
 
           {/* Subheading */}
-          <TextAnimate delay={0.5} className="text-base sm:text-lg md:text-xl text-[hsl(0,0%,60%)] mb-12 sm:mb-16 max-w-3xl">
+          <TextAnimate delay={0.5} startOnView={true} once={true} className="text-base sm:text-lg md:text-xl text-[hsl(0,0%,60%)] mb-12 sm:mb-16 max-w-3xl">
             Our goal is simple. Medicine, Explained by Those Living It.
           </TextAnimate>
 
@@ -87,7 +99,7 @@ export default function Home() {
                   <h3 className="text-white text-xl sm:text-2xl text-left mb-10">
                     Find your mentor.
                   </h3>
-                  <TextAnimate delay={0.5} className="text-base sm:text-lg text-[hsl(0,0%,60%)] text-left">
+                  <TextAnimate delay={0.5} startOnView={true} once={true} className="text-base sm:text-lg text-[hsl(0,0%,60%)] text-left">
                     We provide mentorship, guidance, real insight, community, and real experiences.
                   </TextAnimate>
                 </div>
@@ -134,7 +146,7 @@ export default function Home() {
                   <h3 className="text-white text-xl sm:text-2xl text-left mb-7">
                     Real Experiences.
                   </h3>
-                  <TextAnimate delay={0.5} className="text-base sm:text-lg text-[hsl(0,0%,60%)] text-left">
+                  <TextAnimate delay={0.5} startOnView={true} once={true} className="text-base sm:text-lg text-[hsl(0,0%,60%)] text-left">
                     Connect with medical students and doctors who share their real journeys, challenges.
                   </TextAnimate>
                 </div>
@@ -154,7 +166,7 @@ export default function Home() {
               </h3>
 
               {/* Description - Shows second on mobile/tablet, hidden on desktop */}
-              <TextAnimate delay={0.5} className="text-base sm:text-lg text-[hsl(0,0%,60%)] text-left mb-6 lg:hidden">
+              <TextAnimate delay={0.5} startOnView={true} once={true} className="text-base sm:text-lg text-[hsl(0,0%,60%)] text-left mb-6 lg:hidden">
                 Be part of a supportive community of aspiring doctors, sharing resources, tips, and encouragement throughout your medical career.
               </TextAnimate>
 
@@ -200,7 +212,7 @@ export default function Home() {
           Team Members
         </p>
         <h2 className="text-3xl sm:text-4xl md:text-5xl text-center font-bold leading-tight mb-12 sm:mb-16">
-          <TextAnimate by="word" animation="fadeIn" startOnView={true}>
+          <TextAnimate by="word" animation="fadeIn" startOnView={true} once={true}>
             Meet The Team
           </TextAnimate>
         </h2>
@@ -229,19 +241,7 @@ export default function Home() {
                 </motion.div>
 
                 {/* Name and Title - Overlay at Bottom */}
-                <div className="flex flex-row justify-between absolute bottom-2 left-2 right-2 bg-[hsl(0,0%,10%,0.9)] backdrop-blur-sm rounded-2xl p-4">
-                  <div className="flex flex-col">
-                    <h3 className="text-white text-lg sm:text-xl font-semibold mb-1">
-                      Omar Oqaili
-                    </h3>
-                    <p className="text-gray-300 text-sm">
-                      CEO & Founder
-                    </p>
-                  </div>
-                  <div className="flex items-center justify-end">
-                    <CiLinkedin className="text-white text-2xl sm:text-3xl hover:text-blue-400 transition-colors" />
-                  </div>
-                </div>
+                <Teammembercard name="Omar Oqaili" role="CEO & Founder" />
               </div>
             </div>
           </a>
@@ -264,19 +264,7 @@ export default function Home() {
                     className="rounded-3xl w-full h-auto object-cover aspect-square"
                   />
                 </motion.div>
-                <div className="flex flex-row justify-between absolute bottom-2 left-2 right-2 bg-[hsl(0,0%,10%,0.9)] backdrop-blur-sm rounded-2xl p-4">
-                  <div className="flex flex-col">
-                    <h3 className="text-white text-lg sm:text-xl font-semibold mb-1">
-                      Reema
-                    </h3>
-                    <p className="text-gray-300 text-sm">
-                      Director of Marketing
-                    </p>
-                  </div>
-                  <div className="flex items-center justify-end">
-                    <CiLinkedin className="text-white text-2xl sm:text-3xl hover:text-blue-400 transition-colors" />
-                  </div>
-                </div>
+                <Teammembercard name="Reema" role="Director of Marketing" />
               </div>
             </div>
           </a>
@@ -299,19 +287,7 @@ export default function Home() {
                     className="rounded-3xl w-full h-auto object-cover aspect-square"
                   />
                 </motion.div>
-                <div className="flex flex-row justify-between absolute bottom-2 left-2 right-2 bg-[hsl(0,0%,10%,0.9)] backdrop-blur-sm rounded-2xl p-4">
-                  <div className="flex flex-col">
-                    <h3 className="text-white text-lg sm:text-xl font-semibold mb-1">
-                      Muhammad Ahmad
-                    </h3>
-                    <p className="text-gray-300 text-sm">
-                      CTO
-                    </p>
-                  </div>
-                  <div className="flex items-center justify-end">
-                    <CiLinkedin className="text-white text-2xl sm:text-3xl hover:text-blue-400 transition-colors" />
-                  </div>
-                </div>
+                <Teammembercard name="Muhammad Ahmad" role="CTO" />
               </div>
             </div>
           </a>
