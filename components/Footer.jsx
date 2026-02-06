@@ -25,15 +25,16 @@ const Footer = () => {
                         </ul>
                     </div>
                     <div>
-                        <h4 className="font-semibold mb-4">Legal</h4>
+                        <h4 className="font-semibold mb-4">Support</h4>
                         <ul className="space-y-2 text-gray-400">
+                            <li><a href="#" className="hover:text-purple-400 transition-colors">FAQ</a></li>
                             <li><a href="#" className="hover:text-purple-400 transition-colors">Privacy</a></li>
-                            <li><a href="#" className="hover:text-purple-400 transition-colors">Terms</a></li>
+                            <li><a href="#" className="hover:text-purple-400 transition-colors">Terms & Conditions</a></li>
                         </ul>
                     </div>
                 </div>
-                <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-                    <p>&copy; 2026 Medblend. All rights reserved.</p>
+                <div className="border-t border-gray-800 pt-8 text-left text-gray-400">
+                    <p>Copyright © 2026 Medblend. All rights reserved.</p>
                 </div>
             </div>
         </footer>

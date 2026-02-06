@@ -11,12 +11,13 @@ import { ShootingStars } from "@/components/ui/shooting-stars";
 import { StarsBackground } from "@/components/ui/stars-background";
 import { motion } from "framer-motion";
 import FeatureDiv from "@/components/FeatureDiv";
-import { LuMessageCircle } from "react-icons/lu";
+import { CiLinkedin } from "react-icons/ci";
 
 
 export default function Home() {
+
   return (
-    <div className="min-h-screen bg-[#121212] text-white font-['Inter']">
+    <div className="min-h-screen bg-[#121212] text-white font-['Inter'] smooth-scroll">
       {/* <DotPattern
         glow={true}
         cr={2}
@@ -29,24 +30,24 @@ export default function Home() {
       <section className="py-20 sm:py-24 md:py-32 px-10 sm:px-6 lg:px-10 min-h-screen flex items-center justify-center">
         <div className="max-w-5xl mx-auto text-center">
           {/* Main Heading - Responsive text sizes */}
-          <h1 className="text-6xl md:text-4xl lg:text-5xl font-bold leading-tight">
+          <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold leading-tight">
             <TextAnimate by="word" animation="slideUp" startOnView={true}>
-              Clarity for Every Step In Medicine
+              Clarity For Every Step In Medicine
             </TextAnimate>
           </h1>
 
           {/* Word Rotation - Responsive text sizes */}
           <WordRotate
-            className="text-6xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight"
-            words={["Mentorship", "Guidance", "Real Insights", "Community", "Experiences"]}
+            className="text-3xl md:text-4xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight"
+            words={["Mentorship", "Guidance", "Insights", "Community", "Experiences"]}
           />
           <TextAnimate by="word" animation="slideUp" delay={0.5} startOnView={true} className="text-xl text-gray-400 mb-8">
             Simplifying your Medical University Life
           </TextAnimate>
 
-          <Link href="/newsletter" className="flex items-center justify-center">
+          <Link href="/waitlist" className="flex items-center justify-center">
             <ShimmerButton className="px-8 py-4">
-              Join Our Newsletter
+              Join Our Waitlist
             </ShimmerButton>
           </Link>
         </div>
@@ -55,69 +56,266 @@ export default function Home() {
       </section>
 
       {/* About section */}
-      <section className="pt-20 pb-32 px-6 flex items-center justify-center">
-        <div className="max-w-5xl mx-auto flex flex-col items-center justify-top text-center">
-          <h2 className="text-6xl md:text-6xl font-bold leading-tight animate-fade-in-up mb-10">
-            <TextAnimate
-              by="word"
-              animation="fadeIn"
-              startOnView={true}
-            >
-              About Us
+      <section id="about" className="py-16 sm:py-20 md:py-24 px-6 sm:px-6 lg:px-10 flex items-center justify-center bg-[hsl(0,0%,5%)]">
+        <div className="max-w-6xl mx-auto flex flex-col items-center text-center">
+          {/* Section Tag */}
+          <p className="text-sm font-semibold text-gray-400 mb-4 bg-[hsl(0,0%,15%)] py-2 px-6 rounded-full uppercase tracking-wider">
+            Future of Medicine
+          </p>
+
+          {/* Headline */}
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 sm:mb-6 px-4 sm:px-12 lg:px-24">
+            <TextAnimate by="word" animation="fadeIn" startOnView={true}>
+              Choosing Medicine Shouldn't Be a Guess.
             </TextAnimate>
           </h2>
-          <div className="shadow-[0_0_10px_3px_rgba(255,255,255,0.2)] flex flex-row gap-10 items-center justify-center border border-gray-900 rounded-lg p-10 ">
-            <div className="flex-1">
-              <TextAnimate by="line" as="p" delay={0.5} className="text-xl text-gray-400 mb-8 animate-fade-in-up animation-delay-200">
-                {`Medblend is a platform that aims to provide\n\nclarity for every step in medicine. We provide\n\nmentorship, guidance, real insight,\n\ncommunity, and real experiences to help you succeed in your medical journey.`}
-              </TextAnimate>
+
+          {/* Subheading */}
+          <TextAnimate delay={0.5} className="text-base sm:text-lg md:text-xl text-[hsl(0,0%,60%)] mb-12 sm:mb-16 max-w-3xl">
+            Our goal is simple. Medicine, Explained by Those Living It.
+          </TextAnimate>
+
+          {/* Features Grid*/}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 w-full">
+
+            {/* Left Column - Two stacked cards (desktop only) */}
+            <div className="flex flex-col gap-6 md:gap-8">
+              {/* Feature Card 1 */}
+              <div className="bg-[hsl(0,0%,12%)] rounded-3xl p-6 sm:p-8 flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
+                {/* Text Content */}
+                <div className="flex flex-col lg:max-w-[55%]">
+                  <h3 className="text-white text-xl sm:text-2xl text-left mb-10">
+                    Find your mentor.
+                  </h3>
+                  <TextAnimate delay={0.5} className="text-base sm:text-lg text-[hsl(0,0%,60%)] text-left">
+                    We provide mentorship, guidance, real insight, community, and real experiences.
+                  </TextAnimate>
+                </div>
+
+                {/* Image */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  className="w-full sm:w-64 sm:mx-auto lg:w-auto lg:mx-0 lg:flex-shrink-0"
+                >
+                  <Image
+                    src="/about-us-picture.jpeg"
+                    alt="About"
+                    width={280}
+                    height={280}
+                    className="rounded-2xl w-full h-auto object-cover"
+                  />
+                </motion.div>
+              </div>
+
+              {/* Feature Card 2 */}
+              <div className="bg-[hsl(0,0%,12%)] rounded-3xl p-6 sm:p-8 flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
+                {/* Image - Shows on left for desktop */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  className="w-full sm:w-64 sm:mx-auto lg:w-auto lg:mx-0 lg:flex-shrink-0 lg:order-first order-last"
+                >
+                  <Image
+                    src="/about-us-picture.jpeg"
+                    alt="About"
+                    width={280}
+                    height={280}
+                    className="rounded-2xl w-full h-full object-cover"
+                  />
+                </motion.div>
+
+                {/* Text Content */}
+                <div className="flex flex-col lg:max-w-[55%]">
+                  <h3 className="text-white text-xl sm:text-2xl text-left mb-7">
+                    Real Experiences.
+                  </h3>
+                  <TextAnimate delay={0.5} className="text-base sm:text-lg text-[hsl(0,0%,60%)] text-left">
+                    Connect with medical students and doctors who share their real journeys, challenges.
+                  </TextAnimate>
+                </div>
+              </div>
             </div>
 
-            <motion.div
-              className="flex-1"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 2 }}
-            >
-              <Image
-                src="/about-us-picture.jpeg"
-                alt="About"
-                width={400}
-                height={400}
-                className="rounded-lg w-full h-auto object-cover"
-              />
-            </motion.div>
+            {/* Right Column - One big card */}
+            <div className="bg-[hsl(0,0%,12%)] rounded-3xl p-6 sm:p-8 flex flex-col h-full">
+              {/* Section Tag */}
+              <p className="w-fit bg-[hsl(69,69%,50%)] py-2 px-6 rounded-full text-left text-xs sm:text-sm font-semibold text-[hsl(0,0,15)] mb-4 lg:mb-6 uppercase tracking-wider">
+                Community
+              </p>
+
+              {/* Heading - Shows first on mobile/tablet, hidden on desktop */}
+              <h3 className="text-white text-xl sm:text-2xl text-left mb-4 lg:hidden">
+                Join Community.
+              </h3>
+
+              {/* Description - Shows second on mobile/tablet, hidden on desktop */}
+              <TextAnimate delay={0.5} className="text-base sm:text-lg text-[hsl(0,0%,60%)] text-left mb-6 lg:hidden">
+                Be part of a supportive community of aspiring doctors, sharing resources, tips, and encouragement throughout your medical career.
+              </TextAnimate>
+
+              {/* Image */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="mb-6 lg:mb-8 w-full sm:w-64 sm:mx-auto lg:w-full lg:mx-0"
+              >
+                <Image
+                  src="/about-us-picture.jpeg"
+                  alt="About"
+                  width={600}
+                  height={600}
+                  className="rounded-2xl w-full h-auto lg:h-[200px] object-cover"
+                />
+              </motion.div>
+
+              {/* Bottom Section - Heading and Description (Desktop only) */}
+              <div className="hidden lg:flex flex-row gap-16 items-start">
+                {/* Heading */}
+                <h3 className="text-white text-xl sm:text-2xl lg:text-3xl text-left w-1/3">
+                  Join Community.
+                </h3>
+
+                {/* Description */}
+                <TextAnimate delay={0.5} className="text-base sm:text-lg text-[hsl(0,0%,60%)] text-left w-2/3">
+                  Be part of a supportive community of aspiring doctors, sharing resources, tips, and encouragement throughout your medical career.
+                </TextAnimate>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* Features section */}
-      <section className="pt-32 pb-20 px-6 min-h-screen">
-        <h2 className="text-6xl md:text-6xl font-bold leading-tight mb-10 text-center">
-          <TextAnimate
-            by="word"
-            animation="fadeIn"
-            startOnView={true}
-          >
-            Features
+      {/* Meet the team */}
+      <section className="py-16 sm:py-20 md:py-24 px-6">
+        {/* Section Tag */}
+        <p className="w-fit bg-[hsl(69,69%,50%)] py-2 px-6 rounded-full text-xs mx-auto w-1/2 text-center sm:text-sm font-semibold text-[hsl(0,0,15)] mb-6 lg:mb-6 uppercase tracking-wider">
+          Team Members
+        </p>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl text-center font-bold leading-tight mb-12 sm:mb-16">
+          <TextAnimate by="word" animation="fadeIn" startOnView={true}>
+            Meet The Team
           </TextAnimate>
         </h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 pl-40 pr-40">
-          <FeatureDiv
-            icon={LuMessageCircle}
-            heading="Share team inboxes"
-            description="Whether you have a team of 2 or 200, our shared team inboxes keep everyone on the same page and in the loop."
-          />
-          <FeatureDiv
-            icon={LuMessageCircle}
-            heading="Team Collaboration"
-            description="Work together seamlessly with your team."
-          />
-          <FeatureDiv
-            icon={LuMessageCircle}
-            heading="Real-time Updates"
-            description="Stay informed with instant notifications."
-          />
+
+        {/* Team Grid - 1 col mobile, 2 col tablet, 3 col desktop */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
+
+          {/* Team Member 1 */}
+          <a href="#" className="group">
+            <div className="bg-[hsl(0,0%,12%)] rounded-3xl p-1 transition-transform hover:scale-105">
+              <div className="relative overflow-hidden rounded-3xl">
+                {/* Image */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                >
+                  <Image
+                    src="/ceo2-bg.jpeg"
+                    alt="Omar Oqaili"
+                    width={400}
+                    height={400}
+                    className="rounded-3xl w-full h-auto object-cover aspect-square"
+                  />
+                </motion.div>
+
+                {/* Name and Title - Overlay at Bottom */}
+                <div className="flex flex-row justify-between absolute bottom-2 left-2 right-2 bg-[hsl(0,0%,10%,0.9)] backdrop-blur-sm rounded-2xl p-4">
+                  <div className="flex flex-col">
+                    <h3 className="text-white text-lg sm:text-xl font-semibold mb-1">
+                      Omar Oqaili
+                    </h3>
+                    <p className="text-gray-300 text-sm">
+                      CEO & Founder
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-end">
+                    <CiLinkedin className="text-white text-2xl sm:text-3xl hover:text-blue-400 transition-colors" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+
+          {/* Team Member 2 */}
+          <a href="#" className="group">
+            <div className="bg-[hsl(0,0%,12%)] rounded-3xl p-1 transition-transform hover:scale-105">
+              <div className="relative overflow-hidden rounded-3xl">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
+                  <Image
+                    src="/ceo2-bg.jpeg"
+                    alt="Reema"
+                    width={400}
+                    height={400}
+                    className="rounded-3xl w-full h-auto object-cover aspect-square"
+                  />
+                </motion.div>
+                <div className="flex flex-row justify-between absolute bottom-2 left-2 right-2 bg-[hsl(0,0%,10%,0.9)] backdrop-blur-sm rounded-2xl p-4">
+                  <div className="flex flex-col">
+                    <h3 className="text-white text-lg sm:text-xl font-semibold mb-1">
+                      Reema
+                    </h3>
+                    <p className="text-gray-300 text-sm">
+                      Director of Marketing
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-end">
+                    <CiLinkedin className="text-white text-2xl sm:text-3xl hover:text-blue-400 transition-colors" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+
+          {/* Team Member 3 */}
+          <a href="#" className="group">
+            <div className="bg-[hsl(0,0%,12%)] rounded-3xl p-1 transition-transform hover:scale-105">
+              <div className="relative overflow-hidden rounded-3xl">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                >
+                  <Image
+                    src="/ceo2-bg.jpeg"
+                    alt="Muhammad Ahmad"
+                    width={400}
+                    height={400}
+                    className="rounded-3xl w-full h-auto object-cover aspect-square"
+                  />
+                </motion.div>
+                <div className="flex flex-row justify-between absolute bottom-2 left-2 right-2 bg-[hsl(0,0%,10%,0.9)] backdrop-blur-sm rounded-2xl p-4">
+                  <div className="flex flex-col">
+                    <h3 className="text-white text-lg sm:text-xl font-semibold mb-1">
+                      Muhammad Ahmad
+                    </h3>
+                    <p className="text-gray-300 text-sm">
+                      CTO
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-end">
+                    <CiLinkedin className="text-white text-2xl sm:text-3xl hover:text-blue-400 transition-colors" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+
         </div>
       </section>
 

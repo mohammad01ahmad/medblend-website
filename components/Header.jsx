@@ -13,8 +13,8 @@ export default function Header() {
     const closeMenu = () => setIsMenuOpen(false);
 
     return (
-        <header className="fixed bg-[#121212] top-0 w-full z-50">
-            <div className="max-w-5xl mx-auto px-10 sm:px-6 py-4 sm:py-6 flex items-center justify-between">
+        <header className="fixed bg-[#121212] top-0 w-full z-50 px-6">
+            <div className="max-w-6xl mx-auto py-4 sm:py-6 flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/#" onClick={closeMenu}>
                     <div className="text-xl sm:text-2xl font-bold text-white cursor-pointer">
@@ -24,13 +24,13 @@ export default function Header() {
 
                 {/* Desktop Navigation */}
                 <nav className="hidden md:flex items-center gap-4 lg:gap-8">
-                    <a href="/#about" className="bg-transparent text-white py-2 px-3 lg:px-4 cursor-pointer rounded-lg hover:bg-white hover:text-black transition-colors">
+                    <a href="#about" className="bg-transparent text-white py-2 px-3 lg:px-4 cursor-pointer rounded-lg hover:bg-white hover:text-black transition-colors">
                         About
                     </a>
-                    <a href="/#features" className="bg-transparent text-white py-2 px-3 lg:px-4 cursor-pointer rounded-lg hover:bg-white hover:text-black transition-colors">
-                        Features
+                    <a href="#team" className="bg-transparent text-white py-2 px-3 lg:px-4 cursor-pointer rounded-lg hover:bg-white hover:text-black transition-colors">
+                        Team
                     </a>
-                    <a href="/#register" className="bg-transparent text-white py-2 px-3 lg:px-4 cursor-pointer rounded-lg hover:bg-white hover:text-black transition-colors">
+                    <a href="/waitlist" className="bg-transparent text-white py-2 px-3 lg:px-4 cursor-pointer rounded-lg hover:bg-white hover:text-black transition-colors">
                         Register
                     </a>
                 </nav>
@@ -38,9 +38,9 @@ export default function Header() {
                 {/* Right side buttons */}
                 <div className="flex items-center gap-2 sm:gap-4">
                     {/* Newsletter button - hidden on small mobile */}
-                    <Link href="/#newsletter" className="hidden sm:block">
+                    <Link href="/waitlist" className="hidden sm:block">
                         <ShimmerButton className="text-sm sm:text-base">
-                            Join Our Newsletter
+                            Join Our Waitlist
                         </ShimmerButton>
                     </Link>
 
