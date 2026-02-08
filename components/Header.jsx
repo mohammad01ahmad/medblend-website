@@ -5,6 +5,7 @@ import Link from "next/link";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoClose } from "react-icons/io5";
 import { ShimmerButton } from "./ui/shimmer-button";
+import Image from "next/image";
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,21 +14,25 @@ export default function Header() {
     const closeMenu = () => setIsMenuOpen(false);
 
     return (
-        <header className="fixed bg-[#121212] top-0 w-full z-50 px-6">
+        <header className="fixed bg-black top-0 w-full z-50 px-6">
             <div className="max-w-6xl mx-auto py-4 sm:py-6 flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/" onClick={closeMenu}>
-                    <div className="text-xl sm:text-2xl font-bold text-white cursor-pointer">
-                        Medblend
+                    <div className="flex items-center text-xl sm:text-2xl font-bold text-white cursor-pointer">
+                        <Image src="/Medblend-logo.jpeg" alt="Logo" width={50} height={50} />
+                        MedBlendApp
                     </div>
                 </Link>
 
                 {/* Desktop Navigation */}
                 <nav className="hidden md:flex items-center gap-4 lg:gap-8">
-                    <a href="#about" className="bg-transparent text-white py-2 px-3 lg:px-4 cursor-pointer rounded-lg hover:bg-white hover:text-black transition-colors">
+                    <a href="/" className="bg-transparent text-white py-2 px-3 lg:px-4 cursor-pointer rounded-lg hover:bg-white hover:text-black transition-colors">
+                        Home
+                    </a>
+                    <a href="/" className="bg-transparent text-white py-2 px-3 lg:px-4 cursor-pointer rounded-lg hover:bg-white hover:text-black transition-colors">
                         About
                     </a>
-                    <a href="#team" className="bg-transparent text-white py-2 px-3 lg:px-4 cursor-pointer rounded-lg hover:bg-white hover:text-black transition-colors">
+                    <a href="/" className="bg-transparent text-white py-2 px-3 lg:px-4 cursor-pointer rounded-lg hover:bg-white hover:text-black transition-colors">
                         Team
                     </a>
                     <a href="/waitlist" className="bg-transparent text-white py-2 px-3 lg:px-4 cursor-pointer rounded-lg hover:bg-white hover:text-black transition-colors">
@@ -40,7 +45,7 @@ export default function Header() {
                     {/* Newsletter button - hidden on small mobile */}
                     <Link href="/waitlist" className="hidden sm:block">
                         <ShimmerButton className="text-sm sm:text-base">
-                            Join Our Waitlist
+                            Get Early Access
                         </ShimmerButton>
                     </Link>
 

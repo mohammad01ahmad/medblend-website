@@ -39,31 +39,31 @@ export default function Home() {
       <section className="py-20 sm:py-24 md:py-32 px-10 sm:px-6 lg:px-10 min-h-screen flex items-center justify-center">
         <div className="max-w-5xl mx-auto text-center z-10">
           {/* Main Heading - Responsive text sizes */}
-          <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold leading-tight">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
             <TextAnimate by="word" animation="slideUp" startOnView={true} once={true}>
-              Clarity For Every Step In Medicine
+              Enter Medicine Knowing What To Expect
             </TextAnimate>
           </h1>
 
           {/* Word Rotation - Responsive text sizes */}
           <WordRotate
-            className="text-3xl md:text-4xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight"
             words={["Mentorship", "Guidance", "Insights", "Community", "Experiences"]}
           />
           <TextAnimate by="word" animation="slideUp" delay={0.5} startOnView={true} once={true} className="text-xl text-gray-400 mb-8">
-            Simplifying your Medical University Life
+            Real Guidance From Students And Doctors Who’ve Already Lived It.
           </TextAnimate>
 
           <div className="flex justify-center">
             <ShimmerButton onClick={handleClick} className="px-8 py-4 flex items-center justify-center">
-              Join Our Waitlist
+              Get Early Access
             </ShimmerButton>
           </div>
 
         </div>
         <div className="absolute inset-0 z-0">
           <ShootingStars starColor="#ffffffff" trailColor="#c4c4c4ff" />
-          <StarsBackground />
+          <StarsBackground className="bg-black" />
         </div>
       </section>
 
@@ -78,13 +78,13 @@ export default function Home() {
           {/* Headline */}
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 sm:mb-6 px-4 sm:px-12 lg:px-24">
             <TextAnimate by="word" animation="fadeIn" startOnView={true} once={true}>
-              Choosing Medicine Shouldn't Be a Guess.
+              Medicine Is Hard. Not Knowing Is Harder.
             </TextAnimate>
           </h2>
 
           {/* Subheading */}
           <TextAnimate delay={0.5} startOnView={true} once={true} className="text-base sm:text-lg md:text-xl text-[hsl(0,0%,60%)] mb-12 sm:mb-16 max-w-3xl">
-            Our goal is simple. Medicine, Explained by Those Living It.
+            MedBlend Connects you with Real People at Every Stage — So Expectations Match Reality.
           </TextAnimate>
 
           {/* Features Grid*/}
@@ -97,10 +97,10 @@ export default function Home() {
                 {/* Text Content */}
                 <div className="flex flex-col lg:max-w-[55%]">
                   <h3 className="text-white text-xl sm:text-2xl text-left mb-10">
-                    Find your mentor.
+                    Talk to people ahead of you.
                   </h3>
                   <TextAnimate delay={0.5} startOnView={true} once={true} className="text-base sm:text-lg text-[hsl(0,0%,60%)] text-left">
-                    We provide mentorship, guidance, real insight, community, and real experiences.
+                    Ask questions to medical students, residents, and doctors — not forums, not guesses.
                   </TextAnimate>
                 </div>
 
@@ -144,10 +144,10 @@ export default function Home() {
                 {/* Text Content */}
                 <div className="flex flex-col lg:max-w-[55%]">
                   <h3 className="text-white text-xl sm:text-2xl text-left mb-7">
-                    Real Experiences.
+                    Honesty
                   </h3>
                   <TextAnimate delay={0.5} startOnView={true} once={true} className="text-base sm:text-lg text-[hsl(0,0%,60%)] text-left">
-                    Connect with medical students and doctors who share their real journeys, challenges.
+                    Get real answers. Understand workload, lifestyle, exams, and expectations before you experience them.
                   </TextAnimate>
                 </div>
               </div>
@@ -162,12 +162,12 @@ export default function Home() {
 
               {/* Heading - Shows first on mobile/tablet, hidden on desktop */}
               <h3 className="text-white text-xl sm:text-2xl text-left mb-4 lg:hidden">
-                Join Community.
+                Direction
               </h3>
 
               {/* Description - Shows second on mobile/tablet, hidden on desktop */}
               <TextAnimate delay={0.5} startOnView={true} once={true} className="text-base sm:text-lg text-[hsl(0,0%,60%)] text-left mb-6 lg:hidden">
-                Be part of a supportive community of aspiring doctors, sharing resources, tips, and encouragement throughout your medical career.
+                Move forward with confidence. Make decisions about medicine with clarity — not pressure, assumptions, or luck.
               </TextAnimate>
 
               {/* Image */}
@@ -191,12 +191,12 @@ export default function Home() {
               <div className="hidden lg:flex flex-row gap-16 items-start">
                 {/* Heading */}
                 <h3 className="text-white text-xl sm:text-2xl lg:text-3xl text-left w-1/3">
-                  Join Community.
+                  Direction
                 </h3>
 
                 {/* Description */}
-                <TextAnimate delay={0.5} className="text-base sm:text-lg text-[hsl(0,0%,60%)] text-left w-2/3">
-                  Be part of a supportive community of aspiring doctors, sharing resources, tips, and encouragement throughout your medical career.
+                <TextAnimate startOnView={true} once={true} delay={0.5} className="text-base sm:text-lg text-[hsl(0,0%,60%)] text-left w-2/3">
+                  Move forward with confidence. Make decisions about medicine with clarity — not pressure, assumptions, or luck.
                 </TextAnimate>
               </div>
             </div>
@@ -221,7 +221,7 @@ export default function Home() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
 
           {/* Team Member 1 */}
-          <a href="#" className="group">
+          <a className="group">
             <div className="bg-[hsl(0,0%,12%)] rounded-3xl p-1 transition-transform hover:scale-105">
               <div className="relative overflow-hidden rounded-3xl">
                 {/* Image */}
@@ -247,7 +247,7 @@ export default function Home() {
           </a>
 
           {/* Team Member 2 */}
-          <a href="#" className="group">
+          <a className="group">
             <div className="bg-[hsl(0,0%,12%)] rounded-3xl p-1 transition-transform hover:scale-105">
               <div className="relative overflow-hidden rounded-3xl">
                 <motion.div
@@ -257,20 +257,20 @@ export default function Home() {
                   transition={{ duration: 0.6, delay: 0.2 }}
                 >
                   <Image
-                    src="/ceo2-bg.jpeg"
+                    src="/reema-picture.jpeg"
                     alt="Reema"
                     width={400}
                     height={400}
                     className="rounded-3xl w-full h-auto object-cover aspect-square"
                   />
                 </motion.div>
-                <Teammembercard name="Reema" role="Director of Marketing" />
+                <Teammembercard name="Reema Khattab" role="Director of Marketing" />
               </div>
             </div>
           </a>
 
           {/* Team Member 3 */}
-          <a href="#" className="group">
+          <a className="group">
             <div className="bg-[hsl(0,0%,12%)] rounded-3xl p-1 transition-transform hover:scale-105">
               <div className="relative overflow-hidden rounded-3xl">
                 <motion.div
@@ -280,7 +280,7 @@ export default function Home() {
                   transition={{ duration: 0.6, delay: 0.3 }}
                 >
                   <Image
-                    src="/ceo2-bg.jpeg"
+                    src="/ahmad.jpeg"
                     alt="Muhammad Ahmad"
                     width={400}
                     height={400}

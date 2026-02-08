@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 
 const Footer = () => {
     return (
@@ -6,8 +7,11 @@ const Footer = () => {
             <div className="max-w-6xl mx-auto">
                 <div className="grid md:grid-cols-4 gap-8 mb-8">
                     <div>
-                        <h3 className="text-xl font-bold mb-4">Medblend</h3>
-                        <p className="text-gray-400">Simplifying your University Life</p>
+                        <div className="flex items-center text-xl font-bold text-white cursor-pointer">
+                            <Image src="/MedBlend-logo.jpeg" alt="Logo" width={50} height={50} />
+                            MedblendApp
+                        </div>
+                        <p className="text-gray-400">Real Guidance From Students And Doctors Who’ve Already Lived It.</p>
                     </div>
                     <div>
                         <h4 className="font-semibold mb-4">Product</h4>
