@@ -19,7 +19,7 @@ export default function Header() {
                 {/* Logo */}
                 <Link href="/" onClick={closeMenu}>
                     <div className="flex items-center text-xl sm:text-2xl font-bold text-white cursor-pointer">
-                        <Image src="/Medblend-logo.jpeg" alt="Logo" width={50} height={50} />
+                        <Image src="/MedBlend-logo.jpeg" alt="Logo" width={50} height={50} />
                         MedBlendApp
                     </div>
                 </Link>
@@ -29,7 +29,7 @@ export default function Header() {
                     <a href="/" className="bg-transparent text-white py-2 px-3 lg:px-4 cursor-pointer rounded-lg hover:bg-white hover:text-black transition-colors">
                         Home
                     </a>
-                    <a href="/" className="bg-transparent text-white py-2 px-3 lg:px-4 cursor-pointer rounded-lg hover:bg-white hover:text-black transition-colors">
+                    <a href="#about" className="bg-transparent text-white py-2 px-3 lg:px-4 cursor-pointer rounded-lg hover:bg-white hover:text-black transition-colors">
                         About
                     </a>
                     <a href="/" className="bg-transparent text-white py-2 px-3 lg:px-4 cursor-pointer rounded-lg hover:bg-white hover:text-black transition-colors">
