@@ -102,11 +102,11 @@ export default function Header() {
                             About
                         </a>
 
-                        <a href="/#features"
+                        <a href="/#team"
                             onClick={closeMenu}
                             className="text-white py-3 px-4 rounded-lg hover:bg-white/10 transition-colors text-lg"
                         >
-                            Features
+                            Team
                         </a>
 
                         <a href="/waitlist"
