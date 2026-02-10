@@ -88,19 +88,21 @@ export default function Home() {
           </TextAnimate>
 
           {/* Features Grid*/}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full items-stretch">
 
             {/* Left Column - Two stacked cards (desktop only) */}
             <div className="flex flex-col gap-6 md:gap-8">
+
               {/* Feature Card 1 */}
-              <div className="bg-[hsl(0,0%,12%)] rounded-3xl p-6 sm:p-8 flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
+              <div className="bg-[hsl(0,0%,10%)] rounded-3xl p-6 sm:p-8 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10">
+
                 {/* Text Content */}
-                <div className="flex flex-col lg:max-w-[55%]">
-                  <h3 className="text-white text-xl sm:text-2xl text-left mb-10">
-                    Talk to people ahead of you.
+                <div className="flex flex-1 flex-col justify-center lg:max-w-[55%] lg:gap-1">
+                  <h3 className="flex flex-none text-white text-2xl sm:text-3xl text-left mb-8">
+                    Direction
                   </h3>
-                  <TextAnimate delay={0.5} startOnView={true} once={true} className="text-base sm:text-lg text-[hsl(0,0%,60%)] text-left">
-                    Ask questions to medical students, residents, and doctors — not forums, not guesses.
+                  <TextAnimate delay={0.5} startOnView={true} once={true} className="text-base sm:text-lg text-[hsl(0,0%,60%)] text-left leading-relaxed max-w-md">
+                    Move forward with confidence. Make decisions about medicine with clarity — not pressure, assumptions, or luck.
                   </TextAnimate>
                 </div>
 
@@ -110,40 +112,40 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.2 }}
-                  className="w-full sm:w-64 sm:mx-auto lg:w-auto lg:mx-0 lg:flex-shrink-0"
+                  className="w-full lg:w-[45%] flex justify-end"
                 >
                   <Image
-                    src="/about-us-picture.jpeg"
+                    src="/road-map.jpg"
                     alt="About"
                     width={280}
                     height={280}
-                    className="rounded-2xl w-full h-auto object-cover"
+                    className="rounded-3xl w-full h-auto object-cover aspect-square"
                   />
                 </motion.div>
               </div>
 
               {/* Feature Card 2 */}
-              <div className="bg-[hsl(0,0%,12%)] rounded-3xl p-6 sm:p-8 flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
+              <div className="bg-[hsl(0,0%,10%)] rounded-3xl p-6 sm:p-8 flex flex-col-reverse lg:flex-row lg:items-center lg:justify-between gap-10">
                 {/* Image - Shows on left for desktop */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.3 }}
-                  className="w-full sm:w-64 sm:mx-auto lg:w-auto lg:mx-0 lg:flex-shrink-0 lg:order-first order-last"
+                  className="w-full lg:w-[45%] flex justify-start"
                 >
                   <Image
-                    src="/about-us-picture.jpeg"
+                    src="/checklist.jpg"
                     alt="About"
                     width={280}
                     height={280}
-                    className="rounded-2xl w-full h-full object-cover"
+                    className="rounded-3xl w-full h-auto object-cover aspect-square"
                   />
                 </motion.div>
 
                 {/* Text Content */}
                 <div className="flex flex-col lg:max-w-[55%]">
-                  <h3 className="text-white text-xl sm:text-2xl text-left mb-7">
+                  <h3 className="text-white text-xl sm:text-2xl text-left mb-8 lg:mb-12">
                     Honesty
                   </h3>
                   <TextAnimate delay={0.5} startOnView={true} once={true} className="text-base sm:text-lg text-[hsl(0,0%,60%)] text-left">
@@ -154,20 +156,20 @@ export default function Home() {
             </div>
 
             {/* Right Column - One big card */}
-            <div className="bg-[hsl(0,0%,12%)] rounded-3xl p-6 sm:p-8 flex flex-col h-full">
+            <div className="bg-[hsl(0,0%,10%)] rounded-3xl p-6 sm:p-8 flex flex-col h-full overflow-hidden">
               {/* Section Tag */}
-              <p className="w-fit bg-[hsl(245,72%,59%)] py-2 px-6 rounded-full text-left text-xs sm:text-sm font-semibold text-[hsl(0,0,90%)] mb-4 lg:mb-6 uppercase tracking-wider">
+              {/* <p className="w-fit bg-[hsl(245,72%,59%)] py-2 px-6 rounded-full text-left text-xs sm:text-sm font-semibold text-[hsl(0,0,90%)] mb-4 lg:mb-6 uppercase tracking-wider">
                 Community
-              </p>
+              </p> */}
 
               {/* Heading - Shows first on mobile/tablet, hidden on desktop */}
               <h3 className="text-white text-xl sm:text-2xl text-left mb-4 lg:hidden">
-                Direction
+                Talk to people ahead of you.
               </h3>
 
               {/* Description - Shows second on mobile/tablet, hidden on desktop */}
               <TextAnimate delay={0.5} startOnView={true} once={true} className="text-base sm:text-lg text-[hsl(0,0%,60%)] text-left mb-6 lg:hidden">
-                Move forward with confidence. Make decisions about medicine with clarity — not pressure, assumptions, or luck.
+                Ask questions to medical students, residents, and doctors — not forums, not guesses.
               </TextAnimate>
 
               {/* Image */}
@@ -176,27 +178,27 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="mb-6 lg:mb-8 w-full sm:w-64 sm:mx-auto lg:w-full lg:mx-0"
+                className="mb-6 lg:mb-8 w-full lg:flex-1 lg:h-0"
               >
                 <Image
-                  src="/about-us-picture.jpeg"
+                  src="/access-picture.jpg"
                   alt="About"
-                  width={600}
-                  height={600}
-                  className="rounded-2xl w-full h-auto lg:h-[200px] object-cover"
+                  width={500}
+                  height={500}
+                  className="rounded-2xl w-full h-full object-cover"
                 />
               </motion.div>
 
               {/* Bottom Section - Heading and Description (Desktop only) */}
-              <div className="hidden lg:flex flex-row gap-16 items-start">
+              <div className="hidden lg:flex flex-col gap-8">
                 {/* Heading */}
-                <h3 className="text-white text-xl sm:text-2xl lg:text-3xl text-left w-1/3">
-                  Direction
+                <h3 className="text-white text-xl sm:text-xl lg:text-2xl text-left w-full">
+                  Talk to people ahead of you.
                 </h3>
 
                 {/* Description */}
-                <TextAnimate startOnView={true} once={true} delay={0.5} className="text-base sm:text-lg text-[hsl(0,0%,60%)] text-left w-2/3">
-                  Move forward with confidence. Make decisions about medicine with clarity — not pressure, assumptions, or luck.
+                <TextAnimate startOnView={true} once={true} delay={0.5} className="text-base sm:text-lg text-[hsl(0,0%,60%)] text-left w-full">
+                  Ask questions to medical students, residents, and doctors — not forums, not guesses.
                 </TextAnimate>
               </div>
             </div>
@@ -206,9 +208,9 @@ export default function Home() {
       </section>
 
       {/* Meet the team */}
-      <section className="py-16 sm:py-20 md:py-24 px-6">
+      <section id="team" className="py-16 sm:py-20 md:py-24 px-6">
         {/* Section Tag */}
-        <p className="w-fit bg-[hsl(245,72%,59%)] py-2 px-6 rounded-full text-xs mx-auto w-1/2 text-center sm:text-sm font-semibold text-[hsl(0,0,15)] mb-6 lg:mb-6 uppercase tracking-wider">
+        <p className="w-fit bg-[hsl(245,72%,59%)] py-2 px-6 rounded-full text-xs mx-auto w-1/2 text-center sm:text-sm font-semibold text-[hsl(0,0,100)] mb-6 lg:mb-6 uppercase tracking-wider">
           Team Members
         </p>
         <h2 className="text-3xl sm:text-4xl md:text-5xl text-center font-bold leading-tight mb-12 sm:mb-16">

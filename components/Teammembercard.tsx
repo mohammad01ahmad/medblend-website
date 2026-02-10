@@ -20,7 +20,7 @@ function Teammembercard({ name, role }: { name: string, role: string }) {
                 duration={6}
                 size={100}
                 colorFrom='hsl(0,0%,90%)'
-                colorTo='hsl(69,69%,50%)'
+                colorTo='hsl(245,72%,59%)'
             />
         </div>
     )

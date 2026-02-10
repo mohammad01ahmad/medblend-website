@@ -29,10 +29,10 @@ export default function Header() {
                     <a href="/" className="bg-transparent text-white py-2 px-3 lg:px-4 cursor-pointer rounded-lg hover:bg-white hover:text-black transition-colors">
                         Home
                     </a>
-                    <a href="#about" className="bg-transparent text-white py-2 px-3 lg:px-4 cursor-pointer rounded-lg hover:bg-white hover:text-black transition-colors">
+                    <a href="/#about" className="bg-transparent text-white py-2 px-3 lg:px-4 cursor-pointer rounded-lg hover:bg-white hover:text-black transition-colors">
                         About
                     </a>
-                    <a href="/" className="bg-transparent text-white py-2 px-3 lg:px-4 cursor-pointer rounded-lg hover:bg-white hover:text-black transition-colors">
+                    <a href="/#team" className="bg-transparent text-white py-2 px-3 lg:px-4 cursor-pointer rounded-lg hover:bg-white hover:text-black transition-colors">
                         Team
                     </a>
                     <a href="/waitlist" className="bg-transparent text-white py-2 px-3 lg:px-4 cursor-pointer rounded-lg hover:bg-white hover:text-black transition-colors">
@@ -88,6 +88,13 @@ export default function Header() {
                     {/* Mobile Menu Links */}
                     <div className="flex flex-col gap-2 p-6 flex-1">
 
+                        <a href="/"
+                            onClick={closeMenu}
+                            className="text-white py-3 px-4 rounded-lg hover:bg-white/10 transition-colors text-lg"
+                        >
+                            Home
+                        </a>
+
                         <a href="/#about"
                             onClick={closeMenu}
                             className="text-white py-3 px-4 rounded-lg hover:bg-white/10 transition-colors text-lg"
@@ -114,7 +121,7 @@ export default function Header() {
                     <div className="p-6 border-t border-gray-700">
                         <Link href="/waitlist" onClick={closeMenu}>
                             <ShimmerButton className="w-full">
-                                Join Our Waitlist
+                                Get Early Access
                             </ShimmerButton>
                         </Link>
                     </div>
