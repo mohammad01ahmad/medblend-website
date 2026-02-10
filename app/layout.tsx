@@ -10,8 +10,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Medblend",
-  description: "Medblend - The Future of Medical Education",
+  title: "MedBlend",
+  description: "MedBlend - The Future of Medical Education",
 };
 
 export default function RootLayout({
