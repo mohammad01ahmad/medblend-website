@@ -9,7 +9,7 @@ const Footer = () => {
                     <div>
                         <div className="flex items-center text-xl font-bold text-white cursor-pointer">
                             <Image src="/MedBlend-logo.jpeg" alt="Logo" width={50} height={50} />
-                            MedblendApp
+                            MedBlendApp
                         </div>
                         <p className="text-gray-400">Real Guidance From Students And Doctors Who’ve Already Lived It.</p>
                     </div>
@@ -37,7 +37,7 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className="border-t border-gray-800 pt-8 text-left text-gray-400">
-                    <p>Copyright © 2026 Medblend. All rights reserved.</p>
+                    <p>Copyright © 2026 MedBlend. All rights reserved.</p>
                 </div>
             </div>
         </footer>

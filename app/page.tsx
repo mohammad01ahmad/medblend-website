@@ -181,7 +181,7 @@ export default function Home() {
                 className="mb-6 lg:mb-8 w-full lg:flex-1 lg:h-0"
               >
                 <Image
-                  src="/access-picture.jpg"
+                  src="/doctor-images.jpeg"
                   alt="About"
                   width={500}
                   height={500}
