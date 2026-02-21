@@ -1,5 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
+import { IoLogoInstagram } from "react-icons/io5";
+import { LuMail } from "react-icons/lu";
 
 const Footer = () => {
     return (
@@ -24,7 +26,7 @@ const Footer = () => {
                         <h4 className="font-semibold mb-4">Company</h4>
                         <ul className="space-y-2 text-gray-400">
                             <li><a href="#about" className="hover:text-purple-400 transition-colors">About</a></li>
-                            <li><a href="#" className="hover:text-purple-400 transition-colors">Contact</a></li>
+                            <li><a href="/contact" className="hover:text-purple-400 transition-colors">Contact</a></li>
                         </ul>
                     </div>
                     <div>
@@ -36,8 +38,18 @@ const Footer = () => {
                         </ul>
                     </div>
                 </div>
-                <div className="border-t border-gray-800 pt-8 text-left text-gray-400">
+                <div className="flex justify-between border-t border-gray-800 pt-8 text-left text-gray-400">
                     <p>Copyright © 2026 MedBlend. All rights reserved.</p>
+                    <div className='flex flex-row gap-4'>
+                        <div className="flex space-x-2">
+                            <a href="https://www.instagram.com/medblendapp/" className="hover:text-purple-400 transition-colors text-2xl"><IoLogoInstagram /></a>
+                            <p className='hover:text-purple-400 transition-colors'><a href="https://www.instagram.com/medblendapp/">Instagram</a></p>
+                        </div>
+                        <div className="flex space-x-2">
+                            <a className="hover:text-purple-400 transition-colors text-2xl"><LuMail /></a>
+                            <p>medblendapp@gmail.com</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </footer>
@@ -45,3 +57,6 @@ const Footer = () => {
 }
 
 export default Footer
+
+
+
