@@ -16,13 +16,6 @@ const Footer = () => {
                         <p className="text-gray-400">Real Guidance From Students And Doctors Who’ve Already Lived It.</p>
                     </div>
                     <div>
-                        <h4 className="font-semibold mb-4">Product</h4>
-                        <ul className="space-y-2 text-gray-400">
-                            <li><a href="#features" className="hover:text-purple-400 transition-colors">Medblend App</a></li>
-                            <li><a href="#upcoming" className="hover:text-purple-400 transition-colors">Medblend Web</a></li>
-                        </ul>
-                    </div>
-                    <div>
                         <h4 className="font-semibold mb-4">Company</h4>
                         <ul className="space-y-2 text-gray-400">
                             <li><a href="#about" className="hover:text-purple-400 transition-colors">About</a></li>
