@@ -104,7 +104,7 @@ const PrivacyPolicy = () => {
                 </ul>
                 <p className="mb-4">This information is primarily needed to maintain the security and operation of our Application(s), for trouble shooting, and for internal analytics and reporting purposes.</p>
                 <p className="mb-4">All personal information that you provide to us must be true, complete, and accurate, and you must notify us of any changes to such personal information.</p>
-                <p className="mb-4">Our use of information recieved from Google API will adhere to the Google API Services User Data Policy, including the Limited Use Restriction.</p>
+                <p className="mb-4">Our use of information recieved from Google API will adhere to the <span className="text-blue-500 hover:underline"><Link href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</Link></span>, including the <span className="text-blue-500 hover:underline"><Link href="https://developers.google.com/terms/api-services-user-data-policy#limited-use">Limited Use Restriction</Link></span>.</p>
             </section>
 
             {/* QUESTION 2 */}
@@ -181,7 +181,7 @@ const PrivacyPolicy = () => {
                 <p>Specific information about how we use such technologies and how you can refuse certain cookies is set out in our Cookie Notice.</p>
                 <br />
                 <h3 className="mb-4 text-xl font-bold">Google Analytics</h3>
-                <p className="mb-4">We may share your information with Google Analytics to track and analyze the use of the Services. The Google Analytics Advertising Features that we may use include: Remarketing with Google Analytics and Google Analytics Demographics and Interests Reporting. To opt out of being tracked by Google Analytics across the Services, visit https://tools.google.com/dlpage/gaoptout. You can opt out of Google Analytics Advertising Features through Ads Settings and Ad Settings for mobile apps. Other opt out means include http://optout.networkadvertising.org/ and http://www.networkadvertising.org/mobile-choice. For more information on the privacy practices of Google, please visit the Google Privacy & Terms page.</p>
+                <p className="mb-4">We may share your information with Google Analytics to track and analyze the use of the Services. The Google Analytics Advertising Features that we may use include: Remarketing with Google Analytics and Google Analytics Demographics and Interests Reporting. To opt out of being tracked by Google Analytics across the Services, visit <span className="text-blue-500 hover:underline"><Link href="https://tools.google.com/dlpage/gaoptout">https://tools.google.com/dlpage/gaoptout</Link></span>. You can opt out of Google Analytics Advertising Features through <span className="text-blue-500 hover:underline"><Link href="https://myadcenter.google.com/home?sasb=true&ref=ad-settings">Ads Settings</Link></span> and Ad Settings for mobile apps. Other opt out means include <span className="text-blue-500 hover:underline"><Link href="https://thenai.org/how-to-opt-out/">http://optout.networkadvertising.org/</Link></span> and <span className="text-blue-500 hover:underline"><Link href="https://thenai.org/how-to-opt-out/advertising-privacy-settings-on-mobile-devices/">http://www.networkadvertising.org/mobile-choice</Link></span>. For more information on the privacy practices of Google, please visit the <span className="text-blue-500 hover:underline"><Link href="https://policies.google.com/privacy">Google Privacy & Terms page</Link></span>.</p>
             </section>
 
             {/* QUESTION 6 */}
@@ -285,11 +285,11 @@ const PrivacyPolicy = () => {
             {/* QUESTION 11 */}
             <section className="mb-12">
                 <h2 className="text-2xl font-bold text-white mb-6 uppercase tracking-wide">11. CONTROLS FOR DO-NOT-TRACK FEATURES</h2>
-                <p>Most web browsers and some mobile operating systems and mobile applications include a Do-Not-Track ("DNT") feature or setting you can activate to signal your privacy preference not to have data about your online browsing activities monitored and collected. At this stage, no uniform technology standard for recognizing and implementing DNT signals has been finalized. As such, we do not currently respond to DNT browser signals or any other mechanism that automatically communicates your choice not to be tracked online. If a standard for online tracking is adopted that we must follow in the future, we will inform you about that practice in a revised version of this Privacy Notice.</p>
+                <p>Most web browsers and some mobile operating systems and mobile applications include a Do-Not-Track ("DNT") feature or setting you can activate to signal your privacy preference not to have data about your online browsing activities monitored and collected. At this stage, no uniform technology standard for recognizing or honoring DNT signals has been finalized. As such, we do not currently respond to DNT browser signals or any other mechanism that automatically communicates your choice not to be tracked online. If a standard for online tracking is adopted that we must follow in the future, we will inform you about that practice in a revised version of this Privacy Notice.</p>
                 <br />
                 <p>California law requires us to let you know how we respond to web browser DNT signals. Because there currently is not an industry or legal standard for recognizing or honoring DNT signals, we do not respond to them at this time.</p>
                 <br />
-                <p><strong>Global Privacy Control:</strong> We recognize and honor Global Privacy Control (GPC) signals. If you use a browser or extension that supports GPC, we will treat this as a valid request to opt out of the sale or sharing of your personal information for targeted advertising purposes under applicable state privacy laws, including the California Consumer Privacy Act (CCPA). When we detect a GPC signal from your browser, we will automatically apply your opt-out preference without requiring you to take any additional action. For more information about GPC and how to enable it, visit globalprivacycontrol.org.</p>
+                <p><strong>Global Privacy Control:</strong> We recognize and honor Global Privacy Control (GPC) signals. If you use a browser or extension that supports GPC, we will treat this as a valid request to opt out of the sale or sharing of your personal information for targeted advertising purposes under applicable state privacy laws, including the California Consumer Privacy Act (CCPA). When we detect a GPC signal from your browser, we will automatically apply your opt-out preference without requiring you to take any additional action. For more information about GPC and how to enable it, visit <Link href="https://globalprivacycontrol.org/" className="text-blue-500">globalprivacycontrol.org</Link>.</p>
             </section>
 
             {/* QUESTION 12 */}
@@ -299,7 +299,80 @@ const PrivacyPolicy = () => {
                 <br />
                 <h3 className="text-xl font-bold text-white mb-6 uppercase tracking-wide">Categories of Personal Information We Collect</h3>
                 <p>The table below shows the categories of personal information we have collected in the past twelve (12) months. The table includes illustrative examples of each category and does not reflect the personal information we collect from you. For a comprehensive inventory of all personal information we process, please refer to the section "WHAT INFORMATION DO WE COLLECT?"</p>
-                <p>table here</p>
+
+                {/* table here */}
+                <table className="w-full border border-gray-300 mt-5 text-white">
+                    <thead>
+                        <tr>
+                            <th className="">Category</th>
+                            <th className="">Examples</th>
+                            <th className="">Collected</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td className="">A. Identifiers</td>
+                            <td className="">Contact details, such as real name, alias, postal address, telephone or mobile contact number, unique personal identifier, online identifier, Internet Protocol address, email address, and account name</td>
+                            <td className="">YES</td>
+                        </tr>
+                        <tr>
+                            <td className="">B. Personal information as defined in the California Customer Records statute</td>
+                            <td>Name, contact information, education, employment, employment history, and financial information</td>
+                            <td className="">YES</td>
+                        </tr>
+                        <tr>
+                            <td className="">C. Protected classification characteristics under California or federal law</td>
+                            <td>Gender, age, date of birth, race and ethnicity, national origin, marital status, and other demographic data</td>
+                            <td className="">NO</td>
+                        </tr>
+                        <tr>
+                            <td className="">D. Commercial information</td>
+                            <td>Transaction information, purchase history, financial details, and payment information</td>
+                            <td className="">NO</td>
+                        </tr>
+                        <tr>
+                            <td>E. Biometric information</td>
+                            <td>Fingerprints and voiceprints</td>
+                            <td className="">NO</td>
+                        </tr>
+                        <tr>
+                            <td>F. Internet or other similar network activity</td>
+                            <td>Browsing history, search history, online behavior, interest data, and interactions with our and other websites, applications, systems, and advertisements</td>
+                            <td className="">NO</td>
+                        </tr>
+                        <tr>
+                            <td>G. Geolocation data</td>
+                            <td className="">Device location</td>
+                            <td className="">NO</td>
+                        </tr>
+                        <tr>
+                            <td>H. Audio, electronic, sensory, or similar information</td>
+                            <td>Images and audio, video or call recordings created in connection with our business activities</td>
+                            <td className="">NO</td>
+                        </tr>
+                        <tr>
+                            <td>I. Professional or employment-related information</td>
+                            <td>Business contact details in order to provide you our Services at a business level or job title, work history, and professional qualifications if you apply for a job with us</td>
+                            <td className="">NO</td>
+                        </tr>
+                        <tr>
+                            <td className="">J. Education Information</td>
+                            <td>Student records and directory information</td>
+                            <td className="">NO</td>
+                        </tr>
+                        <tr>
+                            <td className="">K. Inferences drawn from collected personal information</td>
+                            <td>Inferences drawn from any of the collected personal information listed above to create a profile or summary about, for example, an individual's preferences and characteristics</td>
+                            <td className="">YES</td>
+                        </tr>
+                        <tr>
+                            <td className="">L. Sensitive personal information</td>
+                            <td>Account login information</td>
+                            <td className="">YES</td>
+                        </tr>
+                    </tbody>
+                </table>
+
                 <br />
                 <p>We only collect sensitive personal information, as defined by applicable privacy laws or the purposes allowed by law or with your consent. Sensitive personal information may be used, or disclosed to a service provider or contractor, for additional, specified purposes. You may have the right to limit the use or disclosure of your sensitive personal information. We do not collect or process sensitive personal information for the purpose of inferring characteristics about you.</p>
                 <br />
@@ -406,7 +479,7 @@ const PrivacyPolicy = () => {
                 </ul>
                 <p>At any time, you have the right to request access to or correction of your personal information. You can make such a request by contacting us by using the contact details provided in the section "HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?". If you believe we are unlawfully processing your personal information, you have the right to submit a complaint about a breach of the Australian Privacy Principles to the Office of the Australian Information Commissioner and a breach of New Zealand's Privacy Principles to the Office of New Zealand Privacy Commissioner.</p>
                 <br />
-                <p>If you believe we are unlawfully processing your personal information, you have the right to submit a complaint about a breach of the Australian Privacy Principles to the Office of the Australian Information Commissioner and a breach of New Zealand's Privacy Principles to the Office of New Zealand Privacy Commissioner.</p>
+                <p>If you believe we are unlawfully processing your personal information, you have the right to submit a complaint about a breach of the Australian Privacy Principles to the <Link href="https://www.oaic.gov.au/" className="text-blue-500">Office of the Australian Information Commissioner</Link> and a breach of New Zealand's Privacy Principles to the <Link href="https://www.privacy.org.nz/your-rights/making-a-complaint-to-the-privacy-commissioner/" className="text-blue-500">Office of New Zealand Privacy Commissioner</Link>.</p>
                 <br />
                 <h3 className="font-bold text-xl text-white">Republic of South Africa</h3>
                 <br />
