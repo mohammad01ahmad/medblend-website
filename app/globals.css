@@ -126,7 +126,22 @@
       opacity: 0;
     }
   }
+
+  /* This is the animation for the words tape */
+  --animate-move-left: move-left 15s linear infinite;
+
+  @keyframes move-left {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
+  }
 }
+
+
 
 :root {
   --radius: 0.625rem;
