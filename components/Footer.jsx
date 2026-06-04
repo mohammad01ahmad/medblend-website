@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { IoLogoInstagram } from "react-icons/io5";
 import { LuMail } from "react-icons/lu";
+import Link from 'next/link';
 
 const Footer = () => {
     return (
@@ -18,16 +19,16 @@ const Footer = () => {
                     <div>
                         <h4 className="font-semibold mb-4">Company</h4>
                         <ul className="space-y-2 text-gray-400">
-                            <li><a href="#about" className="hover:text-purple-400 transition-colors">About</a></li>
-                            <li><a href="/contact" className="hover:text-purple-400 transition-colors">Contact</a></li>
+                            <li><Link href="#about" className="hover:text-purple-400 transition-colors">About</Link></li>
+                            <li><Link href="/contact" className="hover:text-purple-400 transition-colors">Contact</Link></li>
                         </ul>
                     </div>
                     <div>
                         <h4 className="font-semibold mb-4">Support</h4>
                         <ul className="space-y-2 text-gray-400">
-                            <li><a href="#" className="hover:text-purple-400 transition-colors">FAQ</a></li>
-                            <li><a href="/privacy-policy" className="hover:text-purple-400 transition-colors">Privacy Policy</a></li>
-                            <li><a href="#" className="hover:text-purple-400 transition-colors">Terms & Conditions</a></li>
+                            <li><Link href="/FAQ" className="hover:text-purple-400 transition-colors">FAQ</Link></li>
+                            <li><Link href="/privacy-policy" className="hover:text-purple-400 transition-colors">Privacy Policy</Link></li>
+                            <li><Link href="#" className="hover:text-purple-400 transition-colors">Terms & Conditions</Link></li>
                         </ul>
                     </div>
                 </div>

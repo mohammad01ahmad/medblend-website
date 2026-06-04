@@ -27,13 +27,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#121212] text-white font-['Inter'] smooth-scroll">
-      {/* <DotPattern
-        glow={true}
-        cr={2}
-        className={cn(
-          "[mask-image:radial-gradient(400px_circle_at_center,white,transparent)]"
-        )}
-      /> */}
 
       {/* Hero section  */}
       <section className="py-20 sm:py-24 md:py-32 px-10 sm:px-6 lg:px-10 min-h-screen flex items-center justify-center">
