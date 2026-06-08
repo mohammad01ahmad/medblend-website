@@ -1,11 +1,7 @@
 pull_request_rules:
   - name: Auto-merge PRs when all checks pass
     conditions:
-      # 1. Target the main production branch
       - base=main
-      # 2. Make sure the PR is still open
-      - closed=false
-      # 3. Correct syntax to verify GitHub Actions pass
       - check-success=test
     actions:
       merge:
