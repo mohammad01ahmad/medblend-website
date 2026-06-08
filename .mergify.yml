@@ -11,4 +11,3 @@ pull_request_rules:
 
           {{ body }}
       # Automatically clean up the branch after merging
-      delete_head_branch: {}
