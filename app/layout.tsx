@@ -4,6 +4,7 @@ import { Inter, Syne, Instrument_Serif } from "next/font/google";
 import ConditionalHeader from "@/components/ConditionalHeader";
 import Footer from "@/components/Footer";
 import RevealOnScroll from "@/components/RevealOnScroll";
+import CustomCursor from "@/components/CustomCursor";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -45,6 +46,7 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className={`${inter.className} bg-background text-foreground antialiased`}>
+        <CustomCursor />
         <RevealOnScroll />
         <ConditionalHeader />
         {children}

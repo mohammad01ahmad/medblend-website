@@ -1,20 +1,22 @@
+import Image from 'next/image';
+
 const featuresData = [
     {
-        icon: '🤝',
+        icon: '/handshake.png',
         title: '1-on-1 Async Spaces',
         desc: 'Drop deep questions without the pressure of a live call. Mentors respond with voice notes, long-form reviews, or tactical roadmaps when they are off-duty.',
         accentColor: 'via-[var(--pulse)]',
         animationClass: 'reveal',
     },
     {
-        icon: '🛡️',
+        icon: '/Verified.png',
         title: 'Verified Backgrounds',
         desc: 'Every contributor uploads institutional verification. Know instantly if you\'re talking to an M1, an orthopedic resident, or a chief fellow.',
         accentColor: 'via-[var(--sage)]',
         animationClass: 'reveal d1',
     },
     {
-        icon: '📊',
+        icon: '/bars.png',
         title: 'Specialty Breakdowns',
         desc: 'Browse authentic day-in-the-life logs detailing real hours, actual call schedules, compensation, and emotional highs/lows across 40+ paths.',
         accentColor: 'via-[var(--ember)]',
@@ -50,15 +52,17 @@ export default function FeaturesSection() {
                 </div>
 
                 {/* Features Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                     {featuresData.map((feat, index) => (
 
                         <div
                             key={index}
-                            className={`${feat.animationClass} group relative overflow-hidden  border border-gray-700 bg-black p-8 transition-all duration-300 hover:-translate-y-1 hover:border-[rgba(255,255,255,0.15)]`}
+                            className={`${feat.animationClass} group relative overflow-hidden rounded-[var(--radius-2xl)] border border-gray-700 bg-black p-8 transition-all duration-300 hover:-translate-y-1 hover:border-[rgba(255,255,255,0.15)]`}
                         >
                             {/* Feature Icon */}
-                            <div className="mb-6 text-3xl">{feat.icon}</div>
+                            <div className="mb-6">
+                                <Image src={feat.icon} alt={feat.title} width={64} height={64} className="object-contain" />
+                            </div>
 
                             {/* Feature Title */}
                             <h3 className="mb-3 font-syne text-xl font-semibold">
