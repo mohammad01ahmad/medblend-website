@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { IoLogoInstagram } from 'react-icons/io5';
 import { LuMail } from 'react-icons/lu';
-import DnaCanvas from '@/components/DnaCanvas';
+import Dna3DCanvas from '@/components/dna-3d-canvas';
 
 const companyLinks = [
   { href: '/#problem', label: 'About' },
@@ -22,7 +22,7 @@ export default function Footer() {
     <footer className="relative overflow-hidden border-t border-white/10 bg-[var(--background)] text-white">
       {/* DNA helix — subdued, behind scrim */}
       <div className="pointer-events-none absolute inset-0">
-        <DnaCanvas muted className="scale-105 opacity-50" />
+        <Dna3DCanvas muted className="scale-105 opacity-50" />
       </div>
 
       {/* Blurred dull overlay for readability */}
