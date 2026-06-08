@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import DnaCanvas from '@/components/DnaCanvas';
+import Dna3DCanvas from '@/components/dna-3d-canvas';
 import { useRouter } from 'next/navigation';
 
 export default function LandingHero() {
@@ -601,7 +601,7 @@ export default function LandingHero() {
 
             {/* Purple display card */}
             <div className="lh-purple-card">
-              <DnaCanvas className="lh-purple-card-bg" embedded />
+              <Dna3DCanvas className="lh-purple-card-bg" embedded />
 
               {/* Nav */}
               <nav className="lh-nav">
