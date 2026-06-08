@@ -15,7 +15,7 @@ export default function page() {
             <WaitlistParticles />
 
             <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
-            <div className="bg-white rounded-2xl overflow-hidden shadow-2xl max-w-full">
+            <div className="relative z-10 bg-white rounded-2xl overflow-hidden shadow-2xl max-w-full">
                 <iframe src="https://subscribe-forms.beehiiv.com/cad1e23e-5b57-414b-8931-311f15151b30"
                     className="beehiiv-embed"
                     data-test-id="beehiiv-embed"
