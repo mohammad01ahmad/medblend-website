@@ -24,21 +24,21 @@ const featuresData = [
 
 export default function FeaturesSection() {
     return (
-        <section className="relative px-[clamp(1.5rem,6vw,6rem)] py-[clamp(5rem,10vw,9rem)] text-white">
+        <section id="features" className="relative px-[clamp(1.5rem,6vw,6rem)] py-[clamp(5rem,10vw,9rem)] text-white">
             <div className="mx-auto max-w-[1200px]">
 
                 {/* Section Header */}
                 <div className="mb-16 max-w-[700px]">
                     <div className="reveal mb-6 inline-flex items-center gap-2">
                         <div className="h-px w-6 bg-[var(--pulse)]"></div>
-                        <span className="font-['Syne',sans-serif] text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[var(--white-dim)]">
+                        <span className="font-syne text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[var(--white-dim)]">
                             Features
                         </span>
                     </div>
 
-                    <h2 className="reveal d1 mb-[1.2rem] font-['Syne',sans-serif] text-[clamp(2.2rem,5vw,4rem)] leading-[1.1]">
+                    <h2 className="reveal d1 mb-[1.2rem] font-syne text-[clamp(2.2rem,5vw,4rem)] leading-[1.1]">
                         Everything you need to find{' '}
-                        <em className="font-['Instrument_Serif',serif] italic text-[var(--sage)]">
+                        <em className="font-instrument italic text-[var(--sage)]">
                             your blend.
                         </em>
                     </h2>
@@ -61,7 +61,7 @@ export default function FeaturesSection() {
                             <div className="mb-6 text-3xl">{feat.icon}</div>
 
                             {/* Feature Title */}
-                            <h3 className="mb-3 font-['Syne',sans-serif] text-xl font-semibold">
+                            <h3 className="mb-3 font-syne text-xl font-semibold">
                                 {feat.title}
                             </h3>
 

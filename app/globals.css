@@ -147,6 +147,22 @@
   --radius: 0.625rem;
   --background: #121212;
   --foreground: oklch(0.985 0 0);
+
+  /* MedBlend brand palette (emerald / sage greens) */
+  --void: #0a0a0a;
+  --ink: #121212;
+  --sage: #34d399;
+  --sage-glow: rgba(52, 211, 153, 0.2);
+  --sage-soft: rgba(52, 211, 153, 0.12);
+  --pulse: #10b981;
+  --pulse-soft: rgba(16, 185, 129, 0.18);
+  --pulse-glow: rgba(16, 185, 129, 0.35);
+  --ember: #f59e0b;
+  --ember-glow: rgba(245, 158, 11, 0.15);
+  --white-dim: rgba(255, 255, 255, 0.65);
+  --white-06: rgba(255, 255, 255, 0.06);
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -229,6 +245,58 @@ html {
 section {
   scroll-margin-top: 80px;
   /* Matches your navbar height */
+}
+
+/* Brand font utilities (loaded via next/font in layout) */
+.font-syne {
+  font-family: var(--font-syne), ui-sans-serif, sans-serif;
+}
+
+.font-instrument {
+  font-family: var(--font-instrument-serif), ui-serif, serif;
+}
+
+/* Scroll reveal animations */
+.reveal,
+.reveal-right {
+  opacity: 0;
+  transition:
+    opacity 0.75s var(--ease-out),
+    transform 0.75s var(--ease-out);
+  will-change: opacity, transform;
+}
+
+.reveal {
+  transform: translateY(28px);
+}
+
+.reveal-right {
+  transform: translateX(32px);
+}
+
+.reveal.is-visible,
+.reveal-right.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal.d1,
+.reveal-right.d1 { transition-delay: 0.1s; }
+.reveal.d2,
+.reveal-right.d2 { transition-delay: 0.2s; }
+.reveal.d3,
+.reveal-right.d3 { transition-delay: 0.3s; }
+.reveal.d4,
+.reveal-right.d4 { transition-delay: 0.4s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-right {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
 }
 
 /* style for table */
