@@ -1,16 +1,29 @@
 import React from 'react'
+import WaitlistParticles from '@/components/WaitlistParticles'
 
 export default function page() {
     return (
-        <div className='flex flex-col items-center justify-center h-screen bg-[#000000]'>
+        <div className='relative flex flex-col items-center justify-center min-h-screen bg-[#0a0a0a] p-4 overflow-hidden'>
+            {/* Animated Ambient Glows */}
+            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+                <div className="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] rounded-full bg-[#34d399]/15 blur-[120px] animate-pulse"></div>
+                <div className="absolute top-[40%] -right-[20%] w-[70%] h-[70%] rounded-full bg-[#10b981]/15 blur-[150px]" style={{ animation: 'pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite' }}></div>
+                <div className="absolute bottom-[10%] left-[20%] w-[40%] h-[40%] rounded-full bg-[#f59e0b]/10 blur-[100px]" style={{ animation: 'pulse 10s cubic-bezier(0.4, 0, 0.6, 1) infinite 2s' }}></div>
+            </div>
+
+            {/* Particle Effects */}
+            <WaitlistParticles />
+
             <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
-            <iframe src="https://subscribe-forms.beehiiv.com/cad1e23e-5b57-414b-8931-311f15151b30"
-                className="beehiiv-embed"
-                data-test-id="beehiiv-embed"
-                frameBorder="0"
-                scrolling="no"
-                style={{ width: "560px", height: "495px", margin: "0", borderRadius: "10px 10px 10px 10px !important", backgroundColor: "transparent", boxShadow: "0 0 #0000", maxWidth: "100%" }}>
-            </iframe>
+            <div className="bg-white rounded-2xl overflow-hidden shadow-2xl max-w-full">
+                <iframe src="https://subscribe-forms.beehiiv.com/cad1e23e-5b57-414b-8931-311f15151b30"
+                    className="beehiiv-embed"
+                    data-test-id="beehiiv-embed"
+                    frameBorder="0"
+                    scrolling="no"
+                    style={{ width: "560px", height: "495px", margin: "0", backgroundColor: "transparent", maxWidth: "100%" }}>
+                </iframe>
+            </div>
         </div>
     )
 }
