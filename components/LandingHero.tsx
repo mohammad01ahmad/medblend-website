@@ -5,6 +5,12 @@ import Image from 'next/image';
 import Dna3DCanvas from '@/components/dna-3d-canvas';
 import { useRouter } from 'next/navigation';
 
+const FOUNDING_TEAM = [
+  { name: 'Omar Oqaili', role: 'CEO & Founder', image: '/omar-picture.jpeg' },
+  { name: 'Rima Khattab', role: 'Director of Marketing', image: '/reema-picture.jpeg' },
+  { name: 'Muhammad Ahmad', role: 'Chief Technology Officer', image: '/ahmad2.jpeg' },
+] as const;
+
 export default function LandingHero() {
   const router = useRouter();
   const rootRef = useRef<HTMLElement>(null);
@@ -13,7 +19,6 @@ export default function LandingHero() {
   const sliderTrackRef = useRef<HTMLDivElement>(null);
   const sliderTextRef = useRef<HTMLSpanElement>(null);
   const arrowIconRef = useRef<SVGSVGElement>(null);
-  const toastContainerRef = useRef<HTMLDivElement>(null);
 
   // ── Responsive frame sizing (desktop fluid / tablet scale / phone native layout) ──
   useEffect(() => {
@@ -26,9 +31,9 @@ export default function LandingHero() {
 
       if (w >= 1100) {
         frame.style.transform = 'none';
-        frame.style.width = '96vw';
-        frame.style.height = '92vh';
-        frame.style.maxHeight = '850px';
+        frame.style.width = 'min(96vw, 1400px)';
+        frame.style.height = 'min(92vh, 900px)';
+        frame.style.maxHeight = '';
         root.style.height = '100vh';
         root.style.minHeight = '';
       } else if (w >= 768) {
@@ -54,32 +59,8 @@ export default function LandingHero() {
     return () => window.removeEventListener('resize', adjustScale);
   }, []);
 
-  // ── Toast + slider drag ─────────────────────────────────────────────────
+  // ── Slider drag ─────────────────────────────────────────────────────────
   useEffect(() => {
-    const showToast = (message: string, type: 'normal' | 'success' = 'normal') => {
-      const container = toastContainerRef.current;
-      if (!container) return;
-      const toast = document.createElement('div');
-      toast.className = `lh-toast${type === 'success' ? ' lh-toast--success' : ''}`;
-      const icon = type === 'success' ? '✓' : 'ℹ';
-      toast.innerHTML = `<span class="lh-toast-icon">${icon}</span> <span>${message}</span>`;
-      container.appendChild(toast);
-      setTimeout(() => toast.remove(), 4000);
-    };
-
-    const interactiveEls = document.querySelectorAll<HTMLElement>(
-      '.lh-nav-item, .lh-btn-login, .lh-btn-signup, .lh-glass-card, .lh-social-icon'
-    );
-    const handlers: Array<[HTMLElement, () => void]> = [];
-    interactiveEls.forEach((el) => {
-      const handler = () => {
-        const text = el.textContent?.trim() || 'Action';
-        showToast(`"${text.substring(0, 20)}"`);
-      };
-      el.addEventListener('click', handler);
-      handlers.push([el, handler]);
-    });
-
     const sliderBtn = sliderBtnRef.current;
     const sliderTrack = sliderTrackRef.current;
     const sliderText = sliderTextRef.current;
@@ -126,7 +107,6 @@ export default function LandingHero() {
         sliderText.style.opacity = '1';
         sliderTrack.classList.add('lh-slider--success');
         arrowIcon.style.transform = 'rotate(360deg)';
-        showToast('Joined the MedBlend Waitlist! 🎉', 'success');
 
         setTimeout(() => {
           router.push('/waitlist');
@@ -147,7 +127,6 @@ export default function LandingHero() {
     window.addEventListener('touchend', onDragEnd);
 
     return () => {
-      handlers.forEach(([el, h]) => el.removeEventListener('click', h));
       window.removeEventListener('resize', initSlider);
       sliderBtn.removeEventListener('mousedown', onDragStart as EventListener);
       window.removeEventListener('mousemove', onDragMove as EventListener);
@@ -210,16 +189,16 @@ export default function LandingHero() {
         /* Main */
         .lh-main { flex: 1; height: 100%; position: relative; }
         /* Top-right buttons */
-        .lh-top-right { position: absolute; top: 30px; right: 80px; display: flex; gap: 15px; z-index: 25; }
+        .lh-top-right { position: absolute; top: 3.5%; right: 6%; display: flex; gap: clamp(10px, 1.2%, 18px); z-index: 25; }
         .lh-btn-login {
-          padding: 10px 26px; border: 1.5px solid rgba(255,255,255,0.35); border-radius: 30px;
-          color: #fff; font-size: 13px; font-weight: 600; text-decoration: none;
+          padding: clamp(8px,0.9%,12px) clamp(18px,2%,30px); border: 1.5px solid rgba(255,255,255,0.35); border-radius: 30px;
+          color: #fff; font-size: clamp(11px,1.1vw,14px); font-weight: 600; text-decoration: none;
           background: transparent; transition: all 0.2s;
         }
         .lh-btn-login:hover { background: rgba(255,255,255,0.08); border-color: #fff; }
         .lh-btn-signup {
-          padding: 10px 26px; border: 1.5px solid transparent; border-radius: 30px;
-          color: #fff; font-size: 13px; font-weight: 600; text-decoration: none;
+          padding: clamp(10px,0.9%,12px) clamp(60px,3%,45px); border: 1.5px solid transparent; border-radius: 30px;
+          color: #fff; font-size: clamp(11px,1.1vw,14px); font-weight: 600; text-decoration: none;
           background: var(--lh-accent); transition: all 0.2s;
           box-shadow: 0 4px 15px var(--lh-accent-glow);
         }
@@ -244,10 +223,10 @@ export default function LandingHero() {
           background: linear-gradient(135deg, var(--sage-soft) 0%, rgba(10,18,14,0.75) 55%, rgba(5,10,8,0.88) 100%);
           z-index: 1; pointer-events: none;
         }
-        /* Nav */
-        .lh-nav { position: absolute; top: 22px; left: 45%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 10; }
+        .lh-nav { position: absolute; top: 2.6%; left: 45%; transform: translateX(-50%); display: flex; width: min(340px, 35%); gap: 8px; z-index: 10; }
         .lh-nav-item {
-          padding: 8px 20px; font-size: 12px; font-weight: 500;
+          flex: 1; padding: 8px 0; font-size: clamp(11px, 1vw, 13px); font-weight: 500;
+          display: flex; justify-content: center; align-items: center; box-sizing: border-box;
           color: rgba(255,255,255,0.65); text-decoration: none;
           border: 1px solid rgba(255,255,255,0.15); border-radius: 30px;
           transition: all 0.2s ease; background: rgba(255,255,255,0.02); backdrop-filter: blur(5px);
@@ -255,11 +234,11 @@ export default function LandingHero() {
         .lh-nav-item:hover { color: #fff; border-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.06); }
         .lh-nav-item.active { color: #fff; background: rgba(0,0,0,0.65); border-color: rgba(255,255,255,0.1); }
         /* Hero content */
-        .lh-hero { position: absolute; left: 55px; top: 24%; max-width: 55%; z-index: 10; }
+        .lh-hero { position: absolute; left: 5.8%; top: 24%; max-width: 55%; z-index: 10; }
         .lh-hero h1 { font-size: clamp(32px,3.8vw,48px); font-weight: 700; line-height: 1.12; color: #fff; margin: 0 0 16px; letter-spacing: -0.5px; }
         .lh-hero p { font-size: 13.5px; color: rgba(255,255,255,0.65); line-height: 1.45; max-width: 360px; }
         /* Cards stack */
-        .lh-cards-stack { position: absolute; right: 30px; top: 130px; display: flex; flex-direction: column; gap: 16px; width: 280px; z-index: 10; }
+        .lh-cards-stack { position: absolute; right: 3%; top: 15.3%; display: flex; flex-direction: column; gap: clamp(10px, 1.5%, 16px); width: clamp(220px, 24%, 280px); z-index: 10; }
         .lh-glass-card {
           background: rgba(255,255,255,0.05); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
           border: 1px solid rgba(255,255,255,0.12); border-radius: 20px;
@@ -269,19 +248,50 @@ export default function LandingHero() {
         }
         .lh-glass-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.18); transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 40px var(--lh-accent-glow); }
         .lh-card-left { flex: 1; padding-right: 12px; }
-        .lh-stat-number { font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 4px; letter-spacing: -0.5px; }
-        .lh-card-title { font-size: 13.5px; font-weight: 600; color: #fff; margin-bottom: 6px; }
-        .lh-card-desc { font-size: 10px; color: rgba(255,255,255,0.5); line-height: 1.4; }
-        .lh-team-grid { display: flex; gap: 14px; margin-top: 12px; }
-        .lh-team-member { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; }
-        .lh-team-member img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 1.5px solid var(--sage-glow); box-shadow: 0 4px 12px rgba(0,0,0,0.4); transition: all 0.3s ease; }
-        .lh-team-member:hover img { transform: scale(1.1); border-color: var(--sage); box-shadow: 0 0 12px var(--pulse-glow); }
-        .lh-member-name { font-size: 11px; color: rgba(255,255,255,0.75); font-weight: 500; }
+        .lh-stat-number { font-size: clamp(20px, 2.2vw, 26px); font-weight: 700; color: #fff; margin-bottom: 4px; letter-spacing: -0.5px; }
+        .lh-card-title { font-size: clamp(11.5px, 1.2vw, 13.5px); font-weight: 600; color: #fff; margin-bottom: 6px; }
+        .lh-card-desc { font-size: clamp(8.5px, 0.9vw, 10px); color: rgba(255,255,255,0.5); line-height: 1.4; }
+        .lh-team-card { align-items: stretch; padding: 14px 14px 12px; cursor: default; }
+        .lh-team-card .lh-card-title { margin-bottom: 10px; letter-spacing: 0.02em; }
+        .lh-team-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+        .lh-team-list li { margin: 0; padding: 0; }
+        .lh-team-row {
+          display: flex; align-items: center; gap: 10px;
+          padding: 7px 9px; border-radius: 12px;
+          background: rgba(255,255,255,0.03);
+          border: 1px solid rgba(255,255,255,0.07);
+          transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+          text-decoration: none; color: inherit; cursor: pointer;
+        }
+        .lh-team-row:hover {
+          background: rgba(255,255,255,0.06);
+          border-color: rgba(255,255,255,0.14);
+          transform: translateX(2px);
+        }
+        .lh-team-row img {
+          width: clamp(28px, 3vw, 36px); height: clamp(28px, 3vw, 36px); border-radius: 50%; object-fit: cover; flex-shrink: 0;
+          border: 1.5px solid var(--sage-glow);
+          box-shadow: 0 3px 10px rgba(0,0,0,0.35);
+          transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .lh-team-row:hover img { border-color: var(--sage); box-shadow: 0 0 10px var(--pulse-glow); }
+        .lh-team-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
+        .lh-member-name {
+          font-size: clamp(10px, 1.1vw, 12px); font-weight: 600; color: rgba(255,255,255,0.92);
+          white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+          letter-spacing: 0.01em; line-height: 1.2;
+        }
+        .lh-member-role {
+          font-size: clamp(8px, 0.8vw, 9.5px); font-weight: 500; color: rgba(255,255,255,0.42);
+          white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+          letter-spacing: 0.02em; line-height: 1.2;
+        }
+        .lh-team-row:hover .lh-member-role { color: var(--sage); }
         .lh-card-arrow { width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.75); cursor: pointer; flex-shrink: 0; transition: all 0.25s; }
         .lh-glass-card:hover .lh-card-arrow { background: #fff; color: #000; border-color: #fff; transform: rotate(-45deg); }
         /* Slider */
         .lh-slider-track {
-          position: absolute; bottom: 40px; left: 65px; width: 450px; height: 56px;
+          position: absolute; bottom: 5.7%; left: 1.0%; width: min(490px, 37%); height: 56px;
           background: #000; border: 1.5px solid rgba(255,255,255,0.35); border-radius: 50px;
           display: flex; align-items: center; padding: 4px; box-sizing: border-box;
           z-index: 30; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
@@ -293,19 +303,6 @@ export default function LandingHero() {
         .lh-slider-btn:active { cursor: grabbing; }
         .lh-slider-btn svg { transition: transform 0.3s; }
         .lh-slider-text { position: absolute; width: 100%; left: 0; text-align: center; font-size: 12.5px; font-weight: 500; color: rgba(255,255,255,0.45); letter-spacing: 0.8px; pointer-events: none; z-index: 1; transition: opacity 0.3s; }
-        /* Toast */
-        .lh-toast-container { position: fixed; bottom: 30px; right: 30px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
-        .lh-toast { background: rgba(12,18,15,0.92); border: 1.5px solid var(--sage-glow); border-radius: 12px; padding: 14px 20px; color: #fff; font-size: 13px; font-weight: 500; box-shadow: 0 10px 30px rgba(0,0,0,0.5); backdrop-filter: blur(10px); display: flex; align-items: center; gap: 10px; animation: lhSlideIn 0.3s forwards, lhFadeOut 0.3s 3.5s forwards; opacity: 0; transform: translateY(20px); }
-        .lh-toast--success { border-color: var(--pulse); }
-        .lh-toast-icon { font-size: 16px; }
-        @keyframes lhSlideIn { to { opacity: 1; transform: translateY(0); } }
-        @keyframes lhFadeOut { to { opacity: 0; transform: translateY(-20px); } }
-
-        /* ─── Tablet (scaled layout, minor tweaks) ─────────────────────── */
-        @media (max-width: 1099px) and (min-width: 768px) {
-          .lh-toast-container { bottom: 16px; right: 16px; left: 16px; align-items: center; }
-          .lh-toast { max-width: 100%; }
-        }
 
         /* ─── Phone: native stacked layout (no transform scale) ─────────── */
         @media (max-width: 767px) {
@@ -368,6 +365,8 @@ export default function LandingHero() {
             min-height: 44px;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
+            width: 100%;
           }
 
           .lh-card-border-svg { display: none; }
@@ -403,16 +402,18 @@ export default function LandingHero() {
             top: auto;
             left: auto;
             transform: none;
-            flex-wrap: wrap;
+            display: flex;
+            width: 100%;
             justify-content: center;
             gap: 8px;
             order: 1;
           }
           .lh-nav-item {
-            padding: 8px 14px;
+            flex: 1; padding: 8px 0;
             font-size: 11px;
             min-height: 36px;
-            display: inline-flex;
+            display: flex;
+            justify-content: center;
             align-items: center;
           }
 
@@ -451,8 +452,10 @@ export default function LandingHero() {
             transform: none;
           }
           .lh-stat-number { font-size: 22px; }
-          .lh-team-member img { width: 40px; height: 40px; }
-          .lh-team-grid { gap: 10px; }
+          .lh-team-row img { width: 38px; height: 38px; }
+          .lh-team-list { gap: 8px; }
+          .lh-member-name { font-size: 13px; }
+          .lh-member-role { font-size: 10.5px; }
 
           .lh-slider-track {
             position: relative;
@@ -472,17 +475,6 @@ export default function LandingHero() {
             font-size: 11px;
             letter-spacing: 0.5px;
             padding: 0 48px;
-          }
-
-          .lh-toast-container {
-            bottom: max(16px, env(safe-area-inset-bottom));
-            right: 12px;
-            left: 12px;
-            align-items: stretch;
-          }
-          .lh-toast {
-            font-size: 12px;
-            padding: 12px 16px;
           }
         }
 
@@ -510,15 +502,15 @@ export default function LandingHero() {
 
           .lh-nav { gap: 6px; }
           .lh-nav-item {
-            padding: 7px 11px;
+            padding: 6px 0;
             font-size: 10px;
           }
 
           .lh-hero h1 { font-size: 24px; }
 
           .lh-card-arrow { width: 28px; height: 28px; }
-          .lh-member-name { font-size: 10px; }
-          .lh-team-member img { width: 36px; height: 36px; }
+          .lh-member-name { font-size: 12px; }
+          .lh-team-row img { width: 34px; height: 34px; }
 
           .lh-slider-track {
             width: calc(100% - 16px);
@@ -581,11 +573,8 @@ export default function LandingHero() {
 
             {/* Instagram / LinkedIn */}
             <div className="lh-top-right">
-              <a href="https://www.instagram.com/medblendapp/" target="_blank" rel="noopener noreferrer" className="lh-btn-login">
-                Instagram
-              </a>
-              <a href="https://www.linkedin.com/company/medblend" target="_blank" rel="noopener noreferrer" className="lh-btn-signup">
-                LinkedIn
+              <a href="/waitlist" className="lh-btn-signup">
+                Get in Waitlist
               </a>
             </div>
 
@@ -608,7 +597,7 @@ export default function LandingHero() {
                 <a href="/" className="lh-nav-item active">Home</a>
                 <a href="/#about" className="lh-nav-item">About</a>
                 <a href="/#team" className="lh-nav-item">Team</a>
-                <a href="/waitlist" className="lh-nav-item">Register</a>
+                <a href="/FAQ" className="lh-nav-item">FAQ</a>
               </nav>
 
               {/* Hero text */}
@@ -629,26 +618,23 @@ export default function LandingHero() {
                 </div>
 
                 {/* Founding Team */}
-                <div className="lh-glass-card">
+                <div className="lh-glass-card lh-team-card">
                   <div className="lh-card-left">
                     <div className="lh-card-title">Founding Team</div>
-                    <div className="lh-team-grid">
-                      <div className="lh-team-member">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src="/omar-picture.jpeg" alt="Omar" />
-                        <span className="lh-member-name">Omar Oqaili</span>
-                      </div>
-                      <div className="lh-team-member">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src="/reema-picture.jpeg" alt="Reema" />
-                        <span className="lh-member-name">Rima Khattab</span>
-                      </div>
-                      <div className="lh-team-member">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src="/ahmad2.jpeg" alt="Ahmad" />
-                        <span className="lh-member-name">Muhmmad Ahmad</span>
-                      </div>
-                    </div>
+                    <ul className="lh-team-list">
+                      {FOUNDING_TEAM.map((member) => (
+                        <li key={member.name}>
+                          <a href="/#team" className="lh-team-row" aria-label={`Meet ${member.name}, ${member.role}`}>
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src={member.image} alt={member.name} />
+                            <span className="lh-team-info">
+                              <span className="lh-member-name">{member.name}</span>
+                              <span className="lh-member-role">{member.role}</span>
+                            </span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
 
@@ -680,9 +666,6 @@ export default function LandingHero() {
 
         </div>
       </section>
-
-      {/* Toast container */}
-      <div className="lh-toast-container" ref={toastContainerRef} />
     </>
   );
 }
