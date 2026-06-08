@@ -15,13 +15,19 @@ export default function page() {
             <WaitlistParticles />
 
             <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
-            <div className="relative z-10 bg-white rounded-2xl overflow-hidden shadow-2xl max-w-full">
+            <div className="relative z-10 bg-black rounded-2xl overflow-hidden shadow-[0_0_80px_20px_rgba(52,211,153,0.15)] w-full max-w-[560px] ring-1 ring-white/10">
                 <iframe src="https://subscribe-forms.beehiiv.com/cad1e23e-5b57-414b-8931-311f15151b30"
                     className="beehiiv-embed"
                     data-test-id="beehiiv-embed"
                     frameBorder="0"
                     scrolling="no"
-                    style={{ width: "560px", height: "495px", margin: "0", backgroundColor: "transparent", maxWidth: "100%" }}>
+                    style={{ 
+                        width: "100%", 
+                        height: "495px", 
+                        margin: "0", 
+                        backgroundColor: "transparent",
+                        filter: "invert(1) hue-rotate(180deg) contrast(1.2)"
+                    }}>
                 </iframe>
             </div>
         </div>
