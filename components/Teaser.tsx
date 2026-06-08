@@ -42,14 +42,14 @@ export default function ProblemSection() {
                 <div className="mb-16 max-w-[700px]">
                     <div className="reveal mb-6 inline-flex items-center gap-2">
                         <div className="h-px w-6 bg-emerald-500"></div>
-                        <span className="font-['Syne',sans-serif] text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[var(--white-dim)]">
+                        <span className="font-syne text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[var(--white-dim)]">
                             The Problem
                         </span>
                     </div>
 
-                    <h2 className="reveal d1 mb-[1.2rem] font-['Syne',sans-serif] text-[clamp(2.2rem,5vw,4rem)] leading-[1.1]">
+                    <h2 className="reveal d1 mb-[1.2rem] font-syne text-[clamp(2.2rem,5vw,4rem)] leading-[1.1]">
                         You're making one of the biggest decisions of your life{' '}
-                        <em className="font-['Instrument_Serif',serif] italic text-emerald-500">
+                        <em className="font-instrument italic text-emerald-500">
                             completely alone.
                         </em>
                     </h2>
@@ -68,7 +68,7 @@ export default function ProblemSection() {
                             key={card.num}
                             className={`prob-card ${card.animationClass} relative bg-black p-10 transition-colors duration-300 hover:bg-[#0f0f18]`}
                         >
-                            <div className="mb-6 font-['Syne',sans-serif] text-[0.68rem] font-semibold tracking-[0.2em] text-[var(--pulse)]">
+                            <div className="mb-6 font-syne text-[0.68rem] font-semibold tracking-[0.2em] text-[var(--pulse)]">
                                 {card.num}
                             </div>
 
@@ -76,7 +76,7 @@ export default function ProblemSection() {
                                 {card.icon}
                             </div>
 
-                            <p className="mb-4 font-['Instrument_Serif',serif] text-[1.4rem] leading-[1.4]">
+                            <p className="mb-4 font-instrument text-[1.4rem] leading-[1.4]">
                                 {card.quote}
                             </p>
 

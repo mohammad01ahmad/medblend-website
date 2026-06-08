@@ -2,7 +2,7 @@ const statsData = [
     {
         num: '500+',
         label: 'Students on waitlist',
-        theme: 'blue',
+        theme: 'accent',
         animationClass: 'reveal',
     },
     {
@@ -20,7 +20,7 @@ const statsData = [
     {
         num: '1',
         label: 'Mission: Make medicine human again',
-        theme: 'blue',
+        theme: 'accent',
         animationClass: 'reveal d3',
     },
 ];
@@ -41,8 +41,8 @@ export default function StatsSection() {
                     >
                         {/* Replaces .stat-num and .stat-num.blue */}
                         <div
-                            className={`mb-2 font-['Syne',sans-serif] text-[clamp(2.5rem,5vw,4rem)] font-extrabold leading-none text-transparent bg-clip-text    [-webkit-text-fill-color:transparent] ${stat.theme === 'blue'
-                                ? 'bg-[linear-gradient(135deg,var(--pulse),#88aaff)]'
+                            className={`mb-2 font-syne text-[clamp(2.5rem,5vw,4rem)] font-extrabold leading-none text-transparent bg-clip-text [-webkit-text-fill-color:transparent] ${stat.theme === 'accent'
+                                ? 'bg-[linear-gradient(135deg,var(--pulse),var(--sage))]'
                                 : 'bg-[linear-gradient(135deg,white,rgba(255,255,255,0.6))]'
                                 }`}
                         >

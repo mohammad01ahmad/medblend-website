@@ -1,38 +1,39 @@
 "use client";
 
+import LandingHero from "@/components/LandingHero";
 import Tape from "@/components/Tape";
-import Hero from "@/components/Hero";
 import FeatureSection from "@/components/FeatureSection";
 import Team from "@/components/Team";
 import Teaser from "@/components/Teaser";
 import Solution from "@/components/Solution";
 import Stats from "@/components/Stats";
+import CtaSection from "@/components/CtaSection";
+import StickyNav from "@/components/StickyNav";
 
 export default function Home() {
-
   return (
-    <div className="min-h-screen bg-[#121212] text-white font-['Inter'] smooth-scroll">
+    <div className="min-h-screen bg-[var(--background)] text-white smooth-scroll">
 
-      {/* Hero section  */}
-      <Hero />
+      <LandingHero />
 
-      {/* Animation Tape */}
+      {/* Sentinel: sticky nav appears after hero scrolls out */}
+      <div id="hero-end-sentinel" className="h-px w-full" aria-hidden />
+
+      <StickyNav />
+
       <Tape />
 
-      {/* Teaser section */}
       <Teaser />
 
-      {/* Solution section */}
       <Solution />
 
-      {/* Stats section */}
-      <Stats />
-
-      {/* Feature section */}
       <FeatureSection />
 
-      {/* Meet the team */}
+      <Stats />
+
       <Team />
+
+      <CtaSection />
 
     </div>
   );
