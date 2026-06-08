@@ -10,5 +10,4 @@ pull_request_rules:
           {{ title }}
 
           {{ body }}
-      # Automatically clean up the branch after merging
-      delete_head_branch: {}
+      # Branch cleaning can be done natively on Github now.
