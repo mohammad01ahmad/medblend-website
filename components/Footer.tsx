@@ -19,7 +19,7 @@ const supportLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-white/10 bg-[var(--background)] text-white">
+    <footer className="relative overflow-hidden border-t border-white/10 bg-[var(--background)] text-white" id="site-footer">
       {/* DNA helix — subdued, behind scrim */}
       <div className="pointer-events-none absolute inset-0">
         <Dna3DCanvas muted className="scale-105 opacity-50" />

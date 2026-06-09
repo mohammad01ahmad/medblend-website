@@ -571,7 +571,7 @@ export default function LandingHero() {
       </svg>
 
       {/* ── Full-height hero section ──────────────────────────────────────── */}
-      <section className="lh-root" ref={rootRef}>
+      <section className="lh-root" ref={rootRef} id="landing-hero">
         <div className="lh-device-frame" ref={frameRef}>
 
           {/* Left Sidebar */}
@@ -607,7 +607,7 @@ export default function LandingHero() {
             {/* Instagram / LinkedIn */}
             <div className="lh-top-right">
               <a href="/waitlist" className="lh-btn-signup">
-                Get in Waitlist
+                Join the Waitlist
               </a>
             </div>
 
