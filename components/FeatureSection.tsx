@@ -16,7 +16,7 @@ const featuresData = [
         animationClass: 'reveal d1',
     },
     {
-        icon: '/bars.png',
+        icon: '/Bars.png',
         title: 'Specialty Breakdowns',
         desc: 'Browse authentic day-in-the-life logs detailing real hours, actual call schedules, compensation, and emotional highs/lows across 40+ paths.',
         accentColor: 'via-[var(--ember)]',
