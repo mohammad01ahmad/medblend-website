@@ -79,7 +79,7 @@ export default function FAQSection() {
                     <div className="flex flex-col w-full">
                         {FAQ_ITEMS.map((item, index) => {
                             const isOpen = openIndex === index;
-                            const delays = ['', 'd1', 'd2', 'd3', 'd4'];
+                            const delays = ['', 'd1', 'd2', 'd3', 'd4', 'd5', 'd6'];
                             const delayClass = delays[index % delays.length];
 
                             return (

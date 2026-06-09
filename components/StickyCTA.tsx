@@ -45,16 +45,15 @@ export default function StickyCTA() {
     }, []);
 
     return (
-        <div className={`fixed bottom-[1.5rem] left-1/2 z-[998] flex items-center gap-4 rounded-full bg-[var(--void)] p-[0.8rem_1rem_0.8rem_1.5rem] border-2 border-white/10 transition-all duration-500 ease-[var(--ease-out)] -webkit-backdrop-blur-[20px]
+        <div className={`fixed bottom-[1.5rem] left-1/2 z-[998] flex items-center gap-2.5 md:gap-4 rounded-full bg-[var(--void)] p-[0.6rem_0.8rem_0.6rem_1.2rem] md:p-[0.8rem_1rem_0.8rem_1.5rem] border-2 border-white/10 transition-all duration-500 ease-[var(--ease-out)] -webkit-backdrop-blur-[20px]
         ${isOn ? 'translate-x-[-50%] translate-y-0 opacity-100' : 'translate-x-[-50%] translate-y-[100px] opacity-0'}`}
         >
-            <span className="text-[0.88rem] text-white/80">
+            <span className="text-[0.78rem] md:text-[0.88rem] text-white/80 whitespace-nowrap">
                 <span className="text-white font-semibold">MedBlend</span> · Waitlist open now
             </span>
             <Link
                 href="/waitlist"
-                className="inline-flex items-center gap-2 bg-[var(--pulse)] text-white font-medium rounded-full cursor-pointer transition-all duration-300 shadow-[0_0_40px_rgba(22,163,74,0.6)] hover:-translate-y-1 hover:bg-[var(--pulse)] hover:shadow-[0_0_40px_rgba(22,163,74,0.6)]"
-                style={{ padding: '.55rem 1.25rem', fontSize: '.82rem' }}
+                className="inline-flex items-center gap-2 bg-[var(--pulse)] text-white font-medium rounded-full cursor-pointer transition-all duration-300 shadow-[0_0_40px_rgba(22,163,74,0.6)] hover:-translate-y-1 hover:bg-[var(--pulse)] hover:shadow-[0_0_40px_rgba(22,163,74,0.6)] whitespace-nowrap px-3.5 py-1.5 md:px-5 md:py-2 text-[0.75rem] md:text-[0.82rem]"
             >
                 Join →
             </Link>
