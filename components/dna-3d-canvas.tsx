@@ -5,29 +5,29 @@ import * as THREE from 'three';
 
 const createGasTexture = () => {
   const canvas = document.createElement('canvas');
-  canvas.width = 256;
-  canvas.height = 256;
+  canvas.width = 64;
+  canvas.height = 64;
   const context = canvas.getContext('2d');
   if (context) {
-    const gradient = context.createRadialGradient(128, 128, 0, 128, 128, 128);
+    const gradient = context.createRadialGradient(32, 32, 0, 32, 32, 32);
     gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
     gradient.addColorStop(0.2, 'rgba(255, 255, 255, 0.6)');
     gradient.addColorStop(0.6, 'rgba(255, 255, 255, 0.1)');
     gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
     context.fillStyle = gradient;
-    context.fillRect(0, 0, 256, 256);
+    context.fillRect(0, 0, 64, 64);
   }
   return new THREE.CanvasTexture(canvas);
 };
 
 const createCircleTexture = () => {
   const canvas = document.createElement('canvas');
-  canvas.width = 128;
-  canvas.height = 128;
+  canvas.width = 32;
+  canvas.height = 32;
   const context = canvas.getContext('2d');
   if (context) {
     context.beginPath();
-    context.arc(64, 64, 64, 0, Math.PI * 2);
+    context.arc(16, 16, 16, 0, Math.PI * 2);
     context.fillStyle = 'white';
     context.fill();
   }
@@ -41,7 +41,7 @@ const DnaParticles = () => {
   const isMobile = viewport.width < 10;
 
   const count = 75000;
-  const gasCount = 1500;
+  const gasCount = 6000;
   const radius = 2.5;
 
   const gasTexture = useMemo(() => createGasTexture(), []);
@@ -312,11 +312,11 @@ const DnaParticles = () => {
           <bufferAttribute attach="attributes-color" count={count} args={[colors, 3]} />
         </bufferGeometry>
         <pointsMaterial
-          size={0.06}
+          size={0.18}
           map={circleTexture}
           vertexColors={true}
           transparent={true}
-          opacity={0.75}
+          opacity={0.9}
           sizeAttenuation={true}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
@@ -329,11 +329,11 @@ const DnaParticles = () => {
           <bufferAttribute attach="attributes-color" count={gasCount} args={[gasColors, 3]} />
         </bufferGeometry>
         <pointsMaterial
-          size={0.05}
-          map={circleTexture}
+          size={3.5}
+          map={gasTexture}
           vertexColors={true}
           transparent={true}
-          opacity={0.6}
+          opacity={0.15}
           sizeAttenuation={true}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
@@ -347,7 +347,7 @@ export default function Dna3DCanvas({ className = '', embedded = false, muted = 
   return (
     <div className={`dna-container ${className}`} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none' }}>
       <Canvas camera={{ position: [0, 0, 42], fov: 20 }} dpr={[1, 2]} gl={{ alpha: true, antialias: true }}>
-        <group scale={0.95} rotation={[0, 0, -Math.PI * (52.5 / 180)]}>
+        <group scale={1.1} rotation={[0, 0, -Math.PI * (52.5 / 180)]}>
           <DnaParticles />
         </group>
       </Canvas>

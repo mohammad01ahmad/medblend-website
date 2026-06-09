@@ -2,8 +2,10 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import Dna3DCanvas from '@/components/dna-3d-canvas';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
+
+const Dna3DCanvas = dynamic(() => import('@/components/dna-3d-canvas'), { ssr: false });
 
 const FOUNDING_TEAM = [
   { name: 'Omar Oqaili', role: 'CEO & Founder', image: '/omar-picture.jpeg' },
