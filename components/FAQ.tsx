@@ -54,22 +54,22 @@ export default function FAQSection() {
 
                     {/* Left Block Content Columns */}
                     <div className="flex flex-col items-start text-left">
-                        <div className="flex items-center gap-3 mb-[1.2rem]">
+                        <div className="reveal flex items-center gap-3 mb-[1.2rem]">
                             <div className="w-8 h-px bg-[var(--border)]" />
                             <span className="text-xs font-bold tracking-[0.2em] uppercase text-[var(--pulse)]">FAQ</span>
                         </div>
 
-                        <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold font-syne leading-[1.1] text-white mb-4 tracking-tight">
+                        <h2 className="reveal d1 text-[clamp(2rem,4vw,3rem)] font-bold font-syne leading-[1.1] text-white mb-4 tracking-tight">
                             Questions?<br />We&apos;ve got<br />answers.
                         </h2>
 
-                        <p className="text-[0.95rem] text-[var(--white-dim)] leading-[1.7] mb-8 max-w-sm">
+                        <p className="reveal d2 text-[0.95rem] text-[var(--white-dim)] leading-[1.7] mb-8 max-w-sm">
                             Can&apos;t find what you&apos;re looking for? We&apos;re happy to help.
                         </p>
 
                         <a
                             href="mailto:medblendapp@gmail.com"
-                            className="btn-ghost inline-flex items-center justify-center gap-2 border border-white/15 px-6 py-3 rounded-full text-sm font-semibold hover:bg-white/5 transition-all text-white"
+                            className="reveal d3 btn-ghost inline-flex items-center justify-center gap-2 border border-white/15 px-6 py-3 rounded-full text-sm font-semibold hover:bg-white/5 transition-all text-white"
                         >
                             Email us →
                         </a>
@@ -79,11 +79,13 @@ export default function FAQSection() {
                     <div className="flex flex-col w-full">
                         {FAQ_ITEMS.map((item, index) => {
                             const isOpen = openIndex === index;
+                            const delays = ['', 'd1', 'd2', 'd3', 'd4'];
+                            const delayClass = delays[index % delays.length];
 
                             return (
                                 <div
                                     key={index}
-                                    className="border-b-[0.5px] border-gray-700 overflow-hidden transition-all duration-300"
+                                    className={`reveal ${delayClass} border-b-[0.5px] border-gray-700 overflow-hidden transition-all duration-300`.trim()}
                                 >
                                     {/* Question Row Header Click Target */}
                                     <button

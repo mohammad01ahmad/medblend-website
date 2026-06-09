@@ -12,14 +12,14 @@ const featuresData = [
         icon: '/Verified.png',
         title: 'Verified Backgrounds',
         desc: 'Every contributor uploads institutional verification. Know instantly if you\'re talking to an M1, an orthopedic resident, or a chief fellow.',
-        accentColor: 'via-[var(--sage)]',
+        accentColor: 'via-[var(--pulse)]',
         animationClass: 'reveal d1',
     },
     {
         icon: '/Bars.png',
         title: 'Specialty Breakdowns',
         desc: 'Browse authentic day-in-the-life logs detailing real hours, actual call schedules, compensation, and emotional highs/lows across 40+ paths.',
-        accentColor: 'via-[var(--ember)]',
+        accentColor: 'via-[var(--pulse)]',
         animationClass: 'reveal d2',
     },
 ];

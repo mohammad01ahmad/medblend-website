@@ -46,7 +46,6 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className={`${inter.className} bg-background text-foreground antialiased`}>
-        <CustomCursor />
         <RevealOnScroll />
         <ConditionalHeader />
         {children}
