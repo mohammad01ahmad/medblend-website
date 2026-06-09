@@ -9,6 +9,7 @@ import Solution from "@/components/Solution";
 import Stats from "@/components/Stats";
 import CtaSection from "@/components/CtaSection";
 import StickyNav from "@/components/StickyNav";
+import StickyCTA from "@/components/StickyCTA";
 
 export default function Home() {
   return (
@@ -20,6 +21,8 @@ export default function Home() {
       <div id="hero-end-sentinel" className="h-px w-full" aria-hidden />
 
       <StickyNav />
+
+      <StickyCTA />
 
       <Tape />
 
