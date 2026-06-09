@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Dna3DCanvas from '@/components/dna-3d-canvas';
 import { useRouter } from 'next/navigation';
@@ -15,10 +15,24 @@ export default function LandingHero() {
   const router = useRouter();
   const rootRef = useRef<HTMLElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   const sliderBtnRef = useRef<HTMLDivElement>(null);
   const sliderTrackRef = useRef<HTMLDivElement>(null);
   const sliderTextRef = useRef<HTMLSpanElement>(null);
   const arrowIconRef = useRef<SVGSVGElement>(null);
+
+  const [cardSize, setCardSize] = useState({ w: 950, h: 730 });
+
+  useEffect(() => {
+    if (!cardRef.current) return;
+    const observer = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        setCardSize({ w: entry.contentRect.width, h: entry.contentRect.height });
+      }
+    });
+    observer.observe(cardRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   // ── Responsive frame sizing (desktop fluid / tablet scale / phone native layout) ──
   useEffect(() => {
@@ -29,11 +43,14 @@ export default function LandingHero() {
 
       const w = window.innerWidth;
 
-      if (w >= 1100) {
+      if (w >= 1200) {
         frame.style.transform = 'none';
-        frame.style.width = 'min(96vw, 1400px)';
-        frame.style.height = 'min(92vh, 900px)';
-        frame.style.maxHeight = '';
+        frame.style.width = '100%';
+        frame.style.height = '100%';
+        frame.style.maxHeight = 'none';
+        frame.style.borderRadius = '0px';
+        frame.style.border = 'none';
+        frame.style.boxShadow = 'none';
         root.style.height = '100vh';
         root.style.minHeight = '';
       } else if (w >= 768) {
@@ -42,6 +59,9 @@ export default function LandingHero() {
         frame.style.width = '1200px';
         frame.style.height = '850px';
         frame.style.maxHeight = 'none';
+        frame.style.borderRadius = '40px';
+        frame.style.border = '1px solid rgba(255,255,255,0.15)';
+        frame.style.boxShadow = '0 30px 100px rgba(0,0,0,0.9), 0 0 100px var(--lh-accent-glow)';
         root.style.height = `${850 * scale + 40}px`;
         root.style.minHeight = '';
       } else {
@@ -137,6 +157,13 @@ export default function LandingHero() {
     };
   }, []);
 
+  const { w, h } = cardSize;
+  const scale = w < 768 ? w / 950 : 1;
+  const cTR = 322 * scale; // Top right cutout width (optimized)
+  const cBL = 322 * scale; // Bottom left cutout width (optimized)
+  const r = 32 * scale;    // Corner radius
+  const dynamicPath = `M 0,${r} A ${r},${r} 0 0,1 ${r},0 L ${w - cTR},0 A ${r},${r} 0 0,1 ${w - cTR + r},${r} L ${w - cTR + r},${43 * scale} A ${r},${r} 0 0,0 ${w - cTR + r + 32 * scale},${75 * scale} L ${w - r},${75 * scale} A ${r},${r} 0 0,1 ${w},${75 * scale + r} L ${w},${h - r} A ${r},${r} 0 0,1 ${w - r},${h} L ${cBL},${h} A ${r},${r} 0 0,1 ${cBL - r},${h - r} L ${cBL - r},${h - 43 * scale} A ${r},${r} 0 0,0 ${cBL - r - 32 * scale},${h - 75 * scale} L ${r},${h - 75 * scale} A ${r},${r} 0 0,1 0,${h - 75 * scale - r} Z`;
+
   return (
     <>
       <style>{`
@@ -189,7 +216,7 @@ export default function LandingHero() {
         /* Main */
         .lh-main { flex: 1; height: 100%; position: relative; }
         /* Top-right buttons */
-        .lh-top-right { position: absolute; top: 3.5%; right: 6%; display: flex; gap: clamp(10px, 1.2%, 18px); z-index: 25; }
+        .lh-top-right { position: absolute; top: 30px; right: 35px; width: 270px; height: 55px; display: flex; justify-content: center; z-index: 25; }
         .lh-btn-login {
           padding: clamp(8px,0.9%,12px) clamp(18px,2%,30px); border: 1.5px solid rgba(255,255,255,0.35); border-radius: 30px;
           color: #fff; font-size: clamp(11px,1.1vw,14px); font-weight: 600; text-decoration: none;
@@ -197,12 +224,13 @@ export default function LandingHero() {
         }
         .lh-btn-login:hover { background: rgba(255,255,255,0.08); border-color: #fff; }
         .lh-btn-signup {
-          padding: clamp(10px,0.9%,12px) clamp(60px,3%,45px); border: 1.5px solid transparent; border-radius: 30px;
-          color: #fff; font-size: clamp(11px,1.1vw,14px); font-weight: 600; text-decoration: none;
+          width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;
+          border: 1.5px solid rgba(255,255,255,0.15); border-radius: 10px 22px 10px 22px;
+          color: #fff; font-size: clamp(12px, 1.2vw, 14px); font-weight: 600; text-decoration: none; white-space: nowrap;
           background: var(--lh-accent); transition: all 0.2s;
           box-shadow: 0 4px 15px var(--lh-accent-glow);
         }
-        .lh-btn-signup:hover { background: var(--lh-accent-hover); transform: translateY(-1px); box-shadow: 0 6px 20px var(--pulse-glow); }
+        .lh-btn-signup:hover { background: var(--lh-accent-hover); border-color: rgba(255,255,255,0.4); transform: translateY(-1px); box-shadow: 0 6px 20px var(--pulse-glow); }
         /* Card border SVG */
         .lh-card-border-svg {
           position: absolute; top: 20px; left: 0; right: 25px; bottom: 25px;
@@ -223,7 +251,7 @@ export default function LandingHero() {
           background: linear-gradient(135deg, var(--sage-soft) 0%, rgba(10,18,14,0.75) 55%, rgba(5,10,8,0.88) 100%);
           z-index: 1; pointer-events: none;
         }
-        .lh-nav { position: absolute; top: 2.6%; left: 45%; transform: translateX(-50%); display: flex; width: min(340px, 35%); gap: 8px; z-index: 10; }
+        .lh-nav { position: absolute; top: 2.6%; left: 50%; transform: translateX(-50%); display: flex; width: min(340px, 35%); gap: 8px; z-index: 10; }
         .lh-nav-item {
           flex: 1; padding: 8px 0; font-size: clamp(11px, 1vw, 13px); font-weight: 500;
           display: flex; justify-content: center; align-items: center; box-sizing: border-box;
@@ -238,7 +266,7 @@ export default function LandingHero() {
         .lh-hero h1 { font-size: clamp(32px,3.8vw,48px); font-weight: 700; line-height: 1.12; color: #fff; margin: 0 0 16px; letter-spacing: -0.5px; }
         .lh-hero p { font-size: 13.5px; color: rgba(255,255,255,0.65); line-height: 1.45; max-width: 360px; }
         /* Cards stack */
-        .lh-cards-stack { position: absolute; right: 3%; top: 15.3%; display: flex; flex-direction: column; gap: clamp(10px, 1.5%, 16px); width: clamp(220px, 24%, 280px); z-index: 10; }
+        .lh-cards-stack { position: absolute; right: 30px; top: 15.3%; display: flex; flex-direction: column; gap: clamp(10px, 1.5%, 16px); width: 280px; z-index: 10; }
         .lh-glass-card {
           background: rgba(255,255,255,0.05); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
           border: 1px solid rgba(255,255,255,0.12); border-radius: 20px;
@@ -291,8 +319,8 @@ export default function LandingHero() {
         .lh-glass-card:hover .lh-card-arrow { background: #fff; color: #000; border-color: #fff; transform: rotate(-45deg); }
         /* Slider */
         .lh-slider-track {
-          position: absolute; bottom: 5.7%; left: 1.0%; width: min(490px, 37%); height: 56px;
-          background: #000; border: 1.5px solid rgba(255,255,255,0.35); border-radius: 50px;
+          position: absolute; bottom: 35px; left: 25px; width: 505px; height: 55px;
+          background: #000; border: 1.5px solid rgba(255,255,255,0.35); border-radius: 22px;
           display: flex; align-items: center; padding: 4px; box-sizing: border-box;
           z-index: 30; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
@@ -355,7 +383,9 @@ export default function LandingHero() {
             display: flex;
             justify-content: center;
             gap: 10px;
-            padding: 12px 16px 0;
+            padding: 0;
+            margin: 12px 12px 0;
+            width: calc(100% - 24px);
             z-index: 25;
           }
           .lh-btn-login,
@@ -367,6 +397,7 @@ export default function LandingHero() {
             align-items: center;
             justify-content: center;
             width: 100%;
+            border-radius: 50px;
           }
 
           .lh-card-border-svg { display: none; }
@@ -579,17 +610,17 @@ export default function LandingHero() {
             </div>
 
             {/* Glowing border overlay */}
-            <svg className="lh-card-border-svg" viewBox="0 0 950 730" preserveAspectRatio="none">
-              <path
-                d="M 0,32 A 32,32 0 0,1 32,0 L 628,0 A 32,32 0 0,1 660,32 L 660,43 A 32,32 0 0,0 692,75 L 918,75 A 32,32 0 0,1 950,107 L 950,698 A 32,32 0 0,1 918,730 L 262,730 A 32,32 0 0,1 230,698 L 230,662 A 32,32 0 0,0 198,630 L 32,630 A 32,32 0 0,1 0,598 Z"
-                fill="none"
-                stroke="rgba(255,255,255,0.22)"
-                strokeWidth="2"
-              />
+            <svg className="lh-card-border-svg" width="100%" height="100%">
+              <defs>
+                <clipPath id="lh-card-clip">
+                  <path d={dynamicPath} />
+                </clipPath>
+              </defs>
+              <path d={dynamicPath} fill="none" stroke="rgba(255,255,255,0.22)" strokeWidth="2" />
             </svg>
 
             {/* Purple display card */}
-            <div className="lh-purple-card">
+            <div className="lh-purple-card" ref={cardRef}>
               <Dna3DCanvas className="lh-purple-card-bg" embedded />
 
               {/* Nav */}
