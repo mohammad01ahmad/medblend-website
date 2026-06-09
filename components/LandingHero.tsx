@@ -561,14 +561,6 @@ export default function LandingHero() {
         }
       `}</style>
 
-      {/* Hidden clip-path SVG */}
-      <svg width="0" height="0" style={{ position: 'absolute' }}>
-        <defs>
-          <clipPath id="lh-card-clip" clipPathUnits="objectBoundingBox">
-            <path d="M 0,0.0438 A 0.0337,0.0438 0 0,1 0.0337,0 L 0.6611,0 A 0.0337,0.0438 0 0,1 0.6947,0.0438 L 0.6947,0.0589 A 0.0337,0.0438 0 0,0 0.7284,0.1027 L 0.9663,0.1027 A 0.0337,0.0438 0 0,1 1,0.1466 L 1,0.9562 A 0.0337,0.0438 0 0,1 0.9664,1 L 0.2758,1 A 0.0337,0.0438 0 0,1 0.2421,0.9562 L 0.2421,0.9068 A 0.0337,0.0438 0 0,0 0.2084,0.863 L 0.0337,0.863 A 0.0337,0.0438 0 0,1 0,0.8192 Z" />
-          </clipPath>
-        </defs>
-      </svg>
 
       {/* ── Full-height hero section ──────────────────────────────────────── */}
       <section className="lh-root" ref={rootRef} id="landing-hero">
