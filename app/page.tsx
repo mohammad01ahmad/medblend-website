@@ -10,6 +10,7 @@ import Stats from "@/components/Stats";
 import CtaSection from "@/components/CtaSection";
 import StickyNav from "@/components/StickyNav";
 import StickyCTA from "@/components/StickyCTA";
+import FAQ from "@/components/FAQ";
 
 export default function Home() {
   return (
@@ -35,6 +36,8 @@ export default function Home() {
       <Stats />
 
       <Team />
+
+      <FAQ />
 
       <CtaSection />
 
