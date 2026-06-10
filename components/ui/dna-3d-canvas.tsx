@@ -1,6 +1,5 @@
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Float } from '@react-three/drei';
 import * as THREE from 'three';
 
 const createGasTexture = () => {
@@ -37,8 +36,17 @@ const createCircleTexture = () => {
 const DnaParticles = () => {
   const pointsRef = useRef<THREE.Points>(null);
   const gasRef = useRef<THREE.Points>(null);
-  const { mouse, viewport } = useThree();
+  const { mouse, viewport, size } = useThree();
   const isMobile = viewport.width < 10;
+
+  // Calculate the tilt angle dynamically based on the viewport/canvas size inside R3F context
+  const tiltAngle = useMemo(() => {
+    if (typeof window === 'undefined') return 32;
+    const width = window.innerWidth;
+    if (width < 768) return 65;
+    if (width < 1280) return 52.5;
+    return 32;
+  }, [size.width]);
 
   const count = 75000;
   const gasCount = 6000;
@@ -305,7 +313,7 @@ const DnaParticles = () => {
   });
 
   return (
-    <>
+    <group scale={1.1} rotation={[0, 0, -Math.PI * (tiltAngle / 180)]}>
       <points ref={pointsRef}>
         <bufferGeometry>
           <bufferAttribute attach="attributes-position" count={count} args={[currentPositions, 3]} />
@@ -339,7 +347,7 @@ const DnaParticles = () => {
           depthWrite={false}
         />
       </points>
-    </>
+    </group>
   );
 };
 
@@ -347,9 +355,7 @@ export default function Dna3DCanvas({ className = '', embedded = false, muted = 
   return (
     <div className={`dna-container ${className}`} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none' }}>
       <Canvas camera={{ position: [0, 0, 42], fov: 20 }} dpr={[1, 2]} gl={{ alpha: true, antialias: true }}>
-        <group scale={1.1} rotation={[0, 0, -Math.PI * (52.5 / 180)]}>
-          <DnaParticles />
-        </group>
+        <DnaParticles />
       </Canvas>
     </div>
   );

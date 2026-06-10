@@ -5,6 +5,7 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { WordRotate } from '../ui/word-rotate';
 
 const Dna3DCanvas = dynamic(() => import('@/components/ui/dna-3d-canvas'), { ssr: false });
 
@@ -24,6 +25,7 @@ export default function LandingHero() {
 
   const [cardSize, setCardSize] = useState({ w: 950, h: 730 });
 
+  // update card size on resize
   useEffect(() => {
     if (!cardRef.current) return;
     const observer = new ResizeObserver((entries) => {
@@ -161,7 +163,7 @@ export default function LandingHero() {
               height={64}
               className="shrink-0 rounded-lg object-cover max-xl:!h-11 max-xl:!w-11"
             />
-            <span className="text-2xl font-bold tracking-tight text-white max-xl:text-[17px] max-sm:text-[15px]">
+            <span className="font-syne text-xl font-bold tracking-tight text-white max-xl:text-[17px] max-sm:text-[15px]">
               MedBlendApp
             </span>
           </div>
@@ -175,8 +177,8 @@ export default function LandingHero() {
               >
                 medblendapp@gmail.com
               </a>
-              <div className="text-[12.5px] leading-relaxed text-white/40">Instagram: @medblendapp</div>
-              <div className="text-[12.5px] leading-relaxed text-white/40">
+              <div className="text-[12.5px] text-white/40">Instagram: @medblendapp</div>
+              <div className="text-[12.5px] text-white/40">
                 Real guidance from medical students and doctors.
               </div>
             </div>
@@ -195,24 +197,31 @@ export default function LandingHero() {
           <div
             className={cn(
               'absolute right-[35px] top-[30px] z-[25] flex h-[55px] w-[270px] justify-center',
+
+              // FIX TABLET: Added 'md:max-xl:my-6' to separate it vertically from elements above and below
               'md:max-xl:relative md:max-xl:right-auto md:max-xl:top-auto md:max-xl:order-1',
-              'md:max-xl:mx-4 md:max-xl:mb-0 md:max-xl:mt-3 md:max-xl:h-auto md:max-xl:w-[calc(100%-32px)]',
+              'md:max-xl:mx-4 md:max-xl:my-2 md:max-xl:h-auto md:max-xl:w-[calc(100%-32px)]',
+
+              // FIX MOBILE: Changed 'max-md:mt-3' to 'max-md:mt-0' to remove space above the button
               'max-md:relative max-md:right-auto max-md:top-auto max-md:order-1',
-              'max-md:mx-3 max-md:mb-0 max-md:mt-3 max-md:h-auto max-md:w-[calc(100%-24px)] max-md:gap-2.5',
-              'max-sm:flex-col max-sm:items-stretch max-sm:pt-2.5',
+              'max-md:mx-3 max-md:mb-0 max-md:mt-0 max-md:h-auto max-md:w-[calc(100%-24px)] max-md:gap-2.5',
+              'max-sm:flex-col max-sm:items-stretch max-sm:pt-2', // Changed 'max-sm:pt-2.5' to 'pt-0'
             )}
           >
             <a
               href="/waitlist"
               className={cn(
+                // 1. mobile
                 'flex h-full w-full items-center justify-center whitespace-nowrap rounded-[10px_22px_10px_22px]',
                 'border-[1.5px] border-white/15 bg-[var(--pulse)] text-[clamp(12px,1.2vw,14px)] font-semibold text-white no-underline',
                 'shadow-[0_4px_15px_var(--pulse-glow)] transition-all hover:-translate-y-px hover:border-white/40 hover:bg-[var(--sage)] hover:shadow-[0_6px_20px_var(--pulse-glow)]',
+
+                // 2. Show on tablet and larger screens 
                 'max-xl:inline-flex max-xl:min-h-11 max-xl:rounded-[50px] max-xl:px-[18px] max-xl:py-2.5 max-xl:text-xs',
                 'md:max-xl:min-h-[52px] md:max-xl:text-[15px] md:max-xl:font-bold md:max-xl:tracking-wide md:max-xl:px-6',
               )}
             >
-              Join the Waitlist
+              Join the Waitlist →
             </a>
           </div>
 
@@ -234,7 +243,7 @@ export default function LandingHero() {
           <div
             ref={cardRef}
             className={cn(
-              'lh-purple-card absolute z-[2] overflow-hidden bg-[var(--void)]',
+              'lh-purple-card absolute  z-[2] overflow-hidden bg-[var(--void)]',
               'xl:bottom-[25px] xl:left-0 xl:right-[25px] xl:top-5 xl:[clip-path:url(#lh-card-clip)]',
               // TABLET: flex column, hero text centered in middle, cards pinned at bottom
               'md:max-xl:relative md:max-xl:bottom-auto md:max-xl:left-auto md:max-xl:right-auto md:max-xl:top-auto',
@@ -252,7 +261,7 @@ export default function LandingHero() {
             {/* Nav */}
             <nav
               className={cn(
-                'absolute left-1/2 top-[2.6%] z-10 flex w-[min(340px,35%)] -translate-x-1/2 gap-2',
+                'absolute left-[40%] top-[2.6%] z-10 flex w-[min(340px,35%)] -translate-x-1/2 gap-2',
                 'md:max-xl:relative md:max-xl:left-auto md:max-xl:top-auto md:max-xl:order-1 md:max-xl:w-full md:max-xl:translate-x-0 md:max-xl:justify-center',
                 // TABLET: give the nav a fixed compact height so it doesn't steal space from the centered text
                 'md:max-xl:flex-none md:max-xl:pt-4 md:max-xl:pb-2',
@@ -273,7 +282,7 @@ export default function LandingHero() {
                     'box-border flex flex-1 items-center justify-center rounded-[30px] border border-white/15',
                     'bg-white/[0.02] px-0 py-2 text-[clamp(11px,1vw,13px)] font-medium text-white/65 no-underline backdrop-blur-[5px] transition-all',
                     'hover:border-white/35 hover:bg-white/[0.06] hover:text-white',
-                    item.active && 'border-white/10 bg-black/65 text-white',
+                    item.active && 'border-white/10 bg-white text-black',
                     'max-xl:min-h-9 max-xl:text-[11px]',
                     'md:max-xl:min-h-[44px] md:max-xl:text-[14px] md:max-xl:font-semibold',
                     'max-sm:py-1.5 max-sm:text-[10px]',
@@ -292,13 +301,16 @@ export default function LandingHero() {
                 'md:max-xl:relative md:max-xl:left-auto md:max-xl:top-auto md:max-xl:order-2',
                 'md:max-xl:flex-1 md:max-xl:flex md:max-xl:flex-col md:max-xl:items-center md:max-xl:justify-center',
                 'md:max-xl:max-w-full md:max-xl:px-4 md:max-xl:text-center',
-                'max-md:relative max-md:left-auto max-md:top-auto max-md:order-2 max-md:max-w-full max-md:px-1 max-md:text-center',
+
+                // FIX MOBILE: Added 'max-md:py-6' to create breathing room above and below the content
+                'max-md:relative max-md:left-auto max-md:top-auto max-md:order-2 max-md:max-w-full max-md:px-1 max-md:py-17 max-md:text-center',
               )}
             >
               <h1
                 className={cn(
+                  'font-syne text-[clamp(2.2rem,5vw,4rem)] leading-[1.1]',
                   'mb-4 font-bold leading-[1.12] tracking-tight text-white',
-                  'text-[clamp(32px,3.8vw,48px)]',
+
                   // TABLET: much larger, prominent
                   'md:max-xl:mb-5 md:max-xl:text-[clamp(44px,7vw,72px)]',
                   'max-xl:mb-3 max-sm:text-2xl max-md:landscape:text-[22px]',
@@ -306,15 +318,18 @@ export default function LandingHero() {
                   '[&:not(.md\:max-xl)]:max-xl:text-[clamp(26px,7.5vw,36px)]',
                 )}
               >
-                Enter Medicine
+                Enter Medicine Knowing
                 <br />
-                Knowing What
+                What To Expect
                 <br />
-                To Expect
+                <WordRotate
+                  words={["Mentorship", "Guidance", "Insights", "Community", "Experiences"]}
+                  className="font-instrument italic text-emerald-500"
+                ></WordRotate>
               </h1>
               <p
                 className={cn(
-                  'max-w-[360px] text-[13.5px] leading-[1.45] text-white/65',
+                  'max-w-[360px] text-[15.5px] leading-[1.45] text-white/65',
                   // TABLET: bigger subtitle
                   'md:max-xl:mx-auto md:max-xl:max-w-[520px] md:max-xl:text-[16px] md:max-xl:text-white/70',
                   'max-xl:mx-auto max-xl:max-w-full max-xl:text-[13px]',
@@ -433,7 +448,7 @@ export default function LandingHero() {
               {/* Verified Mentors */}
               <div
                 className={cn(
-                  'group flex cursor-pointer items-center justify-between rounded-[20px] border border-white/12 bg-white/5 p-4',
+                  'hidden md:flex group cursor-pointer items-center justify-between rounded-[20px] border border-white/12 bg-white/5 p-4',
                   'shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-[20px] transition-all duration-300',
                   'hover:scale-[1.02] hover:border-white/[0.18] hover:bg-white/[0.08] hover:shadow-[0_12px_40px_var(--pulse-glow)] hover:-translate-y-[3px]',
                   // TABLET: fill height
