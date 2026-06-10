@@ -1,15 +1,15 @@
 "use client";
 
-import LandingHero from "@/components/LandingHero";
-import Tape from "@/components/Tape";
-import FeatureSection from "@/components/FeatureSection";
-import Team from "@/components/Team";
-import Teaser from "@/components/Teaser";
-import Solution from "@/components/Solution";
-import Stats from "@/components/Stats";
-import CtaSection from "@/components/CtaSection";
-import StickyNav from "@/components/StickyNav";
-import StickyCTA from "@/components/StickyCTA";
+import LandingHero from "@/components/homePage/LandingHero";
+import Tape from "@/components/homePage/Tape";
+import FeatureSection from "@/components/homePage/FeatureSection";
+import Team from "@/components/homePage/Team";
+import Teaser from "@/components/homePage/Teaser";
+import Solution from "@/components/homePage/Solution";
+import Stats from "@/components/homePage/Stats";
+import CtaSection from "@/components/homePage/CtaSection";
+import StickyNav from "@/components/headers/StickyNav";
+import StickyCTA from "@/components/homePage/StickyCTA";
 import FAQ from "@/components/FAQ";
 
 export default function Home() {

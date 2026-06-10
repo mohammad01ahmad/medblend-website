@@ -1,5 +1,5 @@
 import React from 'react'
-import WaitlistParticles from '@/components/WaitlistParticles'
+import WaitlistParticles from '@/components/ui/WaitlistParticles'
 
 export default function page() {
     return (
@@ -21,10 +21,10 @@ export default function page() {
                     data-test-id="beehiiv-embed"
                     frameBorder="0"
                     scrolling="no"
-                    style={{ 
-                        width: "100%", 
-                        height: "495px", 
-                        margin: "0", 
+                    style={{
+                        width: "100%",
+                        height: "495px",
+                        margin: "0",
                         backgroundColor: "transparent",
                         filter: "invert(1) hue-rotate(180deg) contrast(1.2)"
                     }}>

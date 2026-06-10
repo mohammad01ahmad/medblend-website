@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { IoLogoInstagram } from 'react-icons/io5';
 import { LuMail } from 'react-icons/lu';
-import Dna3DCanvas from '@/components/dna-3d-canvas';
+import Dna3DCanvas from '@/components/ui/dna-3d-canvas';
 
 const companyLinks = [
   { href: '/#problem', label: 'About' },

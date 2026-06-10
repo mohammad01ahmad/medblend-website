@@ -1,4 +1,4 @@
-import { BorderBeam } from './ui/border-beam'
+import { BorderBeam } from '../ui/border-beam'
 import { CiLinkedin } from 'react-icons/ci'
 
 function Teammembercard({

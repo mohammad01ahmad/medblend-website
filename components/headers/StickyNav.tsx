@@ -4,7 +4,12 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { ShimmerButton } from './ui/shimmer-button';
+import { ShimmerButton } from '@/components/ui/shimmer-button';
+
+/**
+ * Renders the global Header on the homepage ("/") ONLY,
+ * in addition to the header in the LandingHero component.
+ */
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -27,20 +32,49 @@ export default function StickyNav() {
     const sentinel = document.getElementById('hero-end-sentinel');
     if (!sentinel) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (window.innerWidth >= 768) {
-          setVisible(!entry.isIntersecting);
-        } else {
-          setVisible(!entry.isIntersecting && entry.boundingClientRect.top < 80);
-        }
-      },
-      { threshold: 0, rootMargin: '-80px 0px 0px 0px' }
-    );
+    // This automatically tracks matches without needing manual window.innerWidth checks
+    const mediaQuery = window.matchMedia('(min-width: 768px)');
 
+    const createObserver = () => {
+      return new IntersectionObserver(
+        ([entry]) => {
+          // Safe dead-zone check: If the page bounding top is near 0, force hide
+          if (window.scrollY <= 10) {
+            setVisible(false);
+            return;
+          }
+
+          // Dynamically checks if the viewport matches Tailwind's md breakpoint
+          if (mediaQuery.matches) {
+            setVisible(!entry.isIntersecting);
+          } else {
+            // Fallback safely using the sentinel's position relative to viewport top
+            setVisible(!entry.isIntersecting && entry.boundingClientRect.top < 80);
+          }
+        },
+        { threshold: 0, rootMargin: '-80px 0px 0px 0px' }
+      );
+    };
+
+    let observer = createObserver();
     observer.observe(sentinel);
-    return () => observer.disconnect();
+
+    // Re-evaluate whenever the browser crosses the mobile/desktop boundary
+    const handleBreakpointChange = () => {
+      observer.disconnect();
+      observer = createObserver();
+      observer.observe(sentinel);
+    };
+
+    // Modern event listener for media queries
+    mediaQuery.addEventListener('change', handleBreakpointChange);
+
+    return () => {
+      observer.disconnect();
+      mediaQuery.removeEventListener('change', handleBreakpointChange);
+    };
   }, [pathname]);
+
 
   // Close menu on nav link click
   const handleLinkClick = () => setMenuOpen(false);

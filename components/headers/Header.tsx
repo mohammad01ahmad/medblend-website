@@ -4,14 +4,14 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { IoClose } from 'react-icons/io5';
-import { ShimmerButton } from './ui/shimmer-button';
+import { ShimmerButton } from '@/components/ui/shimmer-button';
 import Image from 'next/image';
 
 const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/#problem', label: 'About' },
   { href: '/#team', label: 'Team' },
-  { href: '/waitlist', label: 'Register' },
+  { href: '/FAQ', label: 'FAQ' },
 ];
 
 export default function Header() {
@@ -56,17 +56,15 @@ export default function Header() {
       </div>
 
       <div
-        className={`fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 md:hidden ${
-          isMenuOpen ? 'opacity-100' : 'pointer-events-none opacity-0'
-        }`}
+        className={`fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 md:hidden ${isMenuOpen ? 'opacity-100' : 'pointer-events-none opacity-0'
+          }`}
         onClick={closeMenu}
         aria-hidden={!isMenuOpen}
       />
 
       <nav
-        className={`fixed top-0 right-0 z-50 flex h-full w-72 flex-col border-l border-white/10 bg-[var(--void)] shadow-2xl transition-transform duration-300 ease-out sm:w-80 md:hidden ${
-          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+        className={`fixed top-0 right-0 z-50 flex h-full w-72 flex-col border-l border-white/10 bg-[var(--void)] shadow-2xl transition-transform duration-300 ease-out sm:w-80 md:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
         aria-hidden={!isMenuOpen}
       >
         <div className="flex items-center justify-between border-b border-white/10 p-6">
