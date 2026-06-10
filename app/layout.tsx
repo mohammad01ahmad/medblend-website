@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Inter, Syne, Instrument_Serif } from "next/font/google";
-import ConditionalHeader from "@/components/ConditionalHeader";
+import ConditionalHeader from "@/components/headers/ConditionalHeader";
 import Footer from "@/components/Footer";
-import RevealOnScroll from "@/components/RevealOnScroll";
-import CustomCursor from "@/components/CustomCursor";
+import RevealOnScroll from "@/components/ui/RevealOnScroll";
 
 const inter = Inter({
   variable: "--font-inter",
