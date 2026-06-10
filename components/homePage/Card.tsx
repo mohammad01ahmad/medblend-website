@@ -1,17 +1,18 @@
 import React from 'react';
+import Image from 'next/image';
 
 // Mock data to keep the JSX clean and scalable
 const problemCards = [
     {
         num: '01',
-        icon: '🌀',
+        icon: '/Arrow.png',
         quote: '"I had no idea what first year would actually feel like."',
         desc: "Generic content can't prepare you for reality. Students consistently report being blindsided by the lifestyle, workload, and mental toll of medicine.",
         delayClass: '',
     },
     {
         num: '02',
-        icon: '🔍',
+        icon: '/Magnifying.png',
         quote: '"I didn\'t know which specialty was right for me until year three."',
         desc: 'Career decisions that take years to uncover could be clarified in a single honest conversation with someone already in that specialty.',
         delayClass: 'delay-100', // Replaces .d1
@@ -62,8 +63,12 @@ export default function Card() {
                         </div>
 
                         {/* Replaces .prob-icon */}
-                        <div className="absolute top-10 right-10 text-2xl opacity-40">
-                            {card.icon}
+                        <div className="absolute top-10 right-10 text-2xl opacity-60">
+                            {card.icon.startsWith('/') ? (
+                                <Image src={card.icon} alt="" width={28} height={28} className="object-contain" />
+                            ) : (
+                                card.icon
+                            )}
                         </div>
 
                         {/* Replaces .prob-quote */}
