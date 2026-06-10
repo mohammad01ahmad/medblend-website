@@ -1,4 +1,3 @@
-
 // Extracted data to keep the JSX clean and maintainable
 const problemCards = [
     {

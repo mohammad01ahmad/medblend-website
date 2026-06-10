@@ -13,7 +13,7 @@ const PrivacyPolicy = () => {
             {/* Intro */}
             <section className="mb-10 text-lg">
                 <p className="mb-4">
-                    This Privacy Notice for <span className="text-white font-semibold">MedBlend</span> ("<strong>we</strong>," "<strong>us</strong>," or "<strong>our</strong>"), describes how and why we might access, collect, store, use, and/or share ("<strong>process</strong>") your personal information when you use our services ("<strong>Services</strong>"), including when you:
+                    This Privacy Notice for <span className="text-white font-semibold">MedBlend</span> (&quot;<strong>we</strong>,&quot; &quot;<strong>us</strong>,&quot; or &quot;<strong>our</strong>&quot;), describes how and why we might access, collect, store, use, and/or share (&quot;<strong>process</strong>&quot;) your personal information when you use our services (&quot;<strong>Services</strong>&quot;), including when you:
                 </p>
                 <ul className="list-disc ml-6 space-y-2 text-[hsl(0,0%,70%)]">
                     <li>
@@ -94,7 +94,7 @@ const PrivacyPolicy = () => {
                     <li>student data</li>
                     <li>social security numbers or other government identifiers</li>
                 </ul>
-                <p className="mb-4"><strong>Social Media Login Data.</strong> We may provide you with the option to register with us using your existing social media account details, like your Facebook, X, or other social media account. If you choose to register in this way, we will collect certain profile information about you from the social media provider, as described in the section called "HOW DO WE HANDLE YOUR SOCIAL LOGINS?" below.</p>
+                <p className="mb-4"><strong>Social Media Login Data.</strong> We may provide you with the option to register with us using your existing social media account details, like your Facebook, X, or other social media account. If you choose to register in this way, we will collect certain profile information about you from the social media provider, as described in the section called &quot;HOW DO WE HANDLE YOUR SOCIAL LOGINS?&quot; below.</p>
                 <p className="mb-4"><strong>Application Data.</strong> If you use our application(s), we also may collect the following information if you choose to provide us with access or permission:</p>
                 <ul className="list-disc list-inside ml-6 mb-4 space-y-2">
                     <li><strong>Geolocation Information.</strong> We may request access or permission to track location-based information from your mobile device, either continuously or while you are using our mobile application(s), to provide certain location-based services. If you wish to change our access or permissions, you may do so in your device's settings.</li>

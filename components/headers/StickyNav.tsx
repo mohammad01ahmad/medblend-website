@@ -87,7 +87,7 @@ export default function StickyNav() {
       aria-label="Site navigation"
     >
       {/* Main bar */}
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <Link href="/" className="flex shrink-0 items-center gap-2" onClick={handleLinkClick}>
           <Image
             src="/MedBlend-logo.jpeg"
@@ -115,10 +115,8 @@ export default function StickyNav() {
         </nav>
 
         {/* Desktop CTA */}
-        <Link href="/waitlist" className="hidden shrink-0 md:block">
-          <ShimmerButton className="px-4 py-2 text-xs sm:px-5 sm:text-sm">
-            Get Early Access
-          </ShimmerButton>
+        <Link href="/waitlist" className="hidden shrink-0 md:block px-4 py-2 text-xs sm:px-5 sm:text-sm border-none bg-[var(--pulse)] rounded-[var(--radius-4xl)] font-syne text-[0.95rem] font-semibold text-white shadow-[0_0_30px_var(--pulse-glow)] transition-all duration-300 ease-[var(--ease-out)] hover:-translate-y-[3px] hover:bg-[var(--sage)] hover:shadow-[0_0_50px_var(--pulse-glow)]">
+          Get Early Access →
         </Link>
 
         {/* Mobile: hamburger button */}

@@ -37,12 +37,6 @@ export default function CtaSection() {
           >
             Join the Waitlist →
           </Link>
-          <a
-            href="/#team"
-            className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-3.5 font-syne text-sm font-semibold text-white transition-colors hover:border-[var(--sage-glow)] hover:text-[var(--sage)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--pulse)]"
-          >
-            Meet the team
-          </a>
         </div>
       </div>
     </section>
