@@ -4,7 +4,6 @@ import { Inter, Syne, Instrument_Serif } from "next/font/google";
 import ConditionalHeader from "@/components/headers/ConditionalHeader";
 import Footer from "@/components/Footer";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
-import CustomCursor from "@/components/ui/CustomCursor";
 
 const inter = Inter({
   variable: "--font-inter",

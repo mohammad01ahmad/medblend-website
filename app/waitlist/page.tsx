@@ -1,4 +1,3 @@
-import React from 'react'
 import WaitlistParticles from '@/components/ui/WaitlistParticles'
 
 export default function page() {
@@ -26,7 +25,6 @@ export default function page() {
                         height: "495px",
                         margin: "0",
                         backgroundColor: "transparent",
-                        filter: "invert(1) hue-rotate(180deg) contrast(1.2)"
                     }}>
                 </iframe>
             </div>
