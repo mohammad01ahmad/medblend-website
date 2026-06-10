@@ -4,6 +4,12 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* ── LandingHero named breakpoints ── */
+  --breakpoint-desktop: 1200px; /* min-width: 1200px  → desktop:   */
+  --breakpoint-mobile:  1199px; /* max-width: 1199px  → max-mobile: */
+  --breakpoint-phone:    767px; /* max-width: 767px   → max-phone:  */
+  --breakpoint-xs:       399px; /* max-width: 399px   → max-xs:     */
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
