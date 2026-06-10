@@ -1,29 +1,31 @@
+import Image from 'next/image';
+
 // Extracted data to keep the JSX clean and maintainable
 const problemCards = [
     {
         num: '01',
-        icon: '🌀',
+        icon: '/Bullseye.png',
         quote: '"I had no idea what first year would actually feel like."',
         desc: "Generic content can't prepare you for reality. Students consistently report being blindsided by the lifestyle, workload, and mental toll of medicine.",
         animationClass: 'reveal',
     },
     {
         num: '02',
-        icon: '🔍',
+        icon: '/MagnifyingGlass.png',
         quote: '"I didn\'t know which specialty was right for me until year three."',
         desc: 'Career decisions that take years to uncover could be clarified in a single honest conversation with someone already in that specialty.',
         animationClass: 'reveal d1',
     },
     {
         num: '03',
-        icon: '💬',
+        icon: '/Chat.png',
         quote: '"I was asking Reddit for advice on the biggest decision of my life."',
         desc: "Anonymous forums aren't mentorship. Real guidance requires real relationships with verified people who've lived the journey.",
         animationClass: 'reveal d2',
     },
     {
         num: '04',
-        icon: '😶',
+        icon: '/People.png',
         quote: '"I felt completely isolated — like everyone had a roadmap except me."',
         desc: 'Pre-med is lonely. Competition culture makes vulnerability taboo. Students struggle in silence when they should be growing together.',
         animationClass: 'reveal d3',
@@ -71,8 +73,12 @@ export default function ProblemSection() {
                                 {card.num}
                             </div>
 
-                            <div className="absolute right-10 top-10 text-[1.5rem] opacity-40">
-                                {card.icon}
+                            <div className="absolute right-10 top-10 text-[1.5rem] opacity-60">
+                                {card.icon.startsWith('/') ? (
+                                    <Image src={card.icon} alt="" width={28} height={28} className="object-contain" />
+                                ) : (
+                                    card.icon
+                                )}
                             </div>
 
                             <p className="mb-4 font-instrument text-[1.4rem] leading-[1.4]">

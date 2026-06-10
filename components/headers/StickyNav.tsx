@@ -13,7 +13,7 @@ import { ShimmerButton } from '@/components/ui/shimmer-button';
 
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/#about', label: 'About' },
+  { href: '/#solution', label: 'Solution' },
   { href: '/#team', label: 'Team' },
   { href: '/FAQ', label: 'FAQ' },
 ];

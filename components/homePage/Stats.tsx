@@ -37,11 +37,11 @@ export default function StatsSection() {
                     /* Replaces .stat-cell */
                     <div
                         key={index}
-                        className={`${stat.animationClass} bg-[var(--void)] p-[3rem_2rem] text-center`}
+                        className={`${stat.animationClass} bg-[var(--void)] p-[2rem_1rem] sm:p-[3rem_2rem] text-center`}
                     >
                         {/* Replaces .stat-num and .stat-num.blue */}
                         <div
-                            className={`mb-2 font-syne text-[clamp(2.5rem,5vw,4rem)] font-extrabold leading-none text-transparent bg-clip-text [-webkit-text-fill-color:transparent] ${stat.theme === 'accent'
+                            className={`mb-2 font-syne text-[clamp(1.75rem,4vw,3.5rem)] tracking-wide font-bold leading-none text-transparent bg-clip-text [-webkit-text-fill-color:transparent] ${stat.theme === 'accent'
                                 ? 'bg-[linear-gradient(135deg,var(--pulse),var(--sage))]'
                                 : 'bg-[linear-gradient(135deg,white,rgba(255,255,255,0.6))]'
                                 }`}

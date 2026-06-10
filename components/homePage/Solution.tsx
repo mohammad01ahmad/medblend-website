@@ -1,19 +1,18 @@
+import Image from 'next/image';
+
 const pillars = [
     {
-        icon: '🎯',
-        iconBg: 'bg-[var(--pulse-soft)]',
+        image: '/Check.png',
         title: 'Verified Mentors',
         desc: 'Every mentor is verified — real students, real residents, real doctors. No fake profiles, no incentivized advice.',
     },
     {
-        icon: '🔥',
-        iconBg: 'bg-[var(--ember-glow)]',
+        image: '/Message.png',
         title: 'Honest Conversations',
         desc: 'Get answers about workload, lifestyle, mental health, and money — the stuff nobody else talks about openly.',
     },
     {
-        icon: '🌱',
-        iconBg: 'bg-[var(--sage-glow)]',
+        image: '/PrettySapling.png',
         title: 'Community Growth',
         desc: 'Join a movement of students who believe medicine is better when shared — not hoarded.',
     },
@@ -55,13 +54,15 @@ export default function SolutionSection() {
                             {pillars.map((pillar, index) => (
                                 <div
                                     key={index}
-                                    className="flex items-start gap-4 bg-[var(--void)] p-[1.3rem_1.5rem] transition-colors duration-250 hover:bg-[var(--white-06)]"
+                                    className="flex items-center gap-4 bg-[var(--void)] p-[1.3rem_1.5rem] transition-colors duration-250 hover:bg-[var(--white-06)]"
                                 >
-                                    <div
-                                        className={`flex h-[36px] w-[36px] shrink-0 items-center justify-center rounded-[var(--radius-xs)] text-[1rem] ${pillar.iconBg}`}
-                                    >
-                                        {pillar.icon}
-                                    </div>
+                                    <Image
+                                        src={pillar.image}
+                                        alt={pillar.title}
+                                        width={44}
+                                        height={44}
+                                        className="shrink-0 object-contain"
+                                    />
                                     <div>
                                         <h4 className="mb-1 font-syne text-[0.9rem] font-semibold">
                                             {pillar.title}
