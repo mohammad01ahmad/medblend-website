@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
+import { cn } from '@/lib/utils';
 
 const Dna3DCanvas = dynamic(() => import('@/components/ui/dna-3d-canvas'), { ssr: false });
 
@@ -15,8 +16,6 @@ const FOUNDING_TEAM = [
 
 export default function LandingHero() {
   const router = useRouter();
-  const rootRef = useRef<HTMLElement>(null);
-  const frameRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const sliderBtnRef = useRef<HTMLDivElement>(null);
   const sliderTrackRef = useRef<HTMLDivElement>(null);
@@ -28,57 +27,12 @@ export default function LandingHero() {
   useEffect(() => {
     if (!cardRef.current) return;
     const observer = new ResizeObserver((entries) => {
-      for (let entry of entries) {
+      for (const entry of entries) {
         setCardSize({ w: entry.contentRect.width, h: entry.contentRect.height });
       }
     });
     observer.observe(cardRef.current);
     return () => observer.disconnect();
-  }, []);
-
-  // ── Responsive frame sizing (desktop fluid / tablet scale / phone native layout) ──
-  useEffect(() => {
-    const adjustScale = () => {
-      const frame = frameRef.current;
-      const root = rootRef.current;
-      if (!frame || !root) return;
-
-      const w = window.innerWidth;
-
-      if (w >= 1200) {
-        frame.style.transform = 'none';
-        frame.style.width = '100%';
-        frame.style.height = '100%';
-        frame.style.maxHeight = 'none';
-        frame.style.borderRadius = '0px';
-        frame.style.border = 'none';
-        frame.style.boxShadow = 'none';
-        root.style.height = '100vh';
-        root.style.minHeight = '';
-      } else if (w >= 768) {
-        const scale = (w * 0.96) / 1200;
-        frame.style.transform = `scale(${scale})`;
-        frame.style.width = '1200px';
-        frame.style.height = '850px';
-        frame.style.maxHeight = 'none';
-        frame.style.borderRadius = '40px';
-        frame.style.border = '1px solid rgba(255,255,255,0.15)';
-        frame.style.boxShadow = '0 30px 100px rgba(0,0,0,0.9), 0 0 100px var(--lh-accent-glow)';
-        root.style.height = `${850 * scale + 40}px`;
-        root.style.minHeight = '';
-      } else {
-        // Phone: CSS media queries handle layout — no transform scaling
-        frame.style.transform = 'none';
-        frame.style.width = '100%';
-        frame.style.height = 'auto';
-        frame.style.maxHeight = 'none';
-        root.style.height = 'auto';
-        root.style.minHeight = '100svh';
-      }
-    };
-    adjustScale();
-    window.addEventListener('resize', adjustScale);
-    return () => window.removeEventListener('resize', adjustScale);
   }, []);
 
   // ── Slider drag ─────────────────────────────────────────────────────────
@@ -161,537 +115,383 @@ export default function LandingHero() {
 
   const { w, h } = cardSize;
   const scale = w < 768 ? w / 950 : 1;
-  const cTR = 322 * scale; // Top right cutout width (optimized)
-  const cBL = 322 * scale; // Bottom left cutout width (optimized)
-  const r = 32 * scale;    // Corner radius
+  const cTR = 322 * scale;
+  const cBL = 322 * scale;
+  const r = 32 * scale;
   const dynamicPath = `M 0,${r} A ${r},${r} 0 0,1 ${r},0 L ${w - cTR},0 A ${r},${r} 0 0,1 ${w - cTR + r},${r} L ${w - cTR + r},${43 * scale} A ${r},${r} 0 0,0 ${w - cTR + r + 32 * scale},${75 * scale} L ${w - r},${75 * scale} A ${r},${r} 0 0,1 ${w},${75 * scale + r} L ${w},${h - r} A ${r},${r} 0 0,1 ${w - r},${h} L ${cBL},${h} A ${r},${r} 0 0,1 ${cBL - r},${h - r} L ${cBL - r},${h - 43 * scale} A ${r},${r} 0 0,0 ${cBL - r - 32 * scale},${h - 75 * scale} L ${r},${h - 75 * scale} A ${r},${r} 0 0,1 0,${h - 75 * scale - r} Z`;
 
   return (
-    <>
-      <style>{`
-        /* ─── LandingHero: scoped with "lh-" prefix ─────────────────────── */
-        .lh-root {
-          /* In normal page flow — not fixed — so the rest of the page scrolls below */
-          width: 100%;
-          height: 100vh;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          overflow: hidden;
-          background: var(--background);
-          font-family: 'Inter', sans-serif;
-          color: #fff;
-          position: relative;
-          --lh-accent: var(--pulse);
-          --lh-accent-hover: var(--sage);
-          --lh-accent-glow: var(--pulse-glow);
-        }
-        .lh-device-frame {
-          position: relative;
-          width: 1200px;
-          height: 850px;
-          background: #000;
-          border: 1px solid rgba(255,255,255,0.15);
-          border-radius: 40px;
-          box-shadow: 0 30px 100px rgba(0,0,0,0.9), 0 0 100px var(--lh-accent-glow);
-          display: flex;
-          overflow: hidden;
-          transform-origin: center;
-          flex-shrink: 0;
-        }
-        /* Sidebar */
-        .lh-sidebar {
-          width: 250px; height: 100%; background: #000;
-          padding: 25px 10px 140px 10px;
-          display: flex; flex-direction: column; justify-content: space-between;
-          position: relative; z-index: 10; flex-shrink: 0;
-        }
-        .lh-logo-container { display: flex; align-items: center; gap: 0px; margin-bottom: 20px; }
-        .lh-logo-img { border-radius: 8px; object-fit: cover; flex-shrink: 0; }
-        .lh-logo-text { font-size: 24px; font-weight: 700; color: #fff; letter-spacing: -0.5px; }
-        .lh-sidebar-middle { margin-top: auto; margin-bottom: 35px; margin-left: 20px; }
-        .lh-contact-heading { font-size: 26px; font-weight: 700; color: #fff; margin: 0 0 20px 0; letter-spacing: -0.5px; }
-        .lh-contact-info { display: flex; flex-direction: column; gap: 12px; }
-        .lh-contact-link { font-size: 12.5px; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; word-break: break-all; }
-        .lh-contact-link:hover { color: #fff; }
-        .lh-contact-detail { font-size: 12.5px; color: rgba(255,255,255,0.4); line-height: 1.6; }
-        /* Main */
-        .lh-main { flex: 1; height: 100%; position: relative; }
-        /* Top-right buttons */
-        .lh-top-right { position: absolute; top: 30px; right: 35px; width: 270px; height: 55px; display: flex; justify-content: center; z-index: 25; }
-        .lh-btn-login {
-          padding: clamp(8px,0.9%,12px) clamp(18px,2%,30px); border: 1.5px solid rgba(255,255,255,0.35); border-radius: 30px;
-          color: #fff; font-size: clamp(11px,1.1vw,14px); font-weight: 600; text-decoration: none;
-          background: transparent; transition: all 0.2s;
-        }
-        .lh-btn-login:hover { background: rgba(255,255,255,0.08); border-color: #fff; }
-        .lh-btn-signup {
-          width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;
-          border: 1.5px solid rgba(255,255,255,0.15); border-radius: 10px 22px 10px 22px;
-          color: #fff; font-size: clamp(12px, 1.2vw, 14px); font-weight: 600; text-decoration: none; white-space: nowrap;
-          background: var(--lh-accent); transition: all 0.2s;
-          box-shadow: 0 4px 15px var(--lh-accent-glow);
-        }
-        .lh-btn-signup:hover { background: var(--lh-accent-hover); border-color: rgba(255,255,255,0.4); transform: translateY(-1px); box-shadow: 0 6px 20px var(--pulse-glow); }
-        /* Card border SVG */
-        .lh-card-border-svg {
-          position: absolute; top: 20px; left: 0; right: 25px; bottom: 25px;
-          width: calc(100% - 25px); height: calc(100% - 45px);
-          pointer-events: none; z-index: 6;
-        }
-        /* Purple card */
-        .lh-purple-card {
-          position: absolute; top: 20px; left: 0; right: 25px; bottom: 25px;
-          background: var(--void);
-          clip-path: url(#lh-card-clip); overflow: hidden; z-index: 2;
-        }
-        .lh-purple-card-bg {
-          opacity: 0.9;
-        }
-        .lh-purple-card::before {
-          content: ''; position: absolute; inset: 0;
-          background: linear-gradient(135deg, var(--sage-soft) 0%, rgba(10,18,14,0.75) 55%, rgba(5,10,8,0.88) 100%);
-          z-index: 1; pointer-events: none;
-        }
-        .lh-nav { position: absolute; top: 2.6%; left: 50%; transform: translateX(-50%); display: flex; width: min(340px, 35%); gap: 8px; z-index: 10; }
-        .lh-nav-item {
-          flex: 1; padding: 8px 0; font-size: clamp(11px, 1vw, 13px); font-weight: 500;
-          display: flex; justify-content: center; align-items: center; box-sizing: border-box;
-          color: rgba(255,255,255,0.65); text-decoration: none;
-          border: 1px solid rgba(255,255,255,0.15); border-radius: 30px;
-          transition: all 0.2s ease; background: rgba(255,255,255,0.02); backdrop-filter: blur(5px);
-        }
-        .lh-nav-item:hover { color: #fff; border-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.06); }
-        .lh-nav-item.active { color: #fff; background: rgba(0,0,0,0.65); border-color: rgba(255,255,255,0.1); }
-        /* Hero content */
-        .lh-hero { position: absolute; left: 5.8%; top: 24%; max-width: 55%; z-index: 10; }
-        .lh-hero h1 { font-size: clamp(32px,3.8vw,48px); font-weight: 700; line-height: 1.12; color: #fff; margin: 0 0 16px; letter-spacing: -0.5px; }
-        .lh-hero p { font-size: 13.5px; color: rgba(255,255,255,0.65); line-height: 1.45; max-width: 360px; }
-        /* Cards stack */
-        .lh-cards-stack { position: absolute; right: 30px; top: 15.3%; display: flex; flex-direction: column; gap: clamp(10px, 1.5%, 16px); width: 280px; z-index: 10; }
-        .lh-glass-card {
-          background: rgba(255,255,255,0.05); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-          border: 1px solid rgba(255,255,255,0.12); border-radius: 20px;
-          box-shadow: 0 8px 32px rgba(0,0,0,0.35); padding: 16px;
-          display: flex; justify-content: space-between; align-items: center;
-          transition: all 0.3s cubic-bezier(0.25,0.8,0.25,1); cursor: pointer;
-        }
-        .lh-glass-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.18); transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 40px var(--lh-accent-glow); }
-        .lh-card-left { flex: 1; padding-right: 12px; }
-        .lh-stat-number { font-size: clamp(20px, 2.2vw, 26px); font-weight: 700; color: #fff; margin-bottom: 4px; letter-spacing: -0.5px; }
-        .lh-card-title { font-size: clamp(11.5px, 1.2vw, 13.5px); font-weight: 600; color: #fff; margin-bottom: 6px; }
-        .lh-card-desc { font-size: clamp(8.5px, 0.9vw, 10px); color: rgba(255,255,255,0.5); line-height: 1.4; }
-        .lh-team-card { align-items: stretch; padding: 14px 14px 12px; cursor: default; }
-        .lh-team-card .lh-card-title { margin-bottom: 10px; letter-spacing: 0.02em; }
-        .lh-team-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
-        .lh-team-list li { margin: 0; padding: 0; }
-        .lh-team-row {
-          display: flex; align-items: center; gap: 10px;
-          padding: 7px 9px; border-radius: 12px;
-          background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(255,255,255,0.07);
-          transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-          text-decoration: none; color: inherit; cursor: pointer;
-        }
-        .lh-team-row:hover {
-          background: rgba(255,255,255,0.06);
-          border-color: rgba(255,255,255,0.14);
-          transform: translateX(2px);
-        }
-        .lh-team-row img {
-          width: clamp(28px, 3vw, 36px); height: clamp(28px, 3vw, 36px); border-radius: 50%; object-fit: cover; flex-shrink: 0;
-          border: 1.5px solid var(--sage-glow);
-          box-shadow: 0 3px 10px rgba(0,0,0,0.35);
-          transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-        .lh-team-row:hover img { border-color: var(--sage); box-shadow: 0 0 10px var(--pulse-glow); }
-        .lh-team-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
-        .lh-member-name {
-          font-size: clamp(10px, 1.1vw, 12px); font-weight: 600; color: rgba(255,255,255,0.92);
-          white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-          letter-spacing: 0.01em; line-height: 1.2;
-        }
-        .lh-member-role {
-          font-size: clamp(8px, 0.8vw, 9.5px); font-weight: 500; color: rgba(255,255,255,0.42);
-          white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-          letter-spacing: 0.02em; line-height: 1.2;
-        }
-        .lh-team-row:hover .lh-member-role { color: var(--sage); }
-        .lh-card-arrow { width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.75); cursor: pointer; flex-shrink: 0; transition: all 0.25s; }
-        .lh-glass-card:hover .lh-card-arrow { background: #fff; color: #000; border-color: #fff; transform: rotate(-45deg); }
-        /* Slider */
-        .lh-slider-track {
-          position: absolute; bottom: 35px; left: 25px; width: 505px; height: 55px;
-          background: #000; border: 1.5px solid rgba(255,255,255,0.35); border-radius: 22px;
-          display: flex; align-items: center; padding: 4px; box-sizing: border-box;
-          z-index: 30; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        }
-        .lh-slider-track.lh-slider--success { border-color: var(--pulse); box-shadow: 0 0 15px var(--pulse-glow); }
-        .lh-slider-track.lh-slider--success .lh-slider-btn { border-color: var(--pulse); color: var(--pulse); }
-        .lh-slider-track.lh-slider--success .lh-slider-text { color: var(--sage); font-weight: 600; }
-        .lh-slider-btn { width: 46px; height: 46px; border-radius: 50%; background: #000; border: 1.5px solid #fff; display: flex; align-items: center; justify-content: center; color: #fff; cursor: grab; z-index: 2; touch-action: none; box-shadow: 0 0 10px rgba(255,255,255,0.1); }
-        .lh-slider-btn:active { cursor: grabbing; }
-        .lh-slider-btn svg { transition: transform 0.3s; }
-        .lh-slider-text { position: absolute; width: 100%; left: 0; text-align: center; font-size: 12.5px; font-weight: 500; color: rgba(255,255,255,0.45); letter-spacing: 0.8px; pointer-events: none; z-index: 1; transition: opacity 0.3s; }
-
-        /* ─── Phone: native stacked layout (no transform scale) ─────────── */
-        @media (max-width: 767px) {
-          .lh-root {
-            height: auto !important;
-            min-height: 100svh;
-            padding: max(10px, env(safe-area-inset-top)) 12px max(16px, env(safe-area-inset-bottom));
-            overflow: visible;
-            align-items: stretch;
-            justify-content: flex-start;
-          }
-
-          .lh-device-frame {
-            width: 100% !important;
-            height: auto !important;
-            max-height: none !important;
-            transform: none !important;
-            flex-direction: column;
-            border-radius: 24px;
-            box-shadow: 0 16px 48px rgba(0,0,0,0.75), 0 0 60px var(--lh-accent-glow);
-          }
-
-          /* Compact top bar */
-          .lh-sidebar {
-            width: 100%;
-            height: auto;
-            padding: 14px 16px;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-          }
-          .lh-logo-container { margin-bottom: 0; gap: 8px; }
-          .lh-logo-img { width: 44px !important; height: 44px !important; }
-          .lh-logo-text { font-size: 17px; }
-          .lh-sidebar-middle { display: none; }
-
-          .lh-main {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            min-height: 0;
-          }
-
-          .lh-top-right {
-            position: relative;
-            top: auto;
-            right: auto;
-            order: 1;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            padding: 0;
-            margin: 12px 12px 0;
-            width: calc(100% - 24px);
-            z-index: 25;
-          }
-          .lh-btn-login,
-          .lh-btn-signup {
-            padding: 10px 18px;
-            font-size: 12px;
-            min-height: 44px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            border-radius: 50px;
-          }
-
-          .lh-card-border-svg { display: none; }
-
-          .lh-purple-card {
-            position: relative;
-            top: auto;
-            left: auto;
-            right: auto;
-            bottom: auto;
-            order: 2;
-            margin: 12px;
-            width: auto;
-            clip-path: none;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.12);
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-            padding: 16px 14px 18px;
-            min-height: 420px;
-          }
-          .lh-purple-card-bg { opacity: 0.85; }
-          .lh-nav,
-          .lh-hero,
-          .lh-cards-stack {
-            position: relative;
-            z-index: 10;
-          }
-
-          .lh-nav {
-            position: relative;
-            top: auto;
-            left: auto;
-            transform: none;
-            display: flex;
-            width: 100%;
-            justify-content: center;
-            gap: 8px;
-            order: 1;
-          }
-          .lh-nav-item {
-            flex: 1; padding: 8px 0;
-            font-size: 11px;
-            min-height: 36px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-
-          .lh-hero {
-            position: relative;
-            left: auto;
-            top: auto;
-            max-width: 100%;
-            text-align: center;
-            order: 2;
-            padding: 0 4px;
-          }
-          .lh-hero h1 {
-            font-size: clamp(26px, 7.5vw, 36px);
-            margin-bottom: 12px;
-          }
-          .lh-hero p {
-            font-size: 13px;
-            max-width: 100%;
-            margin: 0 auto;
-          }
-
-          .lh-cards-stack {
-            position: relative;
-            right: auto;
-            top: auto;
-            width: 100%;
-            order: 3;
-            gap: 12px;
-          }
-          .lh-glass-card {
-            padding: 14px;
-            border-radius: 16px;
-          }
-          .lh-glass-card:hover {
-            transform: none;
-          }
-          .lh-stat-number { font-size: 22px; }
-          .lh-team-row img { width: 38px; height: 38px; }
-          .lh-team-list { gap: 8px; }
-          .lh-member-name { font-size: 13px; }
-          .lh-member-role { font-size: 10.5px; }
-
-          .lh-slider-track {
-            position: relative;
-            bottom: auto;
-            left: auto;
-            order: 3;
-            width: calc(100% - 24px);
-            max-width: 100%;
-            margin: 4px 12px 14px;
-            height: 52px;
-          }
-          .lh-slider-btn {
-            width: 42px;
-            height: 42px;
-          }
-          .lh-slider-text {
-            font-size: 11px;
-            letter-spacing: 0.5px;
-            padding: 0 48px;
-          }
-        }
-
-        /* ─── Small phones ─────────────────────────────────────────────── */
-        @media (max-width: 399px) {
-          .lh-root { padding-left: 8px; padding-right: 8px; }
-
-          .lh-logo-text { font-size: 15px; }
-          .lh-top-right {
-            flex-direction: column;
-            align-items: stretch;
-            padding-top: 10px;
-          }
-          .lh-btn-login,
-          .lh-btn-signup {
-            justify-content: center;
-            width: 100%;
-          }
-
-          .lh-purple-card {
-            margin: 8px;
-            padding: 14px 12px 16px;
-            gap: 14px;
-          }
-
-          .lh-nav { gap: 6px; }
-          .lh-nav-item {
-            padding: 6px 0;
-            font-size: 10px;
-          }
-
-          .lh-hero h1 { font-size: 24px; }
-
-          .lh-card-arrow { width: 28px; height: 28px; }
-          .lh-member-name { font-size: 12px; }
-          .lh-team-row img { width: 34px; height: 34px; }
-
-          .lh-slider-track {
-            width: calc(100% - 16px);
-            margin: 4px 8px 12px;
-          }
-        }
-
-        /* ─── Landscape phone: keep content scrollable ───────────────────── */
-        @media (max-width: 767px) and (orientation: landscape) {
-          .lh-root { min-height: auto; }
-          .lh-purple-card { gap: 12px; padding: 12px; }
-          .lh-hero h1 { font-size: 22px; }
-          .lh-cards-stack { gap: 8px; }
-          .lh-glass-card { padding: 10px 12px; }
-        }
-      `}</style>
-
-
-      {/* ── Full-height hero section ──────────────────────────────────────── */}
-      <section className="lh-root" ref={rootRef} id="landing-hero">
-        <div className="lh-device-frame" ref={frameRef}>
-
-          {/* Left Sidebar */}
-          <aside className="lh-sidebar">
-            <div className="lh-logo-container">
-              <Image
-                src="/MedBlend-logo.jpeg"
-                alt="MedBlend Logo"
-                width={64}
-                height={64}
-                className="lh-logo-img"
-              />
-              <span className="lh-logo-text">MedBlendApp</span>
-            </div>
-
-            <div className="lh-sidebar-middle">
-              <h2 className="lh-contact-heading">Get in Touch</h2>
-              <div className="lh-contact-info">
-                <a href="mailto:medblendapp@gmail.com" className="lh-contact-link">
-                  medblendapp@gmail.com
-                </a>
-                <div className="lh-contact-detail">Instagram: @medblendapp</div>
-                <div className="lh-contact-detail">
-                  Real guidance from medical students and doctors.
-                </div>
-              </div>
-            </div>
-          </aside>
-
-          {/* Main Content */}
-          <main className="lh-main">
-
-            {/* Instagram / LinkedIn */}
-            <div className="lh-top-right">
-              <a href="/waitlist" className="lh-btn-signup">
-                Join the Waitlist
-              </a>
-            </div>
-
-            {/* Glowing border overlay */}
-            <svg className="lh-card-border-svg" width="100%" height="100%">
-              <defs>
-                <clipPath id="lh-card-clip">
-                  <path d={dynamicPath} />
-                </clipPath>
-              </defs>
-              <path d={dynamicPath} fill="none" stroke="rgba(255,255,255,0.22)" strokeWidth="2" />
-            </svg>
-
-            {/* Purple display card */}
-            <div className="lh-purple-card" ref={cardRef}>
-              <Dna3DCanvas className="lh-purple-card-bg" embedded />
-
-              {/* Nav */}
-              <nav className="lh-nav">
-                <a href="/" className="lh-nav-item active">Home</a>
-                <a href="/#about" className="lh-nav-item">About</a>
-                <a href="/#team" className="lh-nav-item">Team</a>
-                <a href="/FAQ" className="lh-nav-item">FAQ</a>
-              </nav>
-
-              {/* Hero text */}
-              <div className="lh-hero">
-                <h1>Enter Medicine<br />Knowing What<br />To Expect</h1>
-                <p>Real guidance from students and doctors who&apos;ve already lived it.</p>
-              </div>
-
-              {/* Widget cards */}
-              <div className="lh-cards-stack">
-
-                {/* Stats */}
-                <div className="lh-glass-card">
-                  <div className="lh-card-left">
-                    <div className="lh-stat-number">500+</div>
-                    <div className="lh-card-desc">Aspiring medical students on our early access waitlist.</div>
-                  </div>
-                </div>
-
-                {/* Founding Team */}
-                <div className="lh-glass-card lh-team-card">
-                  <div className="lh-card-left">
-                    <div className="lh-card-title">Founding Team</div>
-                    <ul className="lh-team-list">
-                      {FOUNDING_TEAM.map((member) => (
-                        <li key={member.name}>
-                          <a href="/#team" className="lh-team-row" aria-label={`Meet ${member.name}, ${member.role}`}>
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src={member.image} alt={member.name} />
-                            <span className="lh-team-info">
-                              <span className="lh-member-name">{member.name}</span>
-                              <span className="lh-member-role">{member.role}</span>
-                            </span>
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Verified Mentors */}
-                <div className="lh-glass-card">
-                  <div className="lh-card-left">
-                    <div className="lh-card-title">Verified Mentors</div>
-                    <div className="lh-card-desc">
-                      Every mentor is verified — real students, residents, and doctors giving real answers.
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-          </main>
-
-          {/* Swipe slider */}
-          <div className="lh-slider-track" ref={sliderTrackRef}>
-            <div className="lh-slider-btn" ref={sliderBtnRef}>
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" ref={arrowIconRef}>
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
-            </div>
-            <span className="lh-slider-text" ref={sliderTextRef}>Swipe to Join Waitlist</span>
+    <section
+      id="landing-hero"
+      className={cn(
+        'relative flex w-full items-center justify-center overflow-hidden bg-background font-sans text-white',
+        'xl:h-screen',
+        'md:max-xl:h-screen md:max-xl:items-stretch md:max-xl:justify-start md:max-xl:overflow-hidden',
+        'max-md:h-auto max-md:min-h-svh max-md:items-stretch max-md:justify-start max-md:overflow-visible',
+        'max-md:pt-[max(10px,env(safe-area-inset-top))] max-md:px-3 max-md:pb-[max(16px,env(safe-area-inset-bottom))]',
+        'max-sm:px-2',
+        'max-md:landscape:min-h-0',
+      )}
+    >
+      <div
+        className={cn(
+          'relative flex shrink-0 origin-center overflow-hidden bg-black',
+          'xl:h-full xl:w-full xl:rounded-none xl:border-0 xl:shadow-none',
+          'md:max-xl:h-full md:max-xl:w-full md:max-xl:flex-col md:max-xl:rounded-none md:max-xl:border-0',
+          'max-md:h-auto max-md:w-full max-md:flex-col max-md:rounded-3xl max-md:border max-md:border-white/15',
+          'max-md:shadow-[0_16px_48px_rgba(0,0,0,0.75),0_0_60px_var(--pulse-glow)]',
+        )}
+      >
+        {/* Left Sidebar */}
+        <aside
+          className={cn(
+            'relative z-10 flex shrink-0 flex-col justify-between bg-black',
+            'xl:h-full xl:w-[250px] xl:px-2.5 xl:pb-[140px] xl:pt-[25px]',
+            'md:max-xl:h-auto md:max-xl:w-full md:max-xl:flex-row md:max-xl:items-center md:max-xl:justify-between',
+            'md:max-xl:border-b md:max-xl:border-white/8 md:max-xl:px-6 md:max-xl:py-4',
+            'max-md:h-auto max-md:w-full max-md:flex-row max-md:items-center max-md:justify-between',
+            'max-md:border-b max-md:border-white/8 max-md:px-4 max-md:py-3.5',
+          )}
+        >
+          <div className="mb-5 flex items-center gap-0 max-xl:mb-0 max-xl:gap-2">
+            <Image
+              src="/MedBlend-logo.jpeg"
+              alt="MedBlend Logo"
+              width={64}
+              height={64}
+              className="shrink-0 rounded-lg object-cover max-xl:!h-11 max-xl:!w-11"
+            />
+            <span className="text-2xl font-bold tracking-tight text-white max-xl:text-[17px] max-sm:text-[15px]">
+              MedBlendApp
+            </span>
           </div>
 
+          <div className="mb-[35px] ml-5 mt-auto max-xl:hidden">
+            <h2 className="mb-5 text-[26px] font-bold tracking-tight text-white">Get in Touch</h2>
+            <div className="flex flex-col gap-3">
+              <a
+                href="mailto:medblendapp@gmail.com"
+                className="break-all text-[12.5px] text-white/50 no-underline transition-colors hover:text-white"
+              >
+                medblendapp@gmail.com
+              </a>
+              <div className="text-[12.5px] leading-relaxed text-white/40">Instagram: @medblendapp</div>
+              <div className="text-[12.5px] leading-relaxed text-white/40">
+                Real guidance from medical students and doctors.
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        {/* Main Content */}
+        <main
+          className={cn(
+            'relative h-full flex-1',
+            'md:max-xl:flex md:max-xl:min-h-0 md:max-xl:w-full md:max-xl:flex-col md:max-xl:overflow-hidden',
+            'max-md:flex max-md:min-h-0 max-md:w-full max-md:flex-col',
+          )}
+        >
+          {/* Join Waitlist */}
+          <div
+            className={cn(
+              'absolute right-[35px] top-[30px] z-[25] flex h-[55px] w-[270px] justify-center',
+              'md:max-xl:relative md:max-xl:right-auto md:max-xl:top-auto md:max-xl:order-1',
+              'md:max-xl:mx-4 md:max-xl:mb-0 md:max-xl:mt-3 md:max-xl:h-auto md:max-xl:w-[calc(100%-32px)]',
+              'max-md:relative max-md:right-auto max-md:top-auto max-md:order-1',
+              'max-md:mx-3 max-md:mb-0 max-md:mt-3 max-md:h-auto max-md:w-[calc(100%-24px)] max-md:gap-2.5',
+              'max-sm:flex-col max-sm:items-stretch max-sm:pt-2.5',
+            )}
+          >
+            <a
+              href="/waitlist"
+              className={cn(
+                'flex h-full w-full items-center justify-center whitespace-nowrap rounded-[10px_22px_10px_22px]',
+                'border-[1.5px] border-white/15 bg-[var(--pulse)] text-[clamp(12px,1.2vw,14px)] font-semibold text-white no-underline',
+                'shadow-[0_4px_15px_var(--pulse-glow)] transition-all hover:-translate-y-px hover:border-white/40 hover:bg-[var(--sage)] hover:shadow-[0_6px_20px_var(--pulse-glow)]',
+                'max-xl:inline-flex max-xl:min-h-11 max-xl:rounded-[50px] max-xl:px-[18px] max-xl:py-2.5 max-xl:text-xs',
+                'md:max-xl:min-h-[52px] md:max-xl:text-[15px] md:max-xl:font-bold md:max-xl:tracking-wide md:max-xl:px-6',
+              )}
+            >
+              Join the Waitlist
+            </a>
+          </div>
+
+          {/* Glowing border overlay */}
+          <svg
+            className="pointer-events-none absolute bottom-[25px] left-0 right-[25px] top-5 z-[6] h-[calc(100%-45px)] w-[calc(100%-25px)] max-xl:hidden"
+            width="100%"
+            height="100%"
+          >
+            <defs>
+              <clipPath id="lh-card-clip">
+                <path d={dynamicPath} />
+              </clipPath>
+            </defs>
+            <path d={dynamicPath} fill="none" stroke="rgba(255,255,255,0.22)" strokeWidth="2" />
+          </svg>
+
+          {/* Purple display card */}
+          <div
+            ref={cardRef}
+            className={cn(
+              'lh-purple-card absolute z-[2] overflow-hidden bg-[var(--void)]',
+              'xl:bottom-[25px] xl:left-0 xl:right-[25px] xl:top-5 xl:[clip-path:url(#lh-card-clip)]',
+              // TABLET: flex column, hero text centered in middle, cards pinned at bottom
+              'md:max-xl:relative md:max-xl:bottom-auto md:max-xl:left-auto md:max-xl:right-auto md:max-xl:top-auto',
+              'md:max-xl:order-2 md:max-xl:mx-4 md:max-xl:flex md:max-xl:flex-1 md:max-xl:min-h-0 md:max-xl:flex-col md:max-xl:gap-0',
+              'md:max-xl:rounded-[24px] md:max-xl:border md:max-xl:border-white/12 md:max-xl:px-5 md:max-xl:pb-4 md:max-xl:pt-0',
+              'max-md:relative max-md:bottom-auto max-md:left-auto max-md:right-auto max-md:top-auto',
+              'max-md:order-2 max-md:m-3 max-md:flex max-md:min-h-[420px] max-md:flex-col max-md:gap-[18px]',
+              'max-md:rounded-[20px] max-md:border max-md:border-white/12 max-md:px-3.5 max-md:py-4',
+              'max-sm:m-2 max-sm:gap-3.5 max-sm:px-3 max-sm:py-3.5',
+              'max-md:landscape:gap-3 max-md:landscape:p-3',
+            )}
+          >
+            <Dna3DCanvas className="opacity-90 max-xl:opacity-[0.85]" embedded />
+
+            {/* Nav */}
+            <nav
+              className={cn(
+                'absolute left-1/2 top-[2.6%] z-10 flex w-[min(340px,35%)] -translate-x-1/2 gap-2',
+                'md:max-xl:relative md:max-xl:left-auto md:max-xl:top-auto md:max-xl:order-1 md:max-xl:w-full md:max-xl:translate-x-0 md:max-xl:justify-center',
+                // TABLET: give the nav a fixed compact height so it doesn't steal space from the centered text
+                'md:max-xl:flex-none md:max-xl:pt-4 md:max-xl:pb-2',
+                'max-md:relative max-md:left-auto max-md:top-auto max-md:order-1 max-md:w-full max-md:translate-x-0 max-md:justify-center',
+                'max-sm:gap-1.5',
+              )}
+            >
+              {[
+                { href: '/', label: 'Home', active: true },
+                { href: '/#about', label: 'About', active: false },
+                { href: '/#team', label: 'Team', active: false },
+                { href: '/FAQ', label: 'FAQ', active: false },
+              ].map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className={cn(
+                    'box-border flex flex-1 items-center justify-center rounded-[30px] border border-white/15',
+                    'bg-white/[0.02] px-0 py-2 text-[clamp(11px,1vw,13px)] font-medium text-white/65 no-underline backdrop-blur-[5px] transition-all',
+                    'hover:border-white/35 hover:bg-white/[0.06] hover:text-white',
+                    item.active && 'border-white/10 bg-black/65 text-white',
+                    'max-xl:min-h-9 max-xl:text-[11px]',
+                    'md:max-xl:min-h-[44px] md:max-xl:text-[14px] md:max-xl:font-semibold',
+                    'max-sm:py-1.5 max-sm:text-[10px]',
+                  )}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+
+            {/* Hero text */}
+            <div
+              className={cn(
+                'absolute left-[5.8%] top-[24%] z-10 max-w-[55%]',
+                // TABLET: flex-1 so it takes all space between nav and cards, centers content vertically
+                'md:max-xl:relative md:max-xl:left-auto md:max-xl:top-auto md:max-xl:order-2',
+                'md:max-xl:flex-1 md:max-xl:flex md:max-xl:flex-col md:max-xl:items-center md:max-xl:justify-center',
+                'md:max-xl:max-w-full md:max-xl:px-4 md:max-xl:text-center',
+                'max-md:relative max-md:left-auto max-md:top-auto max-md:order-2 max-md:max-w-full max-md:px-1 max-md:text-center',
+              )}
+            >
+              <h1
+                className={cn(
+                  'mb-4 font-bold leading-[1.12] tracking-tight text-white',
+                  'text-[clamp(32px,3.8vw,48px)]',
+                  // TABLET: much larger, prominent
+                  'md:max-xl:mb-5 md:max-xl:text-[clamp(44px,7vw,72px)]',
+                  'max-xl:mb-3 max-sm:text-2xl max-md:landscape:text-[22px]',
+                  // non-tablet max-xl fallback (mobile uses max-sm above)
+                  '[&:not(.md\:max-xl)]:max-xl:text-[clamp(26px,7.5vw,36px)]',
+                )}
+              >
+                Enter Medicine
+                <br />
+                Knowing What
+                <br />
+                To Expect
+              </h1>
+              <p
+                className={cn(
+                  'max-w-[360px] text-[13.5px] leading-[1.45] text-white/65',
+                  // TABLET: bigger subtitle
+                  'md:max-xl:mx-auto md:max-xl:max-w-[520px] md:max-xl:text-[16px] md:max-xl:text-white/70',
+                  'max-xl:mx-auto max-xl:max-w-full max-xl:text-[13px]',
+                )}
+              >
+                Real guidance from students and doctors who&apos;ve already lived it.
+              </p>
+            </div>
+
+            {/* Widget cards */}
+            <div
+              className={cn(
+                'absolute right-[30px] top-[15.3%] z-10 flex w-[280px] flex-col gap-[clamp(10px,1.5%,16px)]',
+                // TABLET: flex-none fixed height row pinned at bottom of purple card
+                'md:max-xl:relative md:max-xl:right-auto md:max-xl:top-auto md:max-xl:order-3',
+                'md:max-xl:w-full md:max-xl:flex-none md:max-xl:flex-row md:max-xl:gap-3 md:max-xl:h-[240px]',
+                'max-md:relative max-md:right-auto max-md:top-auto max-md:order-3 max-md:w-full max-md:gap-3',
+                'max-md:landscape:gap-2',
+              )}
+            >
+              {/* Stats */}
+              <div
+                className={cn(
+                  'group flex cursor-pointer items-center justify-between rounded-[20px] border border-white/12 bg-white/5 p-4',
+                  'shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-[20px] transition-all duration-300',
+                  'hover:scale-[1.02] hover:border-white/[0.18] hover:bg-white/[0.08] hover:shadow-[0_12px_40px_var(--pulse-glow)] hover:-translate-y-[3px]',
+                  // TABLET: fill height, compact column
+                  'md:max-xl:flex-1 md:max-xl:h-full md:max-xl:flex-col md:max-xl:items-start md:max-xl:justify-center md:max-xl:rounded-2xl md:max-xl:hover:translate-y-0 md:max-xl:hover:scale-100',
+                  'max-md:rounded-2xl max-md:p-3.5 max-md:hover:translate-y-0 max-md:hover:scale-100',
+                  'max-md:landscape:px-3 max-md:landscape:py-2.5',
+                )}
+              >
+                <div className="flex-1 pr-3 md:max-xl:pr-0">
+                  <div className="mb-1 text-[clamp(20px,2.2vw,26px)] font-bold tracking-tight text-white max-xl:text-[22px] md:max-xl:text-[42px] md:max-xl:mb-2">
+                    500+
+                  </div>
+                  <div className="text-[clamp(8.5px,0.9vw,10px)] leading-snug text-white/50 md:max-xl:text-[13px] md:max-xl:leading-normal">
+                    Aspiring medical students on our early access waitlist.
+                  </div>
+                </div>
+              </div>
+
+              {/* Founding Team */}
+              <div
+                className={cn(
+                  'group flex cursor-default items-stretch justify-between rounded-[20px] border border-white/12 bg-white/5 px-3.5 py-3.5',
+                  'shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-[20px] transition-all duration-300',
+                  'hover:scale-[1.02] hover:border-white/[0.18] hover:bg-white/[0.08] hover:shadow-[0_12px_40px_var(--pulse-glow)] hover:-translate-y-[3px]',
+                  // TABLET: flex-2 width, fixed height, hide full list — show label + stacked avatars only
+                  'md:max-xl:flex-[2] md:max-xl:h-full md:max-xl:flex-col md:max-xl:items-start md:max-xl:justify-start md:max-xl:rounded-2xl md:max-xl:hover:translate-y-0 md:max-xl:hover:scale-100 md:max-xl:px-3 md:max-xl:py-3 md:max-xl:overflow-hidden',
+                  'max-md:rounded-2xl max-md:p-3.5 max-md:hover:translate-y-0 max-md:hover:scale-100',
+                  'max-md:landscape:px-3 max-md:landscape:py-2.5',
+                )}
+              >
+                <div className="flex-1 pr-3 md:max-xl:pr-0 md:max-xl:w-full">
+                  <div className="mb-2.5 text-[clamp(11.5px,1.2vw,13.5px)] font-semibold tracking-wide text-white max-xl:mb-2 md:max-xl:text-[15px] md:max-xl:mb-2">
+                    Founding Team
+                  </div>
+
+                  {/* Full list — visible on mobile, desktop, AND tablet */}
+                  <ul className="m-0 flex list-none flex-col gap-[7px] p-0 max-xl:gap-2 md:max-xl:gap-1.5 md:max-xl:w-full">
+                    {FOUNDING_TEAM.map((member) => (
+                      <li key={member.name} className="m-0 p-0">
+                        <a
+                          href="/#team"
+                          className="group/team flex cursor-pointer items-center gap-2.5 rounded-xl border border-white/[0.07] bg-white/[0.03] px-[9px] py-[7px] text-inherit no-underline transition-all hover:translate-x-0.5 hover:border-white/[0.14] hover:bg-white/[0.06] max-xl:hover:translate-x-0.5 md:max-xl:px-2.5 md:max-xl:py-1.5"
+                          aria-label={`Meet ${member.name}, ${member.role}`}
+                        >
+                          <Image
+                            src={member.image}
+                            alt={member.name}
+                            width={36}
+                            height={36}
+                            className={cn(
+                              'size-[clamp(28px,3vw,36px)] shrink-0 rounded-full border-[1.5px] border-[var(--sage-glow)] object-cover',
+                              'shadow-[0_3px_10px_rgba(0,0,0,0.35)] transition-all',
+                              'group-hover/team:border-[var(--sage)] group-hover/team:shadow-[0_0_10px_var(--pulse-glow)]',
+                              'max-xl:!size-[38px] max-sm:!size-[34px]',
+                              'md:max-xl:!size-[40px]',
+                            )}
+                          />
+                          <span className="flex min-w-0 flex-1 flex-col gap-0.5">
+                            <span className="truncate text-[clamp(10px,1.1vw,12px)] font-semibold leading-tight tracking-wide text-white/92 max-xl:text-[13px] max-sm:text-xs md:max-xl:text-[14px]">
+                              {member.name}
+                            </span>
+                            <span className="truncate text-[clamp(8px,0.8vw,9.5px)] font-medium leading-tight tracking-wide text-white/42 transition-colors group-hover/team:text-[var(--sage)] max-xl:text-[10.5px] md:max-xl:text-[12px]">
+                              {member.role}
+                            </span>
+                          </span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Compact avatar row — hidden now that full list shows on tablet */}
+                  <div className="hidden">
+                    <div className="flex gap-[-6px]">
+                      {FOUNDING_TEAM.map((member) => (
+                        <Image
+                          key={member.name}
+                          src={member.image}
+                          alt={member.name}
+                          width={38}
+                          height={38}
+                          className="size-[38px] shrink-0 rounded-full border-[1.5px] border-[var(--sage-glow)] object-cover shadow-[0_3px_10px_rgba(0,0,0,0.35)] -ml-1 first:ml-0"
+                        />
+                      ))}
+                    </div>
+                    <span className="text-[10px] text-white/40 leading-snug">
+                      CEO, Marketing & CTO
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Verified Mentors */}
+              <div
+                className={cn(
+                  'group flex cursor-pointer items-center justify-between rounded-[20px] border border-white/12 bg-white/5 p-4',
+                  'shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-[20px] transition-all duration-300',
+                  'hover:scale-[1.02] hover:border-white/[0.18] hover:bg-white/[0.08] hover:shadow-[0_12px_40px_var(--pulse-glow)] hover:-translate-y-[3px]',
+                  // TABLET: fill height
+                  'md:max-xl:flex-1 md:max-xl:h-full md:max-xl:flex-col md:max-xl:items-start md:max-xl:justify-center md:max-xl:rounded-2xl md:max-xl:hover:translate-y-0 md:max-xl:hover:scale-100',
+                  'max-md:rounded-2xl max-md:p-3.5 max-md:hover:translate-y-0 max-md:hover:scale-100',
+                  'max-md:landscape:px-3 max-md:landscape:py-2.5',
+                )}
+              >
+                <div className="flex-1 pr-3 md:max-xl:pr-0">
+                  <div className="mb-1.5 text-[clamp(11.5px,1.2vw,13.5px)] font-semibold text-white md:max-xl:text-[15px] md:max-xl:mb-3">Verified Mentors</div>
+                  <div className="text-[clamp(8.5px,0.9vw,10px)] leading-snug text-white/50 md:max-xl:text-[13px] md:max-xl:leading-normal">
+                    Every mentor is verified — real students, residents, and doctors giving real answers.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        {/* Swipe slider */}
+        <div
+          className={cn(
+            'lh-slider-track absolute bottom-[35px] left-[25px] z-30 box-border flex h-[55px] w-[505px] items-center overflow-hidden',
+            'rounded-[22px] border-[1.5px] border-white/35 bg-black p-1 shadow-[0_4px_15px_rgba(0,0,0,0.5)]',
+            'md:max-xl:relative md:max-xl:bottom-auto md:max-xl:left-auto md:max-xl:order-3',
+            'md:max-xl:mx-4 md:max-xl:mb-4 md:max-xl:mt-2 md:max-xl:h-[52px] md:max-xl:w-[calc(100%-32px)] md:max-xl:max-w-full',
+            'max-md:relative max-md:bottom-auto max-md:left-auto max-md:order-3',
+            'max-md:mx-3 max-md:mb-3.5 max-md:mt-1 max-md:h-[52px] max-md:w-[calc(100%-24px)] max-md:max-w-full',
+            'max-sm:mx-2 max-sm:mb-3 max-sm:w-[calc(100%-16px)]',
+          )}
+          ref={sliderTrackRef}
+        >
+          <div
+            className="lh-slider-btn z-[2] flex size-[46px] cursor-grab touch-none items-center justify-center rounded-full border-[1.5px] border-white bg-black text-white shadow-[0_0_10px_rgba(255,255,255,0.1)] active:cursor-grabbing max-xl:size-[42px]"
+            ref={sliderBtnRef}
+          >
+            <svg
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              className="transition-transform duration-300"
+              ref={arrowIconRef}
+            >
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </div>
+          <span
+            className="lh-slider-text pointer-events-none absolute left-0 z-[1] w-full text-center text-[12.5px] font-medium tracking-[0.8px] text-white/45 transition-opacity duration-300 max-xl:px-12 max-xl:text-[11px] max-xl:tracking-[0.5px]"
+            ref={sliderTextRef}
+          >
+            Swipe to Join Waitlist
+          </span>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
-
