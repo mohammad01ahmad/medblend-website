@@ -7,7 +7,7 @@ import { LuMail } from 'react-icons/lu';
 import Dna3DCanvas from '@/components/ui/dna-3d-canvas';
 
 const companyLinks = [
-  { href: '/#problem', label: 'About' },
+  { href: '/#solution', label: 'Solution' },
   { href: '/contact', label: 'Contact' },
 ];
 

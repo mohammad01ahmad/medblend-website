@@ -262,7 +262,7 @@ export default function LandingHero() {
             >
               {[
                 { href: '/', label: 'Home', active: true },
-                { href: '/#about', label: 'About', active: false },
+                { href: '/#solution', label: 'Solution', active: false },
                 { href: '/#team', label: 'Team', active: false },
                 { href: '/FAQ', label: 'FAQ', active: false },
               ].map((item) => (
