@@ -2,8 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { RxHamburgerMenu } from 'react-icons/rx';
-import { IoClose } from 'react-icons/io5';
+
 import { ShimmerButton } from '@/components/ui/shimmer-button';
 import Image from 'next/image';
 
@@ -44,55 +43,54 @@ export default function Header() {
             Get Early Access →
           </Link>
 
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="rounded-lg p-2 text-2xl text-white transition-colors hover:bg-white/10 md:hidden"
-            aria-label="Toggle menu"
-            aria-expanded={isMenuOpen}
-          >
-            {isMenuOpen ? <IoClose /> : <RxHamburgerMenu />}
-          </button>
-        </div>
+        {/* Mobile: hamburger button */}
+        <button
+          className="flex md:hidden items-center justify-center w-10 h-10 rounded-xl border border-white/15 bg-white/5 backdrop-blur-md transition-all hover:bg-white/10 active:scale-95"
+          onClick={() => setIsMenuOpen((o) => !o)}
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isMenuOpen}
+        >
+          <span className="flex flex-col gap-[5px] w-[18px]">
+            <span
+              className="block h-[1.5px] w-full rounded-full bg-white transition-all duration-300 origin-center"
+              style={isMenuOpen ? { transform: 'translateY(6.5px) rotate(45deg)' } : {}}
+            />
+            <span
+              className="block h-[1.5px] w-full rounded-full bg-white transition-all duration-300"
+              style={isMenuOpen ? { opacity: 0, transform: 'scaleX(0)' } : {}}
+            />
+            <span
+              className="block h-[1.5px] w-full rounded-full bg-white transition-all duration-300 origin-center"
+              style={isMenuOpen ? { transform: 'translateY(-6.5px) rotate(-45deg)' } : {}}
+            />
+          </span>
+        </button>
+      </div>
       </div>
 
+      {/* Mobile dropdown menu */}
       <div
-        className={`fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 md:hidden ${isMenuOpen ? 'opacity-100' : 'pointer-events-none opacity-0'
-          }`}
-        onClick={closeMenu}
-        aria-hidden={!isMenuOpen}
-      />
-
-      <nav
-        className={`fixed top-0 right-0 z-50 flex h-full w-72 flex-col border-l border-white/10 bg-[var(--void)] shadow-2xl transition-transform duration-300 ease-out sm:w-80 md:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}
-        aria-hidden={!isMenuOpen}
+        className="md:hidden overflow-hidden transition-all duration-300 ease-in-out"
+        style={{ maxHeight: isMenuOpen ? '320px' : '0px', opacity: isMenuOpen ? 1 : 0 }}
       >
-        <div className="flex items-center justify-between border-b border-white/10 p-6">
-          <span className="font-syne text-lg font-bold text-white">Menu</span>
-          <button onClick={closeMenu} className="rounded-lg p-2 text-2xl text-white hover:bg-white/10" aria-label="Close menu">
-            <IoClose />
-          </button>
-        </div>
-
-        <div className="flex flex-1 flex-col gap-1 p-4">
+        <nav className="flex flex-col gap-1 border-t border-white/10 px-4 pb-4 pt-3">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={closeMenu}
-              className="rounded-xl px-4 py-3 text-base font-medium text-[var(--white-dim)] transition-colors hover:bg-[var(--sage-soft)] hover:text-[var(--sage)]"
+              className="rounded-xl px-4 py-3 text-sm font-medium text-white/70 transition-all hover:bg-white/6 hover:text-white border border-transparent hover:border-white/10"
             >
               {link.label}
             </a>
           ))}
-        </div>
-
-        <div className="border-t border-white/10 p-6">
-          <Link href="/waitlist" onClick={closeMenu}>
-            <ShimmerButton className="w-full">Get Early Access</ShimmerButton>
+          <Link href="/waitlist" onClick={closeMenu} className="mt-2">
+            <ShimmerButton className="w-full justify-center py-3 text-sm">
+              Get Early Access
+            </ShimmerButton>
           </Link>
-        </div>
-      </nav>
+        </nav>
+      </div>
     </header>
   );
 }
