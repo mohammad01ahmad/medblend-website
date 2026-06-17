@@ -177,7 +177,22 @@ export default function LandingHero() {
               >
                 medblendapp@gmail.com
               </a>
-              <div className="text-[12.5px] text-white/40">Instagram: @medblendapp</div>
+              <a
+                href="https://www.instagram.com/medblendapp/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="break-all text-[12.5px] text-white/50 no-underline transition-colors hover:text-white"
+              >
+                Instagram: @medblendapp
+              </a>
+              <a
+                href="https://www.linkedin.com/company/medblendapp/posts/?feedView=all"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="break-all text-[12.5px] text-white/50 no-underline transition-colors hover:text-white"
+              >
+                LinkedIn: @MedBlendApp
+              </a>
               <div className="text-[12.5px] text-white/40">
                 Real guidance from medical students and doctors.
               </div>

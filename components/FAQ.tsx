@@ -9,15 +9,15 @@ interface FAQItem {
 
 const FAQ_ITEMS: FAQItem[] = [
     {
-        question: 'What exactly is MedBlend?',
-        answer: 'MedBlend is a mentorship and community platform that connects pre-med students with medical students, residents, and doctors. Think of it as the honest, human layer that medical education has always been missing — real conversations, real guidance, real community.',
+        question: 'What exactly is MedBlendApp?',
+        answer: 'MedBlendApp is a mentorship and community platform that connects pre-med students with medical students, residents, and doctors. Think of it as the honest, human layer that medical education has always been missing — real conversations, real guidance, real community.',
     },
     {
-        question: 'Who can join MedBlend?',
+        question: 'Who can join MedBlendApp?',
         answer: 'Anyone on the medical journey — from high schoolers exploring medicine to pre-meds preparing for the MCAT, medical students navigating rotations, and beyond. We also welcome residents and physicians who want to mentor the next generation.',
     },
     {
-        question: 'Is MedBlend free?',
+        question: 'Is MedBlendApp free?',
         answer: "We're still finalizing our model. Early access members will receive exclusive pricing and benefits. Our goal is to make quality guidance as accessible as possible — it shouldn't be a privilege.",
     },
     {
@@ -29,11 +29,11 @@ const FAQ_ITEMS: FAQItem[] = [
         answer: 'All mentors go through a verification process to confirm their medical school enrollment, residency, or physician status. We take authenticity seriously — no fake profiles, no misinformation.',
     },
     {
-        question: 'How is MedBlend different from Reddit or SDN?',
-        answer: "Reddit and SDN are anonymous forums. MedBlend is a structured mentorship platform with verified people, real relationships, and intentional community design. It's the difference between shouting into a crowd and having an actual conversation.",
+        question: 'How is MedBlendApp different from Reddit or SDN?',
+        answer: "Reddit and SDN are anonymous forums. MedBlendApp is a structured mentorship platform with verified people, real relationships, and intentional community design. It's the difference between shouting into a crowd and having an actual conversation.",
     },
     {
-        question: 'Can I follow MedBlend on social media?',
+        question: 'Can I follow MedBlendApp on social media?',
         answer: "Yes! Follow us on Instagram @medblendapp for updates, student stories, and behind-the-scenes from the build. We're building in public and love hearing from the community.",
     },
 ];

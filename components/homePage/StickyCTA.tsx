@@ -49,7 +49,7 @@ export default function StickyCTA() {
         ${isOn ? 'translate-x-[-50%] translate-y-0 opacity-100' : 'translate-x-[-50%] translate-y-[100px] opacity-0'}`}
         >
             <span className="text-[0.78rem] md:text-[0.88rem] text-white/80 whitespace-nowrap">
-                <span className="text-white font-semibold">MedBlend</span> · Waitlist open now
+                <span className="text-white font-semibold">MedBlendApp</span> · Waitlist open now
             </span>
             <Link
                 href="/waitlist"
