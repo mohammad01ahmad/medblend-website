@@ -45,7 +45,7 @@ export default function SolutionSection() {
                         </h2>
 
                         <p className="reveal d2 mb-8 text-[1.05rem] leading-[1.8] text-[var(--white-dim)]">
-                            MedBlend is the platform where aspiring doctors connect with
+                            MedBlendApp is the platform where aspiring doctors connect with
                             medical students, residents, and attending physicians — people
                             who've navigated exactly what you're facing.
                         </p>
@@ -153,7 +153,7 @@ export default function SolutionSection() {
                                     </div>
                                 </div>
                                 <div className="text-[0.88rem] italic leading-[1.6] text-[var(--white-dim)]">
-                                    "I finally know what to actually expect. MedBlend made me feel
+                                    "I finally know what to actually expect. MedBlendApp made me feel
                                     like <strong className="font-normal text-white">someone gets it.</strong>"
                                 </div>
                             </div>

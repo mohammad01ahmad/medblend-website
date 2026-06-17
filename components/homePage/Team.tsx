@@ -52,7 +52,7 @@ export default function Team() {
                             Meet The People Behind
                         </TextAnimate>{' '}
                         <em className="font-instrument italic text-[var(--sage)]">
-                            MedBlend
+                            MedBlendApp
                         </em>
                     </h2>
 

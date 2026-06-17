@@ -13,7 +13,7 @@ const PrivacyPolicy = () => {
             {/* Intro */}
             <section className="mb-10 text-lg">
                 <p className="mb-4">
-                    This Privacy Notice for <span className="text-white font-semibold">MedBlend</span> (&quot;<strong>we</strong>,&quot; &quot;<strong>us</strong>,&quot; or &quot;<strong>our</strong>&quot;), describes how and why we might access, collect, store, use, and/or share (&quot;<strong>process</strong>&quot;) your personal information when you use our services (&quot;<strong>Services</strong>&quot;), including when you:
+                    This Privacy Notice for <span className="text-white font-semibold">MedBlenApp</span> (&quot;<strong>we</strong>,&quot; &quot;<strong>us</strong>,&quot; or &quot;<strong>our</strong>&quot;), describes how and why we might access, collect, store, use, and/or share (&quot;<strong>process</strong>&quot;) your personal information when you use our services (&quot;<strong>Services</strong>&quot;), including when you:
                 </p>
                 <ul className="list-disc ml-6 space-y-2 text-[hsl(0,0%,70%)]">
                     <li>

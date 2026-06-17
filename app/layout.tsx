@@ -24,7 +24,7 @@ const instrumentSerif = Instrument_Serif({
 
 export const metadata: Metadata = {
   title: "MedBlend",
-  description: "MedBlend - The Future of Medical Education",
+  description: "MedBlendApp - The Future of Medical Education",
 };
 
 export default function RootLayout({
