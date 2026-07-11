@@ -13,13 +13,13 @@ const PrivacyPolicy = () => {
             {/* Intro */}
             <section className="mb-10 text-lg">
                 <p className="mb-4">
-                    This Privacy Notice for <span className="text-white font-semibold">MedBlenApp</span> (&quot;<strong>we</strong>,&quot; &quot;<strong>us</strong>,&quot; or &quot;<strong>our</strong>&quot;), describes how and why we might access, collect, store, use, and/or share (&quot;<strong>process</strong>&quot;) your personal information when you use our services (&quot;<strong>Services</strong>&quot;), including when you:
+                    This Privacy Notice for <span className="text-white font-semibold">MedBlendApp</span> (&quot;<strong>we</strong>,&quot; &quot;<strong>us</strong>,&quot; or &quot;<strong>our</strong>&quot;), describes how and why we might access, collect, store, use, and/or share (&quot;<strong>process</strong>&quot;) your personal information when you use our services (&quot;<strong>Services</strong>&quot;), including when you:
                 </p>
                 <ul className="list-disc ml-6 space-y-2 text-[hsl(0,0%,70%)]">
                     <li>
                         Visit our website at{" "}
-                        <a href="https://medblend-website.vercel.app/" className="text-[hsl(245,72%,59%)] hover:underline">
-                            https://medblend-website.vercel.app/
+                        <a href="https://medblend.vercel.app/" className="text-[hsl(245,72%,59%)] hover:underline">
+                            https://medblend.vercel.app/
                         </a>
                     </li>
                     <li>Download and use our mobile application (MedBlendApp)</li>
@@ -65,7 +65,7 @@ const PrivacyPolicy = () => {
                     />
                     <KeyPoint
                         title="How do you exercise your rights? "
-                        desc="The easiest way to exercise your rights is by visiting https://medblend-website.vercel.app/contact-us, or by contacting us. We will consider and act upon any request in accordance with applicable data protection laws."
+                        desc="The easiest way to exercise your rights is by visiting https://medblend.vercel.app/contact-us, or by contacting us. We will consider and act upon any request in accordance with applicable data protection laws."
                     />
                     <p className="text-white">Want to learn more about what we do with any information we collect? Review the Privacy Notice in full.</p>
                 </div>
@@ -437,7 +437,7 @@ const PrivacyPolicy = () => {
                 <br />
                 <h3 className="font-bold text-xl text-white">How to Exercise Your Rights</h3>
                 <br />
-                <p>To exercise these rights, you can contact us by visiting https://medblend-website.vercel.app/contact-us, by emailing us at med blendapp@gmail.com, or by referring to the contact details at the bottom of this document.</p>
+                <p>To exercise these rights, you can contact us by visiting https://medblend.vercel.app/contact-us, by emailing us at med blendapp@gmail.com, or by referring to the contact details at the bottom of this document.</p>
                 <br />
                 <p>We will honor your opt-out preferences if you enact the Global Privacy Control (GPC) opt-out signal on your browser.</p>
                 <br />
@@ -504,14 +504,14 @@ const PrivacyPolicy = () => {
             {/* QUESTION 15 */}
             <section className="mb-8">
                 <h2 className="text-2xl font-bold text-white mb-6 uppercase tracking-wide">15. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?</h2>
-                <p>If you have questions or comments about this notice, you may email us at medblendapp@gmail.com or contact us by post at: MedBlend, United Arab Emirates</p>
+                <p>If you have questions or comments about this notice, you may email us at medblendapp@gmail.com or contact us by post at: MedBlendApp, United Arab Emirates</p>
                 <br />
             </section>
 
             {/* QUESTION 16 */}
             <section className="mb-12">
                 <h2 className="text-2xl font-bold text-white mb-6 uppercase tracking-wide">16. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?</h2>
-                <p>Based on the applicable laws of your country or state of residence in the US, you may have the right to request access to the personal information we collect from you, details about how we have processed it, correct inaccuracies, or delete your personal information. You may also have the right to withdraw your consent to our processing of your personal information. These rights may be limited in some circumstances by applicable law. To request to review, update, or delete your personal information, please visit: https://medblend-website.vercel.app/contact-us.</p>
+                <p>Based on the applicable laws of your country or state of residence in the US, you may have the right to request access to the personal information we collect from you, details about how we have processed it, correct inaccuracies, or delete your personal information. You may also have the right to withdraw your consent to our processing of your personal information. These rights may be limited in some circumstances by applicable law. To request to review, update, or delete your personal information, please visit: https://medblend.vercel.app/contact-us.</p>
                 <br />
             </section>
 
