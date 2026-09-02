@@ -29,7 +29,6 @@ export const dynamic = 'force-dynamic';
 export async function DELETE(req: Request) {
   const result = await withApi(async () => {
     const token = req.headers.get('authorization')?.replace(/^Bearer\s+/i, '');
-    console.log('token', token);
     if (!token) return errorResponse('Missing bearer token', 401);
 
     const admin = supabaseAdmin();
