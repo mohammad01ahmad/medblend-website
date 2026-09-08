@@ -16,15 +16,15 @@ export const dynamic = 'force-dynamic';
 // Safe by JWT regardless of origin (docs/SECURITY.md §3.4). `*` is fine with a
 // Bearer token — no cookies involved. Needed for the app's web build; native
 // fetch ignores CORS.
-// const CORS = {
-//   'Access-Control-Allow-Origin': '*',
-//   'Access-Control-Allow-Methods': 'DELETE, OPTIONS',
-//   'Access-Control-Allow-Headers': 'authorization, content-type',
-// };
+const CORS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': 'authorization, content-type',
+};
 
-// export function OPTIONS() {
-//   return new Response(null, { status: 204, headers: CORS });
-// }
+export function OPTIONS() {
+  return new Response(null, { status: 204, headers: CORS });
+}
 
 export async function DELETE(req: Request) {
   const result = await withApi(async () => {
@@ -44,5 +44,5 @@ export async function DELETE(req: Request) {
     return successResponse('Account deleted');
   });
 
-  return Response.json(result, { status: result.code });
+  return Response.json(result, { status: result.code, headers: CORS });
 }
