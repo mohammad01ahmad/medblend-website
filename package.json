@@ -12,11 +12,14 @@
     "transcribe-pdf": "tsx --env-file=.env scripts/transcribe-pdf.ts",
     "ingest": "tsx --env-file=.env scripts/ingest.ts",
     "journey:generate": "tsx --env-file=.env scripts/journey-generate.ts",
+    "journey:project": "tsx --env-file=.env scripts/journey-project.ts",
     "journey:smoke": "tsx --env-file=.env scripts/journey-smoke.ts"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",
+    "@saehrimnir/druidjs": "^0.9.0",
+    "@supabase/ssr": "^0.12.7",
     "@supabase/supabase-js": "^2.113.0",
     "@tsparticles/engine": "^3.9.1",
     "@tsparticles/react": "^3.0.0",
