@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { TooltipProvider } from '@/components/ui/tooltip';
 
 export const metadata: Metadata = {
   title: 'MedBlend Admin',
@@ -6,16 +7,17 @@ export const metadata: Metadata = {
 };
 
 // Own shell — no marketing Header/Footer (suppressed in ConditionalHeader /
-// ConditionalFooter). Forced dark, matching the app's permanent-dark palette.
+// ConditionalFooter). `dark` is scoped to /admin only: it activates the
+// shadcn dark palette already defined in globals.css (unused everywhere
+// else — the marketing site never applies the class). TooltipProvider is
+// required by the installed shadcn Sidebar (icon-collapsed mode shows
+// tooltips on hover). No app-shell header here — branding + the sidebar
+// collapse trigger live in the dashboard's own AdminSidebar; the login page
+// (no sidebar) is a self-contained centered card with its own heading.
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-[var(--void)] text-white">
-      <header className="border-b border-[var(--border-subtle)] px-6 py-4">
-        <span className="font-syne text-sm font-bold tracking-[0.2em] text-[var(--pulse)] uppercase">
-          MedBlend Admin
-        </span>
-      </header>
-      <main className="px-6 py-8">{children}</main>
+    <div className="dark min-h-screen bg-background text-foreground">
+      <TooltipProvider delayDuration={200}>{children}</TooltipProvider>
     </div>
   );
 }

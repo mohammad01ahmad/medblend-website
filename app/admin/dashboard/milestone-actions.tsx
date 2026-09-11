@@ -1,12 +1,11 @@
 'use client';
 
 import { useState, useTransition } from 'react';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
 import { approveMilestone, rejectMilestone } from './actions';
 
 type Status = 'unreviewed' | 'reviewed' | 'rejected' | null;
-
-const btn =
-  'rounded-md border px-3 py-1.5 text-xs font-medium transition disabled:opacity-40';
 
 export default function MilestoneActions({
   milestoneId,
@@ -39,73 +38,75 @@ export default function MilestoneActions({
   return (
     <div className="flex flex-col gap-2">
       <div className="flex flex-wrap items-center gap-2">
-        <button
-          type="button"
+        <Button
+          size="sm"
+          variant="outline"
           disabled={pending || status === 'reviewed'}
           onClick={() => run(() => approveMilestone(milestoneId, course))}
-          className={`${btn} border-[var(--pulse)] text-[var(--pulse)] hover:bg-[var(--pulse-soft)]`}
+          className="border-emerald-500/40 text-emerald-500 hover:bg-emerald-500/10 hover:text-emerald-500"
         >
           {status === 'reviewed' ? 'Approved' : 'Approve'}
-        </button>
+        </Button>
 
-        <button
-          type="button"
+        <Button
+          size="sm"
+          variant="outline"
           disabled={pending}
           onClick={() => {
             setError(null);
             setRejecting((v) => !v);
           }}
-          className={`${btn} border-[var(--ember)] text-[var(--ember)] hover:bg-[var(--ember-glow)]`}
+          className="border-destructive/40 text-destructive hover:bg-destructive/10 hover:text-destructive"
         >
           {status === 'rejected' ? 'Edit rejection' : 'Reject'}
-        </button>
+        </Button>
 
-        <button
-          type="button"
+        <Button
+          size="sm"
+          variant="ghost"
           disabled
           title="Regenerate from the CLI: npm run journey:generate -- --course MBBS --milestone <id> --refresh"
-          className={`${btn} border-[var(--border-subtle)] text-[var(--white-dim)]`}
         >
           Regenerate
-        </button>
+        </Button>
 
-        {pending && <span className="text-xs text-[var(--white-dim)]">saving…</span>}
+        {pending && <span className="text-xs text-muted-foreground">saving…</span>}
       </div>
 
       {rejecting && (
         <div className="flex flex-col gap-2">
-          <textarea
+          <Textarea
             value={note}
             onChange={(e) => setNote(e.target.value)}
             rows={2}
             placeholder="What's wrong with this milestone? (required)"
-            className="w-full rounded-md border border-[var(--border-subtle)] bg-black/30 px-2 py-1.5 text-xs text-white"
+            className="text-xs"
           />
           <div className="flex gap-2">
-            <button
-              type="button"
+            <Button
+              size="sm"
+              variant="destructive"
               disabled={pending || !note.trim()}
               onClick={() => run(() => rejectMilestone(milestoneId, course, note))}
-              className={`${btn} border-[var(--ember)] bg-[var(--ember-glow)] text-[var(--ember)]`}
             >
               Confirm rejection
-            </button>
-            <button
-              type="button"
+            </Button>
+            <Button
+              size="sm"
+              variant="ghost"
               disabled={pending}
               onClick={() => {
                 setRejecting(false);
                 setNote(reviewNotes ?? '');
               }}
-              className={`${btn} border-[var(--border-subtle)] text-[var(--white-dim)]`}
             >
               Cancel
-            </button>
+            </Button>
           </div>
         </div>
       )}
 
-      {error && <p className="text-xs text-[var(--ember)]">{error}</p>}
+      {error && <p className="text-xs text-destructive">{error}</p>}
     </div>
   );
 }

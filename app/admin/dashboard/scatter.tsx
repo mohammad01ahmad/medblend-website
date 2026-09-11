@@ -62,11 +62,11 @@ export default function Scatter({
 
   return (
     <section>
-      <h2 className="font-syne text-lg font-bold">{title}</h2>
-      <p className="mt-0.5 mb-3 text-xs text-[var(--white-dim)]">{subtitle}</p>
+      <h2 className="text-base font-semibold tracking-tight">{title}</h2>
+      <p className="mt-0.5 mb-3 text-xs text-muted-foreground">{subtitle}</p>
 
       <div
-        className="relative w-full overflow-hidden rounded-xl border border-[var(--border-subtle)] bg-[var(--ink)]"
+        className="relative w-full overflow-hidden rounded-xl border bg-card"
         onMouseMove={(e) => {
           const r = e.currentTarget.getBoundingClientRect();
           setPos({ x: e.clientX - r.left, y: e.clientY - r.top });
@@ -128,7 +128,7 @@ export default function Scatter({
 
         {hover && (
           <div
-            className="pointer-events-none absolute z-10 max-w-xs rounded-md border border-[var(--border-subtle)] bg-black/90 p-2 text-xs text-white shadow-lg"
+            className="pointer-events-none absolute z-10 max-w-xs rounded-md border bg-popover p-2 text-xs text-popover-foreground shadow-lg"
             style={{
               left: Math.min(pos.x + 12, W - 40),
               top: pos.y + 12,
@@ -137,18 +137,18 @@ export default function Scatter({
             <div className="font-semibold">
               {hover.kind === 'query' ? `query · ${hover.ref}` : 'chunk'} — {hover.label}
             </div>
-            <div className="mt-1 text-[var(--white-dim)]">{hover.hover}</div>
+            <div className="mt-1 text-muted-foreground">{hover.hover}</div>
           </div>
         )}
       </div>
 
       {/* source legend */}
       <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5">
-        <span className="flex items-center gap-1.5 text-xs text-[var(--white-dim)]">
-          <span className="inline-block h-2.5 w-2.5 rotate-45 bg-white" /> milestone query
+        <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+          <span className="inline-block h-2.5 w-2.5 rotate-45 bg-foreground" /> milestone query
         </span>
         {legend.map((s) => (
-          <span key={s.id} className="flex items-center gap-1.5 text-xs text-[var(--white-dim)]">
+          <span key={s.id} className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <span className="inline-block h-2.5 w-2.5 rounded-full" style={{ background: s.color }} />
             {s.title}
           </span>
