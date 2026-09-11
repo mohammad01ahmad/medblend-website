@@ -2,11 +2,16 @@ import { requireAdmin } from '@/lib/admin';
 import { supabaseAdmin } from '@/lib/supabase';
 import { SKELETON } from '@/lib/journey/skeleton';
 import { corpusSignature } from '@/lib/projection';
+import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
+import AdminSidebar from './admin-sidebar';
+import { SectionProvider } from './section-context';
+import SectionPanel from './section-panel';
 import Scatter, { type ScatterPoint, type ScatterLink } from './scatter';
 import MilestoneReviewPanel, {
   type ReviewItem,
   type MilestoneContentRow,
 } from './milestone-review';
+import SourcesTable, { type SourceRow } from './sources-table';
 
 export const dynamic = 'force-dynamic';
 
@@ -40,13 +45,13 @@ function sourceColor(index: number, total: number): string {
 }
 
 export default async function DashboardPage() {
-  await requireAdmin();
+  const { user } = await requireAdmin();
   const db = supabaseAdmin();
 
   const [proj, chunks, sources, runs, content] = await Promise.all([
     db.from('rag_chunk_projection').select('kind, ref_id, label, source_id, method, x, y, corpus_sha'),
     db.from('rag_chunks').select('id, chunk_index, source_id, text, metadata'),
-    db.from('rag_sources').select('id, title'),
+    db.from('rag_sources').select('*').order('title'),
     db.from('rag_runs').select('*').order('run_at', { ascending: false }),
     db.from('milestone_content').select('*').eq('course', 'MBBS'),
   ]);
@@ -56,7 +61,7 @@ export default async function DashboardPage() {
 
   const projRows = (proj.data ?? []) as ProjRow[];
   const chunkRows = (chunks.data ?? []) as ChunkRow[];
-  const sourceRows = (sources.data ?? []) as { id: string; title: string }[];
+  const sourceRows = (sources.data ?? []) as SourceRow[];
   const runRows = (runs.data ?? []) as Record<string, unknown>[];
   const contentRows = (content.data ?? []) as (MilestoneContentRow & { milestone_id: string })[];
 
@@ -138,45 +143,63 @@ export default async function DashboardPage() {
       }));
 
   return (
-    <div className="flex flex-col gap-10">
-      <div>
-        <h1 className="font-syne text-2xl font-bold">RAG evaluation dashboard</h1>
-        <p className="mt-1 text-sm text-[var(--white-dim)]">
-          {chunkRows.length} chunks · {MILESTONES.length} milestone queries · {runRows.length} runs
-        </p>
-      </div>
+    <SectionProvider>
+      <SidebarProvider>
+        <AdminSidebar email={user.email} />
+        <SidebarInset className="min-w-0">
+          <header className="flex h-14 shrink-0 items-center gap-2 border-b px-4">
+            <span className="text-sm font-medium">RAG evaluation dashboard</span>
+          </header>
 
-      {noProjection ? (
-        <p className="rounded-lg border border-[var(--ember)] bg-[var(--ember-glow)] px-4 py-3 text-sm">
-          No projection data. Run <code className="text-[var(--ember)]">npm run journey:project</code>.
-        </p>
-      ) : stale ? (
-        <p className="rounded-lg border border-[var(--ember)] bg-[var(--ember-glow)] px-4 py-3 text-sm">
-          Projection is stale — the corpus changed since it was computed. Re-run{' '}
-          <code className="text-[var(--ember)]">npm run journey:project</code>.
-        </p>
-      ) : null}
+          <div className="flex min-w-0 flex-col gap-10 p-6">
+            <p className="text-sm text-muted-foreground">
+              {chunkRows.length} chunks · {MILESTONES.length} milestone queries · {runRows.length} runs
+            </p>
 
-      {!noProjection && (
-        <div className="flex flex-col gap-10">
-          <Scatter
-            title="UMAP — chunk & query embedding space"
-            subtitle="Keeps more global structure. Lines join each milestone query to the chunks its latest run retrieved."
-            points={pointsFor('umap')}
-            links={links}
-            legend={legend}
-          />
-          <Scatter
-            title="t-SNE — chunk & query embedding space"
-            subtitle="Sharpens local clusters; distances between clusters mean less than within."
-            points={pointsFor('tsne')}
-            links={links}
-            legend={legend}
-          />
-        </div>
-      )}
+            {noProjection ? (
+              <p className="rounded-lg border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-500">
+                No projection data. Run <code>npm run journey:project</code>.
+              </p>
+            ) : stale ? (
+              <p className="rounded-lg border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-500">
+                Projection is stale — the corpus changed since it was computed. Re-run{' '}
+                <code>npm run journey:project</code>.
+              </p>
+            ) : null}
 
-      <MilestoneReviewPanel milestones={reviewData} />
-    </div>
+            {!noProjection && (
+              <>
+                <SectionPanel id="umap">
+                  <Scatter
+                    title="UMAP — chunk & query embedding space"
+                    subtitle="Keeps more global structure. Lines join each milestone query to the chunks its latest run retrieved."
+                    points={pointsFor('umap')}
+                    links={links}
+                    legend={legend}
+                  />
+                </SectionPanel>
+                <SectionPanel id="tsne">
+                  <Scatter
+                    title="t-SNE — chunk & query embedding space"
+                    subtitle="Sharpens local clusters; distances between clusters mean less than within."
+                    points={pointsFor('tsne')}
+                    links={links}
+                    legend={legend}
+                  />
+                </SectionPanel>
+              </>
+            )}
+
+            <SectionPanel id="review">
+              <MilestoneReviewPanel milestones={reviewData} />
+            </SectionPanel>
+
+            <SectionPanel id="sources">
+              <SourcesTable sources={sortedSources} />
+            </SectionPanel>
+          </div>
+        </SidebarInset>
+      </SidebarProvider>
+    </SectionProvider>
   );
 }

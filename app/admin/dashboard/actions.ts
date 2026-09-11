@@ -36,3 +36,19 @@ export async function rejectMilestone(milestoneId: string, course: string, note:
   if (!trimmed) throw new Error('A note is required to reject.');
   await setReview(milestoneId, course, { status: 'rejected', review_notes: trimmed });
 }
+
+/**
+ * Freestanding comment — writes only review_notes, deliberately not a review
+ * decision: doesn't touch status/reviewed_by/reviewed_at (those stay
+ * Approve/Reject's). No validation, per spec.
+ */
+export async function addComment(milestoneId: string, course: string, note: string) {
+  await requireAdmin();
+  const { error } = await supabaseAdmin()
+    .from('milestone_content')
+    .update({ review_notes: note })
+    .eq('milestone_id', milestoneId)
+    .eq('course', course);
+  if (error) throw new Error(error.message);
+  revalidatePath('/admin/dashboard');
+}

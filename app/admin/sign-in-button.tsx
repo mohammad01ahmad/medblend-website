@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 import { createBrowserSupabase } from '@/lib/supabase/client';
 
 export default function SignInButton() {
@@ -23,12 +24,8 @@ export default function SignInButton() {
   }
 
   return (
-    <button
-      onClick={signIn}
-      disabled={busy}
-      className="rounded-lg border border-[var(--border-subtle)] bg-white/5 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-white/10 disabled:opacity-50"
-    >
+    <Button onClick={signIn} disabled={busy}>
       {busy ? 'Redirecting…' : 'Sign in with Google'}
-    </button>
+    </Button>
   );
 }
