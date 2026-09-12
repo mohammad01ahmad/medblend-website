@@ -16,7 +16,7 @@ import {
   SidebarRail,
   SidebarTrigger,
 } from '@/components/ui/sidebar';
-import SignOutButton from '../sign-out-button';
+import SignOutButton from '@/components/admin/sign-out-button';
 import { useSection, type SectionId } from './section-context';
 
 const SECTIONS: { id: SectionId; label: string; icon: typeof ScatterChart }[] = [

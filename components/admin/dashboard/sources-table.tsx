@@ -12,7 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { addSource, updateSource } from './sources-actions';
+import { addSource, updateSource } from '@/lib/admin/sources-actions';
 
 export interface SourceRow {
   id: string;

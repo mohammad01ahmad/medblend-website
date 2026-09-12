@@ -3,7 +3,7 @@
 import { useState, useTransition } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { addComment } from './actions';
+import { addComment } from '@/lib/admin/milestone-actions';
 
 /** Freeform note on a milestone, independent of Approve/Reject. No constraints. */
 export default function CommentBox({

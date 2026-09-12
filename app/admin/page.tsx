@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 import { getSessionUser, isAdmin } from '@/lib/admin';
-import SignInButton from './sign-in-button';
-import SignOutButton from './sign-out-button';
+import SignInButton from '@/components/admin/sign-in-button';
+import SignOutButton from '@/components/admin/sign-out-button';
 
 export const dynamic = 'force-dynamic';
 

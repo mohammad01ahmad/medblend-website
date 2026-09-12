@@ -3,15 +3,15 @@ import { supabaseAdmin } from '@/lib/supabase';
 import { SKELETON } from '@/lib/journey/skeleton';
 import { corpusSignature } from '@/lib/projection';
 import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
-import AdminSidebar from './admin-sidebar';
-import { SectionProvider } from './section-context';
-import SectionPanel from './section-panel';
-import Scatter, { type ScatterPoint, type ScatterLink } from './scatter';
+import AdminSidebar from '@/components/admin/dashboard/admin-sidebar';
+import { SectionProvider } from '@/components/admin/dashboard/section-context';
+import SectionPanel from '@/components/admin/dashboard/section-panel';
+import Scatter, { type ScatterPoint, type ScatterLink } from '@/components/admin/dashboard/scatter';
 import MilestoneReviewPanel, {
   type ReviewItem,
   type MilestoneContentRow,
-} from './milestone-review';
-import SourcesTable, { type SourceRow } from './sources-table';
+} from '@/components/admin/dashboard/milestone-review';
+import SourcesTable, { type SourceRow } from '@/components/admin/dashboard/sources-table';
 
 export const dynamic = 'force-dynamic';
 
