@@ -3,7 +3,7 @@
 import { useState, useTransition } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { approveMilestone, rejectMilestone } from './actions';
+import { approveMilestone, rejectMilestone } from '@/lib/admin/milestone-actions';
 
 type Status = 'unreviewed' | 'reviewed' | 'rejected' | null;
 
